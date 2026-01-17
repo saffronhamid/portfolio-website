@@ -1,10 +1,15 @@
 ﻿import type { Metadata } from "next";
-import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Fraunces, JetBrains_Mono, Manrope } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const manrope = Manrope({
   subsets: ["latin"],
-  variable: "--font-space",
+  variable: "--font-body",
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-display",
 });
 
 const jetBrainsMono = JetBrains_Mono({
@@ -34,8 +39,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} ${jetBrainsMono.variable} antialiased`}
+        className={`${manrope.variable} ${fraunces.variable} ${jetBrainsMono.variable} antialiased`}
       >
+        <div className="earth-bg" aria-hidden="true" />
         {children}
       </body>
     </html>

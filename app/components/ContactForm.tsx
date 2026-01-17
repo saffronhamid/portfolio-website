@@ -12,7 +12,7 @@
         <input
           type="text"
           name="name"
-          className="rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition focus:border-emerald-400"
+          className="rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition focus:border-amber-300"
           placeholder="Your name"
           autoComplete="name"
           required
@@ -23,7 +23,7 @@
         <input
           type="email"
           name="email"
-          className="rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition focus:border-emerald-400"
+          className="rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition focus:border-amber-300"
           placeholder="you@email.com"
           autoComplete="email"
           required
@@ -34,14 +34,14 @@
         <textarea
           rows={4}
           name="message"
-          className="rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition focus:border-emerald-400"
+          className="rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition focus:border-amber-300"
           placeholder="Tell me about your project..."
           required
         />
       </label>
       <button
         type="submit"
-        className="rounded-xl bg-emerald-400 px-5 py-3 text-sm font-semibold text-black transition hover:bg-emerald-300"
+        className="btn-primary rounded-xl px-5 py-3 text-sm"
         aria-label="Send message"
       >
         Send Message

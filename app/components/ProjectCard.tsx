@@ -12,7 +12,7 @@ type Project = {
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <div className="glass-card flex h-full flex-col justify-between p-6">
+    <div className="glass-card card-hover flex h-full flex-col justify-between p-6">
       <div>
         <h3 className="text-xl font-semibold text-white">{project.title}</h3>
         <ul className="mt-4 space-y-2 text-sm text-zinc-300">
@@ -20,27 +20,24 @@ export default function ProjectCard({ project }: { project: Project }) {
             <li key={idx}>• {line}</li>
           ))}
         </ul>
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-4 flex flex-wrap gap-2 text-zinc-200">
           {project.tech.map((item) => (
-            <span
-              key={item}
-              className="rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs text-zinc-200"
-            >
+            <span key={item} className="chip">
               {item}
             </span>
           ))}
         </div>
       </div>
-      <div className="mt-6 flex gap-4 text-sm text-emerald-300">
+      <div className="mt-6 flex gap-4 text-sm text-amber-200">
         <a
-          className="inline-flex items-center gap-2 hover:text-emerald-200"
+          className="inline-flex items-center gap-2 hover:text-amber-100"
           href={project.links.live}
           aria-label={`Open live project for ${project.title}`}
         >
           <FiExternalLink /> Live
         </a>
         <a
-          className="inline-flex items-center gap-2 hover:text-emerald-200"
+          className="inline-flex items-center gap-2 hover:text-amber-100"
           href={project.links.repo}
           aria-label={`Open repository for ${project.title}`}
         >

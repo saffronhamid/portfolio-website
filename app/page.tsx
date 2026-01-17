@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FiMail, FiMapPin, FiPhone } from "react-icons/fi";
 import ContactForm from "./components/ContactForm";
@@ -17,6 +18,7 @@ export default function Home() {
     () => [
       { id: "home", label: "Home" },
       { id: "about", label: "About" },
+      { id: "focus", label: "Focus" },
       { id: "skills", label: "Skills" },
       { id: "projects", label: "Projects" },
       { id: "experience", label: "Experience" },
@@ -32,6 +34,7 @@ export default function Home() {
 
   const [activeId, setActiveId] = useState("home");
   const [smokeEnabled, setSmokeEnabled] = useState(true);
+  const [headlineIndex, setHeadlineIndex] = useState(0);
 
   useEffect(() => {
     const prefersReduced = window.matchMedia(
@@ -45,6 +48,25 @@ export default function Home() {
       setSmokeEnabled(false);
     }
   }, []);
+
+  const rotatingHeadlines = [
+    "Machine Learning Engineer (MLOps) | RAG | AI Pipelines",
+    "Low-Code Seminar Builder | Product Strategy",
+    "Computer Vision | YOLO Tracking | Applied Research",
+  ];
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReduced) return;
+
+    const interval = setInterval(() => {
+      setHeadlineIndex((prev) => (prev + 1) % rotatingHeadlines.length);
+    }, 2800);
+
+    return () => clearInterval(interval);
+  }, [rotatingHeadlines.length]);
 
   useEffect(() => {
     const targets = sections
@@ -213,19 +235,21 @@ export default function Home() {
       <SmokyCursor enabled={smokeEnabled} />
       <Navbar items={navItems} activeId={activeId} />
 
-      <main className="mx-auto max-w-6xl px-4 pb-20 pt-12 sm:px-6">
+      <main className="mx-auto max-w-7xl px-4 pb-24 pt-12 sm:px-6">
         <section id="home" className="py-16">
           <FadeIn>
             <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
               <div>
-                <p className="text-xs uppercase tracking-[0.35em] text-emerald-300/80">
+                <p className="text-xs uppercase tracking-[0.35em] text-amber-200/80">
                   Portfolio
                 </p>
-                <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+                <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-6xl">
                   {profile.name}
                 </h1>
                 <p className="mt-3 text-lg text-zinc-300">
-                  {profile.headline}
+                  <span key={headlineIndex} className="text-cycle">
+                    {rotatingHeadlines[headlineIndex]}
+                  </span>
                 </p>
                 <p className="mt-5 max-w-2xl text-base text-zinc-400">
                   {aboutSummary}
@@ -246,29 +270,26 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="mt-8 flex flex-wrap gap-4">
-                  <a
-                    href="#contact"
-                    className="rounded-full bg-emerald-400 px-6 py-3 text-sm font-semibold text-black transition hover:bg-emerald-300"
-                  >
+                  <a href="#contact" className="btn-primary px-6 py-3 text-sm">
                     Contact
                   </a>
                   <a
                     href="#projects"
-                    className="rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                    className="btn-ghost px-6 py-3 text-sm font-semibold"
                   >
                     View Projects
                   </a>
                   <a
                     href="/Faizan_CV.pdf"
-                    className="rounded-full border border-white/15 bg-black/40 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                    className="btn-ghost px-6 py-3 text-sm font-semibold"
                   >
                     View CV
                   </a>
                 </div>
               </div>
-              <div className="glass-card-strong p-6">
+              <div className="glass-card-strong card-hover p-7">
                 <div className="glass-card p-6">
-                  <p className="text-xs uppercase tracking-[0.3em] text-emerald-300/80">
+                  <p className="text-xs uppercase tracking-[0.3em] text-amber-200/80">
                     Focus Areas
                   </p>
                   <ul className="mt-4 space-y-3 text-sm text-zinc-300">
@@ -285,7 +306,7 @@ export default function Home() {
                       <a
                         key={link.label}
                         href={link.url}
-                        className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 transition hover:bg-white/10"
+                        className="card-hover flex items-center justify-between rounded-xl border border-white/10 bg-black/30 px-4 py-3 transition hover:bg-white/5"
                       >
                         <span className="inline-flex items-center gap-2">
                           <Icon /> {link.label}
@@ -308,7 +329,7 @@ export default function Home() {
               description="Focused on production ML workflows, MLOps reliability, and scalable AI delivery."
             />
             <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-              <div className="glass-card p-6 text-zinc-300">
+              <div className="glass-card card-hover p-6 text-zinc-300">
                 <p className="text-base text-zinc-300">{aboutSummary}</p>
                 <ul className="mt-6 space-y-3 text-sm text-zinc-400">
                   {aboutHighlights.map((item) => (
@@ -316,8 +337,8 @@ export default function Home() {
                   ))}
                 </ul>
               </div>
-              <div className="glass-card p-6">
-                <p className="text-xs uppercase tracking-[0.3em] text-emerald-300/80">
+              <div className="glass-card card-hover p-6">
+                <p className="text-xs uppercase tracking-[0.3em] text-amber-200/80">
                   Languages
                 </p>
                 <div className="mt-4 space-y-2 text-sm text-zinc-300">
@@ -325,6 +346,42 @@ export default function Home() {
                   <p>German (A2)</p>
                 </div>
               </div>
+            </div>
+          </FadeIn>
+        </section>
+
+        <section id="focus" className="py-16">
+          <FadeIn>
+            <SectionHeader
+              title="Focus Areas"
+              subtitle="What I am working on now"
+              description="Two current tracks that blend applied research with practical delivery."
+            />
+            <div className="grid gap-6 lg:grid-cols-2">
+              <Link
+                href="/low-code"
+                className="glass-card focus-card card-hover p-6 animate-float"
+                aria-label="Low-code seminar details"
+              >
+                <p className="text-xs uppercase tracking-[0.3em] text-amber-200/80">
+                  Low-Code Seminar
+                </p>
+                <h3 className="focus-card-title mt-4 text-xl font-semibold text-white">
+                  Web-App for Managing Student Projects
+                </h3>
+              </Link>
+              <Link
+                href="/bat-tracking"
+                className="glass-card focus-card card-hover p-6 animate-float"
+                aria-label="Bat tracking project details"
+              >
+                <p className="text-xs uppercase tracking-[0.3em] text-amber-200/80">
+                  Bat Tracking
+                </p>
+                <h3 className="focus-card-title mt-4 text-xl font-semibold text-white">
+                  Master project using all YOLO versions
+                </h3>
+              </Link>
             </div>
           </FadeIn>
         </section>
@@ -387,10 +444,7 @@ export default function Home() {
             />
             <div className="grid gap-4 md:grid-cols-2">
               {education.map((item) => (
-                <div
-                  key={item.school}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-6"
-                >
+                <div key={item.school} className="glass-card card-hover p-6">
                   <h3 className="text-lg font-semibold text-white">
                     {item.school}
                   </h3>
@@ -418,7 +472,7 @@ export default function Home() {
               description="Open to ML engineering, RAG pipeline, and MLOps roles."
             />
             <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
-              <div className="glass-card p-6 text-zinc-300">
+              <div className="glass-card card-hover p-6 text-zinc-300">
                 <p className="text-base">
                   Want to collaborate or discuss ML/MLOps work? Send a message
                   and I will get back to you.
@@ -445,15 +499,15 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-white/5 py-8">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-sm text-zinc-500 sm:flex-row sm:px-6">
+      <footer className="border-t border-white/10 py-10">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 text-sm text-zinc-400 sm:flex-row sm:px-6">
           <p>© {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <button
               type="button"
               onClick={() => setSmokeEnabled((prev) => !prev)}
               aria-pressed={smokeEnabled}
-              className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-white transition hover:bg-white/10"
+              className="btn-ghost px-4 py-2 text-xs font-semibold"
             >
               Smoke {smokeEnabled ? "On" : "Off"}
             </button>

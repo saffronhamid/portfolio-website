@@ -1,4 +1,4 @@
-import { FiExternalLink, FiGithub } from "react-icons/fi";
+﻿import { FiExternalLink, FiGithub } from "react-icons/fi";
 
 type Project = {
   title: string;
@@ -17,7 +17,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         <h3 className="text-xl font-semibold text-ink">{project.title}</h3>
         <ul className="mt-4 space-y-2 text-sm text-muted">
           {project.description.map((line, idx) => (
-            <li key={idx}>� {line}</li>
+            <li key={idx}>• {line}</li>
           ))}
         </ul>
         <div className="mt-4 flex flex-wrap gap-2">
@@ -47,3 +47,4 @@ export default function ProjectCard({ project }: { project: Project }) {
     </div>
   );
 }
+

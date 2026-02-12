@@ -279,12 +279,6 @@ export default function Home() {
                   >
                     View Projects
                   </a>
-                  <a
-                    href="/Faizan_CV.pdf"
-                    className="btn-ghost px-6 py-3 text-sm font-semibold"
-                  >
-                    View CV
-                  </a>
                 </div>
               </div>
               <div className="glass-card-strong card-hover p-7">

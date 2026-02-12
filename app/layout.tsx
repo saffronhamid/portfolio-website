@@ -42,7 +42,7 @@ export default function RootLayout({
         className={`${manrope.variable} ${fraunces.variable} ${jetBrainsMono.variable} antialiased`}
       >
         <div className="earth-bg" aria-hidden="true" />
-        {children}
+        <div className="page-wrap">{children}</div>
       </body>
     </html>
   );

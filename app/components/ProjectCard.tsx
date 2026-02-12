@@ -1,4 +1,4 @@
-﻿import { FiExternalLink, FiGithub } from "react-icons/fi";
+import { FiExternalLink, FiGithub } from "react-icons/fi";
 
 type Project = {
   title: string;
@@ -12,12 +12,12 @@ type Project = {
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <div className="glass-card card-hover flex h-full flex-col justify-between p-6">
+    <div className="panel card-hover flex h-full flex-col justify-between p-6">
       <div>
         <h3 className="text-xl font-semibold text-ink">{project.title}</h3>
         <ul className="mt-4 space-y-2 text-sm text-muted">
           {project.description.map((line, idx) => (
-            <li key={idx}>• {line}</li>
+            <li key={idx}>� {line}</li>
           ))}
         </ul>
         <div className="mt-4 flex flex-wrap gap-2">

@@ -1,22 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4f5f7;
-  --foreground: #111318;
-  --surface: #ffffff;
-  --surface-strong: #eef1f4;
-  --muted: #5c6673;
-  --muted-2: #7a8594;
-  --accent: #d7263d;
-  --accent-strong: #b81f33;
-  --border: rgba(17, 19, 24, 0.12);
-  --shadow: 0 24px 60px rgba(18, 24, 33, 0.08);
-  --shadow-strong: 0 32px 80px rgba(18, 24, 33, 0.14);
+  --bg: #0b0b0b;
+  --fg: #f5f5f2;
+  --muted: #b2b2ad;
+  --muted-2: #8f8f89;
+  --accent: #ecd06f;
+  --border: rgba(245, 245, 242, 0.16);
+  --panel: #121212;
+  --panel-2: #171717;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
   --font-sans: var(--font-body);
   --font-mono: var(--font-mono);
 }
@@ -36,16 +33,35 @@ html {
 }
 
 body {
-  background-color: var(--background);
-  background-image:
-    radial-gradient(640px circle at 82% 18%, rgba(215, 38, 61, 0.08), transparent 65%),
-    radial-gradient(520px circle at 12% 78%, rgba(31, 111, 235, 0.08), transparent 60%),
-    linear-gradient(180deg, #f7f8fa 0%, #eef1f4 100%);
-  color: var(--foreground);
+  background-color: var(--bg);
+  color: var(--fg);
   font-family: var(--font-body), system-ui, sans-serif;
-  transition: background 0.3s ease, color 0.3s ease;
+  letter-spacing: -0.01em;
   position: relative;
   overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 140px 140px;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: -2;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  background: radial-gradient(520px circle at 12% 20%, rgba(236, 208, 111, 0.12), transparent 60%),
+    radial-gradient(480px circle at 82% 72%, rgba(245, 245, 242, 0.08), transparent 60%);
+  pointer-events: none;
+  z-index: -3;
 }
 
 h1,
@@ -53,7 +69,7 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display), var(--font-body), system-ui, sans-serif;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.03em;
 }
 
 a {
@@ -70,7 +86,7 @@ textarea:focus-visible {
 }
 
 ::selection {
-  background: rgba(215, 38, 61, 0.2);
+  background: rgba(236, 208, 111, 0.2);
 }
 
 .page-wrap {
@@ -78,47 +94,10 @@ textarea:focus-visible {
   z-index: 1;
 }
 
-.earth-bg {
-  position: fixed;
-  width: min(52vw, 520px);
-  height: min(52vw, 520px);
-  right: -10%;
-  bottom: -12%;
-  background: radial-gradient(circle at 40% 35%, rgba(255, 255, 255, 0.9), transparent 55%),
-    radial-gradient(circle at 30% 40%, rgba(215, 38, 61, 0.12), transparent 60%);
-  border-radius: 50%;
-  opacity: 0.7;
-  filter: blur(1px);
-  z-index: 0;
-  pointer-events: none;
-}
-
-body::before,
-body::after {
-  content: "";
-  position: fixed;
-  inset: -20%;
-  z-index: -2;
-  pointer-events: none;
-}
-
-body::before {
-  background: radial-gradient(420px circle at 10% 20%, rgba(17, 19, 24, 0.08), transparent 60%),
-    radial-gradient(480px circle at 90% 10%, rgba(17, 19, 24, 0.06), transparent 65%);
-}
-
-body::after {
-  background-image:
-    linear-gradient(rgba(17, 19, 24, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(17, 19, 24, 0.05) 1px, transparent 1px);
-  background-size: 120px 120px, 120px 120px;
-  opacity: 0.45;
-}
-
 @keyframes text-cycle {
   0% {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(10px);
   }
   15% {
     opacity: 1;
@@ -130,7 +109,7 @@ body::after {
   }
   100% {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(-10px);
   }
 }
 
@@ -153,7 +132,7 @@ body::after {
 
 @layer components {
   .text-ink {
-    color: var(--foreground);
+    color: var(--fg);
   }
 
   .text-muted {
@@ -165,8 +144,8 @@ body::after {
   }
 
   .text-kicker {
-    font-size: 0.7rem;
-    letter-spacing: 0.32em;
+    font-size: 0.68rem;
+    letter-spacing: 0.36em;
     text-transform: uppercase;
     color: var(--accent);
     font-weight: 600;
@@ -176,53 +155,52 @@ body::after {
     color: var(--accent);
   }
 
-  .animate-float {
-    animation: soft-float 6s ease-in-out infinite;
-  }
-
   .text-cycle {
     display: inline-block;
     animation: text-cycle 2.8s ease forwards;
     will-change: transform, opacity;
   }
 
-  .glass-card {
-    border-radius: 1.25rem;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    box-shadow: var(--shadow);
+  .animate-float {
+    animation: soft-float 6s ease-in-out infinite;
   }
 
-  .glass-card-strong {
-    border-radius: 1.5rem;
+  .panel {
     border: 1px solid var(--border);
-    background: var(--surface);
-    box-shadow: var(--shadow-strong);
+    background: var(--panel);
+    border-radius: 1.25rem;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
+  }
+
+  .panel-strong {
+    border: 1px solid rgba(245, 245, 242, 0.22);
+    background: var(--panel-2);
+    border-radius: 1.5rem;
+    box-shadow: 0 40px 90px rgba(0, 0, 0, 0.5);
   }
 
   .btn-primary {
     border-radius: 999px;
     background: var(--accent);
-    color: #ffffff;
+    color: #0b0b0b;
     font-weight: 600;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-    box-shadow: 0 14px 30px rgba(215, 38, 61, 0.2);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 18px 40px rgba(236, 208, 111, 0.25);
   }
 
   .btn-primary:hover {
     transform: translateY(-2px);
-    background: var(--accent-strong);
-    box-shadow: 0 18px 40px rgba(215, 38, 61, 0.25);
+    box-shadow: 0 24px 60px rgba(236, 208, 111, 0.35);
   }
 
   .btn-ghost {
     border-radius: 999px;
     border: 1px solid var(--border);
     background: transparent;
-    color: var(--foreground);
+    color: var(--fg);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -231,18 +209,18 @@ body::after {
 
   .btn-ghost:hover {
     transform: translateY(-2px);
-    border-color: rgba(17, 19, 24, 0.28);
-    background: rgba(17, 19, 24, 0.04);
+    border-color: rgba(245, 245, 242, 0.3);
+    background: rgba(255, 255, 255, 0.04);
   }
 
   .chip {
     border-radius: 999px;
-    border: 1px solid rgba(17, 19, 24, 0.14);
-    background: var(--surface-strong);
-    padding: 0.2rem 0.65rem;
-    font-size: 0.7rem;
+    border: 1px solid rgba(245, 245, 242, 0.2);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.2rem 0.7rem;
+    font-size: 0.68rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     color: var(--muted);
   }
 
@@ -252,31 +230,26 @@ body::after {
 
   .card-hover:hover {
     transform: translateY(-6px);
-    box-shadow: 0 28px 70px rgba(18, 24, 33, 0.12);
-    border-color: rgba(17, 19, 24, 0.2);
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.5);
+    border-color: rgba(245, 245, 242, 0.28);
   }
 
   .focus-card {
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(17, 19, 24, 0.16);
-    background: linear-gradient(135deg, #ffffff 0%, #f5f7f9 100%);
+    background: linear-gradient(140deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
   }
 
   .focus-card::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 30% 20%, rgba(215, 38, 61, 0.08), transparent 55%);
+    background: radial-gradient(circle at 18% 18%, rgba(236, 208, 111, 0.16), transparent 55%);
     pointer-events: none;
   }
 
-  .focus-card-title {
-    color: var(--foreground);
-  }
-
   .section-title {
-    color: var(--foreground);
+    color: var(--fg);
   }
 
   .link-muted {
@@ -285,6 +258,6 @@ body::after {
   }
 
   .link-muted:hover {
-    color: var(--foreground);
+    color: var(--fg);
   }
 }

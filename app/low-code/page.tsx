@@ -24,7 +24,7 @@ export default function LowCodePage() {
 
       <div className="grid gap-6">
         <div className="grid gap-6 lg:grid-cols-[1.4fr_0.6fr]">
-          <section className="glass-card card-hover p-6">
+          <section className="panel card-hover p-6">
             <h2 className="text-lg font-semibold text-ink">Overview</h2>
             <p className="mt-2 text-sm text-muted">
               This document defines the requirements and scope for a low-code
@@ -37,7 +37,7 @@ export default function LowCodePage() {
               <li>• Scheduling, comments, and reliability requirements.</li>
             </ul>
           </section>
-          <section className="glass-card card-hover p-6">
+          <section className="panel card-hover p-6">
             <p className="text-kicker">Document</p>
             <h3 className="mt-3 text-base font-semibold text-ink">
               Requirements specification
@@ -50,7 +50,7 @@ export default function LowCodePage() {
           </section>
         </div>
 
-        <section className="glass-card card-hover p-6">
+        <section className="panel card-hover p-6">
           <h3 className="text-base font-semibold text-ink">1. Objective</h3>
           <p className="mt-2 text-sm text-muted">
             Develop a web application that enables users to manage student
@@ -58,7 +58,7 @@ export default function LowCodePage() {
           </p>
         </section>
 
-        <section className="glass-card card-hover p-6">
+        <section className="panel card-hover p-6">
           <h3 className="text-base font-semibold text-ink">
             2. General description
           </h3>
@@ -69,7 +69,7 @@ export default function LowCodePage() {
           </p>
         </section>
 
-        <section className="glass-card card-hover p-6">
+        <section className="panel card-hover p-6">
           <h3 className="text-base font-semibold text-ink">
             3. Definitions and abbreviations
           </h3>
@@ -96,7 +96,7 @@ export default function LowCodePage() {
           </ul>
         </section>
 
-        <section className="glass-card card-hover p-6">
+        <section className="panel card-hover p-6">
           <h3 className="text-base font-semibold text-ink">
             4. Product environment
           </h3>
@@ -106,7 +106,7 @@ export default function LowCodePage() {
           </p>
         </section>
 
-        <section className="glass-card card-hover p-6">
+        <section className="panel card-hover p-6">
           <h3 className="text-base font-semibold text-ink">
             5. Functional requirements
           </h3>
@@ -115,7 +115,7 @@ export default function LowCodePage() {
           </p>
         </section>
 
-        <section className="glass-card card-hover p-6">
+        <section className="panel card-hover p-6">
           <h3 className="text-base font-semibold text-ink">
             5.1 User management
           </h3>
@@ -163,7 +163,7 @@ export default function LowCodePage() {
           </ul>
         </section>
 
-        <section className="glass-card card-hover p-6">
+        <section className="panel card-hover p-6">
           <h3 className="text-base font-semibold text-ink">
             5.2 Project management
           </h3>
@@ -195,7 +195,7 @@ export default function LowCodePage() {
           </ul>
         </section>
 
-        <section className="glass-card card-hover p-6">
+        <section className="panel card-hover p-6">
           <h3 className="text-base font-semibold text-ink">
             5.3 Appointment management
           </h3>
@@ -220,7 +220,7 @@ export default function LowCodePage() {
           </ul>
         </section>
 
-        <section className="glass-card card-hover p-6">
+        <section className="panel card-hover p-6">
           <h3 className="text-base font-semibold text-ink">5.4 Commenting</h3>
           <ul className="mt-3 space-y-2 text-sm text-muted">
             <li>
@@ -254,7 +254,7 @@ export default function LowCodePage() {
           </ul>
         </section>
 
-        <section className="glass-card card-hover p-6">
+        <section className="panel card-hover p-6">
           <h3 className="text-base font-semibold text-ink">5.5 Settings</h3>
           <ul className="mt-3 space-y-2 text-sm text-muted">
             <li>
@@ -264,7 +264,7 @@ export default function LowCodePage() {
           </ul>
         </section>
 
-        <section className="glass-card card-hover p-6">
+        <section className="panel card-hover p-6">
           <h3 className="text-base font-semibold text-ink">
             6. Non-functional requirements
           </h3>
@@ -282,12 +282,12 @@ export default function LowCodePage() {
           </ul>
         </section>
 
-        <section className="glass-card p-6">
+        <section className="panel p-6">
           <h3 className="text-base font-semibold text-ink">7. Glossary</h3>
           <p className="mt-2 text-sm text-muted">None</p>
         </section>
 
-        <section className="glass-card p-6">
+        <section className="panel p-6">
           <h3 className="text-base font-semibold text-ink">8. References</h3>
           <p className="mt-2 text-sm text-muted">None</p>
         </section>

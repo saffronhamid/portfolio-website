@@ -23,7 +23,7 @@ export default function BatTrackingPage() {
       </FadeIn>
 
       <div className="grid gap-6 lg:grid-cols-[1.4fr_0.6fr]">
-        <section className="glass-card card-hover p-6">
+        <section className="panel card-hover p-6">
           <h2 className="text-lg font-semibold text-ink">Overview</h2>
           <p className="mt-2 text-sm text-muted">
             Applied computer vision project focused on multi-object tracking in
@@ -36,7 +36,7 @@ export default function BatTrackingPage() {
             <li>• Deployment-ready inference with reproducible metrics.</li>
           </ul>
         </section>
-        <section className="glass-card card-hover p-6">
+        <section className="panel card-hover p-6">
           <p className="text-kicker">Project Facts</p>
           <div className="mt-4 space-y-2 text-sm text-muted">
             <p>Focus: Night-vision tracking</p>
@@ -47,7 +47,7 @@ export default function BatTrackingPage() {
       </div>
 
       <div className="mt-6 grid gap-6">
-        <section className="glass-card card-hover p-6">
+        <section className="panel card-hover p-6">
           <h3 className="text-base font-semibold text-ink">1. Research goals</h3>
           <p className="mt-2 text-sm text-muted">
             Establish a reliable baseline for detecting and tracking bats in
@@ -55,7 +55,7 @@ export default function BatTrackingPage() {
           </p>
         </section>
 
-        <section className="glass-card card-hover p-6">
+        <section className="panel card-hover p-6">
           <h3 className="text-base font-semibold text-ink">2. Data strategy</h3>
           <p className="mt-2 text-sm text-muted">
             Curated a multi-scene dataset with manual labels, augmentation, and
@@ -63,7 +63,7 @@ export default function BatTrackingPage() {
           </p>
         </section>
 
-        <section className="glass-card card-hover p-6">
+        <section className="panel card-hover p-6">
           <h3 className="text-base font-semibold text-ink">3. Evaluation</h3>
           <ul className="mt-3 space-y-2 text-sm text-muted">
             <li>• mAP@50 and mAP@50-95 for detection quality.</li>

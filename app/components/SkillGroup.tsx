@@ -1,4 +1,4 @@
-﻿export default function SkillGroup({
+export default function SkillGroup({
   title,
   skills,
 }: {
@@ -6,7 +6,7 @@
   skills: string[];
 }) {
   return (
-    <div className="glass-card card-hover p-6">
+    <div className="panel card-hover p-6">
       <h3 className="text-lg font-semibold text-ink">{title}</h3>
       <div className="mt-3 flex flex-wrap gap-2 text-sm text-muted">
         {skills.map((skill) => (

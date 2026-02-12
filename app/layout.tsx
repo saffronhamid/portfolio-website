@@ -1,23 +1,23 @@
 ﻿import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, IBM_Plex_Serif } from "next/font/google";
+import { DM_Mono, DM_Sans, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const plexSans = IBM_Plex_Sans({
+const bodyFont = DM_Sans({
   subsets: ["latin"],
   variable: "--font-body",
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const plexSerif = IBM_Plex_Serif({
+const displayFont = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-display",
   weight: ["400", "500", "600", "700"],
 });
 
-const plexMono = IBM_Plex_Mono({
+const monoFont = DM_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
-  weight: ["400", "500", "600"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -42,9 +42,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${plexSans.variable} ${plexSerif.variable} ${plexMono.variable} antialiased`}
+        className={`${bodyFont.variable} ${displayFont.variable} ${monoFont.variable} antialiased`}
       >
-        <div className="earth-bg" aria-hidden="true" />
         <div className="page-wrap">{children}</div>
       </body>
     </html>

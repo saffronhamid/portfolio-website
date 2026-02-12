@@ -14,7 +14,7 @@ export default function SectionHeader({
       {subtitle && (
         <p className="text-kicker">{subtitle}</p>
       )}
-      <h2 className="mt-4 text-3xl font-semibold text-ink sm:text-4xl">
+      <h2 className="mt-4 text-4xl font-semibold text-ink sm:text-5xl">
         <span className="section-title">{title}</span>
       </h2>
       {description && (

@@ -236,23 +236,23 @@ export default function Home() {
       <Navbar items={navItems} activeId={activeId} />
 
       <main className="mx-auto max-w-7xl px-4 pb-24 pt-12 sm:px-6">
-        <section id="home" className="py-16">
+        <section id="home" className="py-20">
           <FadeIn>
-            <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+            <div className="grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
               <div>
-                <p className="text-kicker">Portfolio</p>
-                <h1 className="mt-4 text-4xl font-semibold tracking-tight text-ink sm:text-6xl">
+                <p className="text-kicker">ML Engineer Portfolio</p>
+                <h1 className="mt-6 text-5xl font-semibold tracking-tight text-ink sm:text-7xl">
                   {profile.name}
                 </h1>
-                <p className="mt-3 text-lg text-muted">
+                <p className="mt-6 text-xl text-muted">
                   <span key={headlineIndex} className="text-cycle">
                     {rotatingHeadlines[headlineIndex]}
                   </span>
                 </p>
-                <p className="mt-5 max-w-2xl text-base text-muted">
+                <p className="mt-6 max-w-2xl text-base text-muted">
                   {aboutSummary}
                 </p>
-                <div className="mt-6 flex flex-wrap gap-4 text-sm text-muted">
+                <div className="mt-8 flex flex-wrap gap-4 text-sm text-muted">
                   <span className="inline-flex items-center gap-2">
                     <FiMapPin /> {profile.location}
                   </span>
@@ -279,8 +279,8 @@ export default function Home() {
                   </a>
                 </div>
               </div>
-              <div className="glass-card-strong card-hover p-7">
-                <div className="glass-card p-6">
+              <div className="panel-strong card-hover p-7">
+                <div className="panel p-6">
                   <p className="text-kicker">Focus Areas</p>
                   <ul className="mt-4 space-y-3 text-sm text-muted">
                     <li>• Retrieval-augmented generation pipelines</li>
@@ -296,7 +296,7 @@ export default function Home() {
                       <a
                         key={link.label}
                         href={link.url}
-                        className="card-hover flex items-center justify-between rounded-xl border border-black/10 bg-white px-4 py-3 transition hover:bg-black/5"
+                        className="card-hover flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 transition hover:bg-white/10"
                       >
                         <span className="inline-flex items-center gap-2">
                           <Icon /> {link.label}
@@ -319,7 +319,7 @@ export default function Home() {
               description="Focused on production ML workflows, MLOps reliability, and scalable AI delivery."
             />
             <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-              <div className="glass-card card-hover p-6 text-muted">
+              <div className="panel card-hover p-6 text-muted">
                 <p className="text-base text-muted">{aboutSummary}</p>
                 <ul className="mt-6 space-y-3 text-sm text-subtle">
                   {aboutHighlights.map((item) => (
@@ -327,7 +327,7 @@ export default function Home() {
                   ))}
                 </ul>
               </div>
-              <div className="glass-card card-hover p-6">
+              <div className="panel card-hover p-6">
                 <p className="text-kicker">Languages</p>
                 <div className="mt-4 space-y-2 text-sm text-muted">
                   <p>English</p>
@@ -348,7 +348,7 @@ export default function Home() {
             <div className="grid gap-6 lg:grid-cols-2">
               <Link
                 href="/low-code"
-                className="glass-card focus-card card-hover p-6 animate-float"
+                className="panel focus-card card-hover p-6 animate-float"
                 aria-label="Low-code seminar details"
               >
                 <p className="text-kicker">Low-Code Seminar</p>
@@ -358,7 +358,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/bat-tracking"
-                className="glass-card focus-card card-hover p-6 animate-float"
+                className="panel focus-card card-hover p-6 animate-float"
                 aria-label="Bat tracking project details"
               >
                 <p className="text-kicker">Bat Tracking</p>
@@ -428,7 +428,7 @@ export default function Home() {
             />
             <div className="grid gap-4 md:grid-cols-2">
               {education.map((item) => (
-                <div key={item.school} className="glass-card card-hover p-6">
+                <div key={item.school} className="panel card-hover p-6">
                   <h3 className="text-lg font-semibold text-ink">
                     {item.school}
                   </h3>
@@ -456,7 +456,7 @@ export default function Home() {
               description="Open to ML engineering, RAG pipeline, and MLOps roles."
             />
             <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
-              <div className="glass-card card-hover p-6 text-muted">
+              <div className="panel card-hover p-6 text-muted">
                 <p className="text-base">
                   Want to collaborate or discuss ML/MLOps work? Send a message
                   and I will get back to you.
@@ -483,7 +483,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-black/10 py-10">
+      <footer className="border-t border-white/10 py-10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 text-sm text-subtle sm:flex-row sm:px-6">
           <p>© {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
           <div className="flex items-center gap-4">
@@ -505,3 +505,5 @@ export default function Home() {
     </div>
   );
 }
+
+

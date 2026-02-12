@@ -12,15 +12,13 @@ export default function SectionHeader({
   return (
     <div className="mb-10">
       {subtitle && (
-        <p className="text-xs uppercase tracking-[0.32em] text-amber-200/80">
-          {subtitle}
-        </p>
+        <p className="text-kicker">{subtitle}</p>
       )}
-      <h2 className="mt-4 text-3xl font-semibold sm:text-4xl">
-        <span className="typewriter section-title">{title}</span>
+      <h2 className="mt-4 text-3xl font-semibold text-ink sm:text-4xl">
+        <span className="section-title">{title}</span>
       </h2>
       {description && (
-        <p className="mt-3 max-w-2xl text-sm text-zinc-400 sm:text-base">
+        <p className="mt-3 max-w-2xl text-sm text-muted sm:text-base">
           {description}
         </p>
       )}

@@ -4,7 +4,7 @@ import SectionHeader from "../components/SectionHeader";
 
 export default function LowCodePage() {
   return (
-    <main className="mx-auto max-w-6xl px-4 pb-24 pt-12 sm:px-6">
+    <main className="mx-auto max-w-7xl px-4 pb-24 pt-12 sm:px-6">
       <div className="mb-10">
         <Link
           href="/#focus"
@@ -23,26 +23,46 @@ export default function LowCodePage() {
       </FadeIn>
 
       <div className="grid gap-6">
-        <section className="glass-card card-hover p-6">
-          <h2 className="text-lg font-semibold text-white">
-            Requirements specification
-          </h2>
-          <p className="mt-2 text-sm text-zinc-400">Date: October 17, 2025</p>
-        </section>
+        <div className="grid gap-6 lg:grid-cols-[1.4fr_0.6fr]">
+          <section className="glass-card card-hover p-6">
+            <h2 className="text-lg font-semibold text-ink">Overview</h2>
+            <p className="mt-2 text-sm text-muted">
+              This document defines the requirements and scope for a low-code
+              platform that manages student projects, roles, and project
+              lifecycle coordination.
+            </p>
+            <ul className="mt-4 space-y-2 text-sm text-muted">
+              <li>• Role-based access and secure account lifecycle.</li>
+              <li>• Structured project data with lifecycle states.</li>
+              <li>• Scheduling, comments, and reliability requirements.</li>
+            </ul>
+          </section>
+          <section className="glass-card card-hover p-6">
+            <p className="text-kicker">Document</p>
+            <h3 className="mt-3 text-base font-semibold text-ink">
+              Requirements specification
+            </h3>
+            <div className="mt-4 space-y-2 text-sm text-muted">
+              <p>Date: October 17, 2025</p>
+              <p>Scope: University project management</p>
+              <p>Audience: Lecturers and students</p>
+            </div>
+          </section>
+        </div>
 
         <section className="glass-card card-hover p-6">
-          <h3 className="text-base font-semibold text-white">1. Objective</h3>
-          <p className="mt-2 text-sm text-zinc-400">
+          <h3 className="text-base font-semibold text-ink">1. Objective</h3>
+          <p className="mt-2 text-sm text-muted">
             Develop a web application that enables users to manage student
             projects.
           </p>
         </section>
 
         <section className="glass-card card-hover p-6">
-          <h3 className="text-base font-semibold text-white">
+          <h3 className="text-base font-semibold text-ink">
             2. General description
           </h3>
-          <p className="mt-2 text-sm text-zinc-400">
+          <p className="mt-2 text-sm text-muted">
             The app supports user and rights management, creation and
             management of projects and project data, comments, and appointment
             management.
@@ -50,10 +70,10 @@ export default function LowCodePage() {
         </section>
 
         <section className="glass-card card-hover p-6">
-          <h3 className="text-base font-semibold text-white">
+          <h3 className="text-base font-semibold text-ink">
             3. Definitions and abbreviations
           </h3>
-          <ul className="mt-3 space-y-2 text-sm text-zinc-400">
+          <ul className="mt-3 space-y-2 text-sm text-muted">
             <li>Server: backend with REST API and data persistence.</li>
             <li>
               User account: user name, email, password, role, first and last
@@ -77,29 +97,29 @@ export default function LowCodePage() {
         </section>
 
         <section className="glass-card card-hover p-6">
-          <h3 className="text-base font-semibold text-white">
+          <h3 className="text-base font-semibold text-ink">
             4. Product environment
           </h3>
-          <p className="mt-2 text-sm text-zinc-400">
+          <p className="mt-2 text-sm text-muted">
             Web app for lecturers and students, compatible with Chrome,
             Firefox, Safari, and Edge.
           </p>
         </section>
 
         <section className="glass-card card-hover p-6">
-          <h3 className="text-base font-semibold text-white">
+          <h3 className="text-base font-semibold text-ink">
             5. Functional requirements
           </h3>
-          <p className="mt-2 text-sm text-zinc-400">
+          <p className="mt-2 text-sm text-muted">
             All requirements assume a logged-in user, except 5.1.1 and 5.1.3.
           </p>
         </section>
 
         <section className="glass-card card-hover p-6">
-          <h3 className="text-base font-semibold text-white">
+          <h3 className="text-base font-semibold text-ink">
             5.1 User management
           </h3>
-          <ul className="mt-3 space-y-2 text-sm text-zinc-400">
+          <ul className="mt-3 space-y-2 text-sm text-muted">
             <li>
               5.1.1 Log in to the server: enter username or email and password;
               server validates or rejects.
@@ -144,10 +164,10 @@ export default function LowCodePage() {
         </section>
 
         <section className="glass-card card-hover p-6">
-          <h3 className="text-base font-semibold text-white">
+          <h3 className="text-base font-semibold text-ink">
             5.2 Project management
           </h3>
-          <ul className="mt-3 space-y-2 text-sm text-zinc-400">
+          <ul className="mt-3 space-y-2 text-sm text-muted">
             <li>
               5.2.1 Create project: admin sets name, type, status; optional
               description and team members; no dual role.
@@ -176,10 +196,10 @@ export default function LowCodePage() {
         </section>
 
         <section className="glass-card card-hover p-6">
-          <h3 className="text-base font-semibold text-white">
+          <h3 className="text-base font-semibold text-ink">
             5.3 Appointment management
           </h3>
-          <ul className="mt-3 space-y-2 text-sm text-zinc-400">
+          <ul className="mt-3 space-y-2 text-sm text-muted">
             <li>
               5.3.1 Create appointment: managers and developers set name, type,
               start/end, and optional description.
@@ -201,8 +221,8 @@ export default function LowCodePage() {
         </section>
 
         <section className="glass-card card-hover p-6">
-          <h3 className="text-base font-semibold text-white">5.4 Commenting</h3>
-          <ul className="mt-3 space-y-2 text-sm text-zinc-400">
+          <h3 className="text-base font-semibold text-ink">5.4 Commenting</h3>
+          <ul className="mt-3 space-y-2 text-sm text-muted">
             <li>
               5.4.1 Write public comment: managers and developers add public
               comments.
@@ -235,8 +255,8 @@ export default function LowCodePage() {
         </section>
 
         <section className="glass-card card-hover p-6">
-          <h3 className="text-base font-semibold text-white">5.5 Settings</h3>
-          <ul className="mt-3 space-y-2 text-sm text-zinc-400">
+          <h3 className="text-base font-semibold text-ink">5.5 Settings</h3>
+          <ul className="mt-3 space-y-2 text-sm text-muted">
             <li>
               5.5.1 Change connection interrupt period: view and update interval
               in seconds.
@@ -245,10 +265,10 @@ export default function LowCodePage() {
         </section>
 
         <section className="glass-card card-hover p-6">
-          <h3 className="text-base font-semibold text-white">
+          <h3 className="text-base font-semibold text-ink">
             6. Non-functional requirements
           </h3>
-          <ul className="mt-3 space-y-2 text-sm text-zinc-400">
+          <ul className="mt-3 space-y-2 text-sm text-muted">
             <li>
               6.1 Reliability: detect connection interruptions at configurable
               intervals and prevent data loss.
@@ -263,13 +283,13 @@ export default function LowCodePage() {
         </section>
 
         <section className="glass-card p-6">
-          <h3 className="text-base font-semibold text-white">7. Glossary</h3>
-          <p className="mt-2 text-sm text-zinc-400">None</p>
+          <h3 className="text-base font-semibold text-ink">7. Glossary</h3>
+          <p className="mt-2 text-sm text-muted">None</p>
         </section>
 
         <section className="glass-card p-6">
-          <h3 className="text-base font-semibold text-white">8. References</h3>
-          <p className="mt-2 text-sm text-zinc-400">None</p>
+          <h3 className="text-base font-semibold text-ink">8. References</h3>
+          <p className="mt-2 text-sm text-muted">None</p>
         </section>
       </div>
     </main>

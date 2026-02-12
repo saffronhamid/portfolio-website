@@ -33,7 +33,7 @@ export default function Home() {
   );
 
   const [activeId, setActiveId] = useState("home");
-  const [smokeEnabled, setSmokeEnabled] = useState(true);
+  const [smokeEnabled, setSmokeEnabled] = useState(false);
   const [headlineIndex, setHeadlineIndex] = useState(0);
 
   useEffect(() => {
@@ -231,7 +231,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen text-white">
+    <div className="min-h-screen text-ink">
       <SmokyCursor enabled={smokeEnabled} />
       <Navbar items={navItems} activeId={activeId} />
 
@@ -240,27 +240,25 @@ export default function Home() {
           <FadeIn>
             <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
               <div>
-                <p className="text-xs uppercase tracking-[0.35em] text-amber-200/80">
-                  Portfolio
-                </p>
-                <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-6xl">
+                <p className="text-kicker">Portfolio</p>
+                <h1 className="mt-4 text-4xl font-semibold tracking-tight text-ink sm:text-6xl">
                   {profile.name}
                 </h1>
-                <p className="mt-3 text-lg text-zinc-300">
+                <p className="mt-3 text-lg text-muted">
                   <span key={headlineIndex} className="text-cycle">
                     {rotatingHeadlines[headlineIndex]}
                   </span>
                 </p>
-                <p className="mt-5 max-w-2xl text-base text-zinc-400">
+                <p className="mt-5 max-w-2xl text-base text-muted">
                   {aboutSummary}
                 </p>
-                <div className="mt-6 flex flex-wrap gap-4 text-sm text-zinc-300">
+                <div className="mt-6 flex flex-wrap gap-4 text-sm text-muted">
                   <span className="inline-flex items-center gap-2">
                     <FiMapPin /> {profile.location}
                   </span>
                   <a
                     href={`mailto:${profile.email}`}
-                    className="inline-flex cursor-pointer items-center gap-2 hover:text-white hover:underline hover:underline-offset-4"
+                    className="inline-flex cursor-pointer items-center gap-2 hover:text-ink hover:underline hover:underline-offset-4"
                     aria-label={`Email ${profile.email}`}
                   >
                     <FiMail /> {profile.email}
@@ -283,29 +281,27 @@ export default function Home() {
               </div>
               <div className="glass-card-strong card-hover p-7">
                 <div className="glass-card p-6">
-                  <p className="text-xs uppercase tracking-[0.3em] text-amber-200/80">
-                    Focus Areas
-                  </p>
-                  <ul className="mt-4 space-y-3 text-sm text-zinc-300">
+                  <p className="text-kicker">Focus Areas</p>
+                  <ul className="mt-4 space-y-3 text-sm text-muted">
                     <li>• Retrieval-augmented generation pipelines</li>
                     <li>• MLOps automation and continuous learning</li>
                     <li>• Reliable data preprocessing and validation</li>
                     <li>• Real-time ML systems and deployment</li>
                   </ul>
                 </div>
-                <div className="mt-6 grid gap-3 text-sm text-zinc-300">
+                <div className="mt-6 grid gap-3 text-sm text-muted">
                   {profile.links.map((link) => {
                     const Icon = link.icon;
                     return (
                       <a
                         key={link.label}
                         href={link.url}
-                        className="card-hover flex items-center justify-between rounded-xl border border-white/10 bg-black/30 px-4 py-3 transition hover:bg-white/5"
+                        className="card-hover flex items-center justify-between rounded-xl border border-black/10 bg-white px-4 py-3 transition hover:bg-black/5"
                       >
                         <span className="inline-flex items-center gap-2">
                           <Icon /> {link.label}
                         </span>
-                        <span className="text-xs text-zinc-400">Open</span>
+                        <span className="text-xs text-subtle">Open</span>
                       </a>
                     );
                   })}
@@ -323,19 +319,17 @@ export default function Home() {
               description="Focused on production ML workflows, MLOps reliability, and scalable AI delivery."
             />
             <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-              <div className="glass-card card-hover p-6 text-zinc-300">
-                <p className="text-base text-zinc-300">{aboutSummary}</p>
-                <ul className="mt-6 space-y-3 text-sm text-zinc-400">
+              <div className="glass-card card-hover p-6 text-muted">
+                <p className="text-base text-muted">{aboutSummary}</p>
+                <ul className="mt-6 space-y-3 text-sm text-subtle">
                   {aboutHighlights.map((item) => (
                     <li key={item}>• {item}</li>
                   ))}
                 </ul>
               </div>
               <div className="glass-card card-hover p-6">
-                <p className="text-xs uppercase tracking-[0.3em] text-amber-200/80">
-                  Languages
-                </p>
-                <div className="mt-4 space-y-2 text-sm text-zinc-300">
+                <p className="text-kicker">Languages</p>
+                <div className="mt-4 space-y-2 text-sm text-muted">
                   <p>English</p>
                   <p>German (A2)</p>
                 </div>
@@ -357,10 +351,8 @@ export default function Home() {
                 className="glass-card focus-card card-hover p-6 animate-float"
                 aria-label="Low-code seminar details"
               >
-                <p className="text-xs uppercase tracking-[0.3em] text-amber-200/80">
-                  Low-Code Seminar
-                </p>
-                <h3 className="focus-card-title mt-4 text-xl font-semibold text-white">
+                <p className="text-kicker">Low-Code Seminar</p>
+                <h3 className="focus-card-title mt-4 text-xl font-semibold text-ink">
                   Web-App for Managing Student Projects
                 </h3>
               </Link>
@@ -369,10 +361,8 @@ export default function Home() {
                 className="glass-card focus-card card-hover p-6 animate-float"
                 aria-label="Bat tracking project details"
               >
-                <p className="text-xs uppercase tracking-[0.3em] text-amber-200/80">
-                  Bat Tracking
-                </p>
-                <h3 className="focus-card-title mt-4 text-xl font-semibold text-white">
+                <p className="text-kicker">Bat Tracking</p>
+                <h3 className="focus-card-title mt-4 text-xl font-semibold text-ink">
                   Master project using all YOLO versions
                 </h3>
               </Link>
@@ -439,14 +429,14 @@ export default function Home() {
             <div className="grid gap-4 md:grid-cols-2">
               {education.map((item) => (
                 <div key={item.school} className="glass-card card-hover p-6">
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-lg font-semibold text-ink">
                     {item.school}
                   </h3>
-                  <p className="mt-1 text-sm text-zinc-300">{item.degree}</p>
-                  <p className="mt-1 text-sm text-zinc-400">{item.location}</p>
-                  <p className="mt-2 text-sm text-zinc-400">{item.date}</p>
+                  <p className="mt-1 text-sm text-muted">{item.degree}</p>
+                  <p className="mt-1 text-sm text-subtle">{item.location}</p>
+                  <p className="mt-2 text-sm text-subtle">{item.date}</p>
                   {item.details.length > 0 && (
-                    <ul className="mt-3 space-y-1 text-sm text-zinc-300">
+                    <ul className="mt-3 space-y-1 text-sm text-muted">
                       {item.details.map((detail) => (
                         <li key={detail}>• {detail}</li>
                       ))}
@@ -466,7 +456,7 @@ export default function Home() {
               description="Open to ML engineering, RAG pipeline, and MLOps roles."
             />
             <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
-              <div className="glass-card card-hover p-6 text-zinc-300">
+              <div className="glass-card card-hover p-6 text-muted">
                 <p className="text-base">
                   Want to collaborate or discuss ML/MLOps work? Send a message
                   and I will get back to you.
@@ -474,7 +464,7 @@ export default function Home() {
                 <div className="mt-6 space-y-3 text-sm">
                   <a
                     href={`mailto:${profile.email}`}
-                    className="inline-flex cursor-pointer items-center gap-2 hover:text-white hover:underline hover:underline-offset-4"
+                    className="inline-flex cursor-pointer items-center gap-2 hover:text-ink hover:underline hover:underline-offset-4"
                     aria-label={`Email ${profile.email}`}
                   >
                     <FiMail /> {profile.email}
@@ -493,27 +483,19 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-white/10 py-10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 text-sm text-zinc-400 sm:flex-row sm:px-6">
+      <footer className="border-t border-black/10 py-10">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 text-sm text-subtle sm:flex-row sm:px-6">
           <p>© {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <button
-              type="button"
-              onClick={() => setSmokeEnabled((prev) => !prev)}
-              aria-pressed={smokeEnabled}
-              className="btn-ghost px-4 py-2 text-xs font-semibold"
-            >
-              Smoke {smokeEnabled ? "On" : "Off"}
-            </button>
             <a
               href={profile.links[0].url}
-              className="text-xs text-zinc-400 transition hover:text-white"
+              className="text-xs text-subtle transition hover:text-ink"
             >
               LinkedIn
             </a>
             <a
               href={profile.links[1].url}
-              className="text-xs text-zinc-400 transition hover:text-white"
+              className="text-xs text-subtle transition hover:text-ink"
             >
               GitHub
             </a>

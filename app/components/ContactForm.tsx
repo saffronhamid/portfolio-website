@@ -12,7 +12,7 @@
         <input
           type="text"
           name="name"
-          className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-ink outline-none transition focus:border-[color:var(--accent)]"
+          className="rounded-xl border border-black/10 bg-white px-4 py-3 text-ink outline-none transition focus:border-black"
           placeholder="Your name"
           autoComplete="name"
           required
@@ -23,7 +23,7 @@
         <input
           type="email"
           name="email"
-          className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-ink outline-none transition focus:border-[color:var(--accent)]"
+          className="rounded-xl border border-black/10 bg-white px-4 py-3 text-ink outline-none transition focus:border-black"
           placeholder="you@email.com"
           autoComplete="email"
           required
@@ -34,7 +34,7 @@
         <textarea
           rows={4}
           name="message"
-          className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-ink outline-none transition focus:border-[color:var(--accent)]"
+          className="rounded-xl border border-black/10 bg-white px-4 py-3 text-ink outline-none transition focus:border-black"
           placeholder="Tell me about your project..."
           required
         />

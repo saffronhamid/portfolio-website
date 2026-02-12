@@ -256,71 +256,72 @@ export default function Home() {
       <main className="mx-auto max-w-7xl px-4 pb-24 pt-12 sm:px-6">
         <section id="home" className="py-24">
           <FadeIn>
-            <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-              <div>
-                <p className="text-kicker">Creative ML Engineer</p>
-                <h1 className="hero-title mt-6 font-semibold text-ink">
-                  {profile.name}
-                </h1>
-                <p className="hero-subtitle mt-6 text-muted">
-                  <span key={headlineIndex} className="text-cycle">
-                    {rotatingHeadlines[headlineIndex]}
-                  </span>
-                </p>
-                <p className="mt-6 max-w-2xl text-base text-muted">
-                  {aboutSummary}
-                </p>
-                <div className="mt-8 flex flex-wrap gap-4 text-sm text-muted">
-                  <span className="inline-flex items-center gap-2">
-                    <FiMapPin /> {profile.location}
-                  </span>
-                  <a
-                    href={`mailto:${profile.email}`}
-                    className="inline-flex cursor-pointer items-center gap-2 hover:text-ink hover:underline hover:underline-offset-4"
-                    aria-label={`Email ${profile.email}`}
-                  >
-                    <FiMail /> {profile.email}
-                  </a>
-                  <span className="inline-flex items-center gap-2">
-                    <FiPhone /> {profile.phone}
-                  </span>
+            <div className="panel-strong relative overflow-hidden px-6 py-10 sm:px-10">
+              <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+                <div className="space-y-6">
+                  <p className="text-xs uppercase tracking-[0.24em] text-muted">
+                    My name is {profile.name} and I am a
+                  </p>
+                  <div className="space-y-2">
+                    <h1 className="hero-title font-semibold text-ink">
+                      Machine Learning Engineer
+                    </h1>
+                    <h2 className="hero-title hero-outline font-semibold">
+                      &amp; Researcher
+                    </h2>
+                  </div>
+                  <p className="hero-subtitle text-muted">
+                    based in {profile.location}.
+                  </p>
+                  <p className="max-w-xl text-sm text-muted">
+                    {aboutSummary}
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    <a href="#work" className="btn-primary px-5 py-3 text-xs uppercase tracking-[0.24em]">
+                      Discover my work
+                    </a>
+                    <a href="#contact" className="btn-ghost px-5 py-3 text-xs uppercase tracking-[0.24em]">
+                      Contact me
+                    </a>
+                  </div>
+                  <div className="flex flex-wrap gap-4 text-xs text-muted">
+                    <span className="inline-flex items-center gap-2">
+                      <FiMapPin /> {profile.location}
+                    </span>
+                    <a
+                      href={`mailto:${profile.email}`}
+                      className="inline-flex cursor-pointer items-center gap-2 hover:text-ink hover:underline hover:underline-offset-4"
+                      aria-label={`Email ${profile.email}`}
+                    >
+                      <FiMail /> {profile.email}
+                    </a>
+                    <span className="inline-flex items-center gap-2">
+                      <FiPhone /> {profile.phone}
+                    </span>
+                  </div>
                 </div>
-                <div className="mt-8 flex flex-wrap gap-4">
-                  <a href="#contact" className="btn-primary px-6 py-3 text-sm">
-                    Contact
-                  </a>
-                  <a
-                    href="#work"
-                    className="btn-ghost px-6 py-3 text-sm font-semibold"
-                  >
-                    View Projects
-                  </a>
-                </div>
-              </div>
-              <div className="panel-strong card-hover p-6">
-                <div className="image-frame">
-                  <img
-                    src="/dummy-portrait.svg"
-                    alt="Portrait placeholder"
-                    className="h-[520px] w-full object-cover"
-                  />
-                </div>
-                <div className="mt-6 grid gap-3 text-sm text-muted">
-                  {profile.links.map((link) => {
-                    const Icon = link.icon;
-                    return (
-                      <a
-                        key={link.label}
-                        href={link.url}
-                        className="card-hover flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 transition hover:bg-white/10"
-                      >
-                        <span className="inline-flex items-center gap-2">
+                <div className="relative">
+                  <div className="image-frame">
+                    <img
+                      src="/dummy-portrait.svg"
+                      alt="Portrait placeholder"
+                      className="h-[440px] w-full object-cover"
+                    />
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted">
+                    {profile.links.map((link) => {
+                      const Icon = link.icon;
+                      return (
+                        <a
+                          key={link.label}
+                          href={link.url}
+                          className="btn-ghost inline-flex items-center gap-2 px-4 py-2 uppercase tracking-[0.2em]"
+                        >
                           <Icon /> {link.label}
-                        </span>
-                        <span className="text-xs text-subtle">Open</span>
-                      </a>
-                    );
-                  })}
+                        </a>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
@@ -526,7 +527,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-white/10 py-10">
+      <footer className="border-t border-black/10 py-10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 text-sm text-subtle sm:flex-row sm:px-6">
           <p>© {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
           <div className="flex items-center gap-4">

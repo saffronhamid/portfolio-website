@@ -14,7 +14,7 @@ export default function ExperienceCard({
   return (
     <div className="panel card-hover relative p-6">
       <span className="absolute left-6 top-7 h-2.5 w-2.5 rounded-full bg-[color:var(--accent)]" />
-      <div className="border-l border-white/10 pl-8">
+      <div className="border-l border-black/10 pl-8">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h3 className="text-lg font-semibold text-ink">

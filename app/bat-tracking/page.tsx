@@ -4,7 +4,7 @@ import SectionHeader from "../components/SectionHeader";
 
 export default function BatTrackingPage() {
   return (
-    <main className="mx-auto max-w-7xl px-4 pb-24 pt-12 sm:px-6">
+    <main className="mx-auto max-w-7xl px-4 pb-24 pt-14 sm:px-6">
       <div className="mb-10">
         <Link
           href="/#focus"
@@ -15,11 +15,29 @@ export default function BatTrackingPage() {
       </div>
 
       <FadeIn>
-        <SectionHeader
-          title="Bat Tracking"
-          subtitle="Master project using all YOLO versions"
-          description="Add the detailed scope, datasets, and metrics here."
-        />
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div>
+            <SectionHeader
+              title="Bat Tracking"
+              subtitle="Master project using all YOLO versions"
+              description="Applied vision research with a focus on multi-object tracking in low-light environments."
+            />
+            <div className="mt-6 flex flex-wrap gap-3 text-sm text-muted">
+              <span className="chip">Computer Vision</span>
+              <span className="chip">YOLO Benchmarks</span>
+              <span className="chip">Research</span>
+            </div>
+          </div>
+          <div className="panel-strong card-hover p-6">
+            <div className="image-frame">
+              <img
+                src="/dummy-project-2.svg"
+                alt="Bat tracking project preview"
+                className="h-[360px] w-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
       </FadeIn>
 
       <div className="grid gap-6 lg:grid-cols-[1.4fr_0.6fr]">

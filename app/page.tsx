@@ -107,7 +107,7 @@ export default function Home() {
   };
 
   const aboutSummary =
-    "To leverage expertise in ML, RAG, and MLOps to develop scalable, automated AI pipelines and retrieval-based systems that enhance model reliability, accelerate deployment, and improve data-driven operational efficiency.";
+    "To leverage expertise in ML, RAG, and MLOps to build reliable AI systems that scale from research to production with measurable impact.";
 
   const aboutHighlights = [
     "Focused on reliable ML systems with strong data integrity and monitoring.",
@@ -156,8 +156,8 @@ export default function Home() {
     {
       title: "Phishing URL Detection System",
       description: [
-        "Built a phishing ETL pipeline with Python, MongoDB, and scikit-learn using KNN imputation.",
-        "Built an MLOps pipeline with MLflow, DagsHub, AWS S3, and Dockerized FastAPI.",
+        "Phishing ETL pipeline with Python, MongoDB, and scikit-learn using KNN imputation.",
+        "MLOps pipeline with MLflow, DagsHub, AWS S3, and Dockerized FastAPI.",
       ],
       tech: ["Python", "FastAPI", "Scikit-learn", "MLflow", "MongoDB"],
       links: {
@@ -168,14 +168,32 @@ export default function Home() {
     {
       title: "Retrieval-Augmented Generation (RAG) Pipeline",
       description: [
-        "Engineered a modular ingestion pipeline for PDFs, TXT, and web pages.",
-        "Built LangGraph workflow nodes to orchestrate retrieval and generation.",
+        "Modular ingestion pipeline for PDFs, TXT, and web pages.",
+        "LangGraph workflow nodes to orchestrate retrieval and generation.",
       ],
       tech: ["LangChain", "LangGraph", "OpenAI", "FAISS", "Pydantic"],
       links: {
         live: "#",
         repo: "https://github.com/saffronhamid/code.git",
       },
+    },
+  ];
+
+  const featuredWork = [
+    {
+      title: "ML Ops Platform",
+      category: "Product Design",
+      image: "/dummy-project-1.svg",
+    },
+    {
+      title: "RAG Research Studio",
+      category: "AI Systems",
+      image: "/dummy-project-2.svg",
+    },
+    {
+      title: "Vision Tracking Lab",
+      category: "Applied Research",
+      image: "/dummy-project-3.svg",
     },
   ];
 
@@ -236,15 +254,15 @@ export default function Home() {
       <Navbar items={navItems} activeId={activeId} />
 
       <main className="mx-auto max-w-7xl px-4 pb-24 pt-12 sm:px-6">
-        <section id="home" className="py-20">
+        <section id="home" className="py-24">
           <FadeIn>
-            <div className="grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
+            <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div>
-                <p className="text-kicker">ML Engineer Portfolio</p>
-                <h1 className="mt-6 text-5xl font-semibold tracking-tight text-ink sm:text-7xl">
+                <p className="text-kicker">Creative ML Engineer</p>
+                <h1 className="hero-title mt-6 font-semibold text-ink">
                   {profile.name}
                 </h1>
-                <p className="mt-6 text-xl text-muted">
+                <p className="hero-subtitle mt-6 text-muted">
                   <span key={headlineIndex} className="text-cycle">
                     {rotatingHeadlines[headlineIndex]}
                   </span>
@@ -272,22 +290,20 @@ export default function Home() {
                     Contact
                   </a>
                   <a
-                    href="#projects"
+                    href="#work"
                     className="btn-ghost px-6 py-3 text-sm font-semibold"
                   >
                     View Projects
                   </a>
                 </div>
               </div>
-              <div className="panel-strong card-hover p-7">
-                <div className="panel p-6">
-                  <p className="text-kicker">Focus Areas</p>
-                  <ul className="mt-4 space-y-3 text-sm text-muted">
-                    <li>• Retrieval-augmented generation pipelines</li>
-                    <li>• MLOps automation and continuous learning</li>
-                    <li>• Reliable data preprocessing and validation</li>
-                    <li>• Real-time ML systems and deployment</li>
-                  </ul>
+              <div className="panel-strong card-hover p-6">
+                <div className="image-frame">
+                  <img
+                    src="/dummy-portrait.svg"
+                    alt="Portrait placeholder"
+                    className="h-[520px] w-full object-cover"
+                  />
                 </div>
                 <div className="mt-6 grid gap-3 text-sm text-muted">
                   {profile.links.map((link) => {
@@ -311,7 +327,7 @@ export default function Home() {
           </FadeIn>
         </section>
 
-        <section id="about" className="py-16">
+        <section id="about" className="py-20">
           <FadeIn>
             <SectionHeader
               title="About"
@@ -338,7 +354,7 @@ export default function Home() {
           </FadeIn>
         </section>
 
-        <section id="focus" className="py-16">
+        <section id="focus" className="py-20">
           <FadeIn>
             <SectionHeader
               title="Focus Areas"
@@ -370,7 +386,34 @@ export default function Home() {
           </FadeIn>
         </section>
 
-        <section id="skills" className="py-16">
+        <section id="work" className="py-20">
+          <FadeIn>
+            <SectionHeader
+              title="Selected Work"
+              subtitle="Design / Research"
+              description="A curated set of recent ML product and research work."
+            />
+            <div className="grid gap-6 lg:grid-cols-2">
+              {featuredWork.map((work) => (
+                <div key={work.title} className="panel-soft card-hover p-6">
+                  <div className="image-frame">
+                    <img
+                      src={work.image}
+                      alt={`${work.title} preview`}
+                      className="h-[320px] w-full object-cover"
+                    />
+                  </div>
+                  <div className="mt-5 flex items-center justify-between text-sm text-muted">
+                    <p className="text-ink">{work.title}</p>
+                    <p className="text-subtle">{work.category}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </FadeIn>
+        </section>
+
+        <section id="skills" className="py-20">
           <FadeIn>
             <SectionHeader
               title="Skills"
@@ -389,7 +432,7 @@ export default function Home() {
           </FadeIn>
         </section>
 
-        <section id="projects" className="py-16">
+        <section id="projects" className="py-20">
           <FadeIn>
             <SectionHeader
               title="Projects"
@@ -404,7 +447,7 @@ export default function Home() {
           </FadeIn>
         </section>
 
-        <section id="experience" className="py-16">
+        <section id="experience" className="py-20">
           <FadeIn>
             <SectionHeader
               title="Experience"
@@ -419,7 +462,7 @@ export default function Home() {
           </FadeIn>
         </section>
 
-        <section id="education" className="py-16">
+        <section id="education" className="py-20">
           <FadeIn>
             <SectionHeader
               title="Education"
@@ -448,7 +491,7 @@ export default function Home() {
           </FadeIn>
         </section>
 
-        <section id="contact" className="py-16">
+        <section id="contact" className="py-20">
           <FadeIn>
             <SectionHeader
               title="Contact"

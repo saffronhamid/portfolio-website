@@ -299,15 +299,15 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="relative hidden lg:block">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[var(--panel-strong)] to-transparent z-10 w-24" />
+                <div className="relative hidden lg:block h-[600px] w-full">
+                  <div className="absolute inset-0 z-0 bg-gradient-to-tr from-[var(--bg)] via-transparent to-transparent opacity-40"></div>
                   <img
                     src="/portrait.png"
                     alt="Faizan Hamid"
-                    className="h-[500px] w-full object-cover object-top grayscale-[20%] sepia-[10%] mask-image-gradient"
+                    className="h-full w-full object-contain object-bottom"
                     style={{
-                      maskImage: "linear-gradient(to bottom, black 50%, transparent 100%)",
-                      WebkitMaskImage: "linear-gradient(to bottom, black 50%, transparent 100%)"
+                      maskImage: "radial-gradient(circle at center, black 40%, transparent 95%)",
+                      WebkitMaskImage: "radial-gradient(circle at center, black 40%, transparent 95%)"
                     }}
                   />
                 </div>

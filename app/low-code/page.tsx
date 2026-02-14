@@ -15,27 +15,16 @@ export default function LowCodePage() {
       </div>
 
       <FadeIn>
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <div>
-            <SectionHeader
-              title="Low-Code Seminar"
-              subtitle="Web-App for Managing Student Projects"
-              description="Requirements specification and scope definition."
-            />
-            <div className="mt-6 flex flex-wrap gap-3 text-sm text-muted">
-              <span className="chip">Product Design</span>
-              <span className="chip">University Scope</span>
-              <span className="chip">2025</span>
-            </div>
-          </div>
-          <div className="panel-strong card-hover p-6">
-            <div className="image-frame">
-              <img
-                src="/dummy-project-1.svg"
-                alt="Low-code project preview"
-                className="h-[360px] w-full object-cover"
-              />
-            </div>
+        <div className="mx-auto max-w-3xl">
+          <SectionHeader
+            title="Low-Code Seminar"
+            subtitle="Web-App for Managing Student Projects"
+            description="Requirements specification and scope definition."
+          />
+          <div className="mt-6 flex flex-wrap gap-3 text-sm text-muted">
+            <span className="chip">Product Design</span>
+            <span className="chip">University Scope</span>
+            <span className="chip">2025</span>
           </div>
         </div>
       </FadeIn>

@@ -179,23 +179,7 @@ export default function Home() {
     },
   ];
 
-  const featuredWork = [
-    {
-      title: "ML Ops Platform",
-      category: "Product Design",
-      image: "/dummy-project-1.svg",
-    },
-    {
-      title: "RAG Research Studio",
-      category: "AI Systems",
-      image: "/dummy-project-2.svg",
-    },
-    {
-      title: "Vision Tracking Lab",
-      category: "Applied Research",
-      image: "/dummy-project-3.svg",
-    },
-  ];
+
 
   const experiences = [
     {
@@ -257,7 +241,7 @@ export default function Home() {
         <section id="home" className="py-24">
           <FadeIn>
             <div className="panel-strong relative overflow-hidden px-6 py-10 sm:px-10">
-              <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+              <div className="max-w-3xl">
                 <div className="space-y-6">
                   <p className="text-xs uppercase tracking-[0.24em] text-muted">
                     My name is {profile.name} and I am a
@@ -277,7 +261,7 @@ export default function Home() {
                     {aboutSummary}
                   </p>
                   <div className="flex flex-wrap gap-3">
-                    <a href="#work" className="btn-primary px-5 py-3 text-xs uppercase tracking-[0.24em]">
+                    <a href="#projects" className="btn-primary px-5 py-3 text-xs uppercase tracking-[0.24em]">
                       Discover my work
                     </a>
                     <a href="#contact" className="btn-ghost px-5 py-3 text-xs uppercase tracking-[0.24em]">
@@ -298,15 +282,6 @@ export default function Home() {
                     <span className="inline-flex items-center gap-2">
                       <FiPhone /> {profile.phone}
                     </span>
-                  </div>
-                </div>
-                <div className="relative">
-                  <div className="image-frame">
-                    <img
-                      src="/dummy-portrait.svg"
-                      alt="Portrait placeholder"
-                      className="h-[440px] w-full object-cover"
-                    />
                   </div>
                   <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted">
                     {profile.links.map((link) => {
@@ -387,32 +362,7 @@ export default function Home() {
           </FadeIn>
         </section>
 
-        <section id="work" className="py-20">
-          <FadeIn>
-            <SectionHeader
-              title="Selected Work"
-              subtitle="Design / Research"
-              description="A curated set of recent ML product and research work."
-            />
-            <div className="grid gap-6 lg:grid-cols-2">
-              {featuredWork.map((work) => (
-                <div key={work.title} className="panel-soft card-hover p-6">
-                  <div className="image-frame">
-                    <img
-                      src={work.image}
-                      alt={`${work.title} preview`}
-                      className="h-[320px] w-full object-cover"
-                    />
-                  </div>
-                  <div className="mt-5 flex items-center justify-between text-sm text-muted">
-                    <p className="text-ink">{work.title}</p>
-                    <p className="text-subtle">{work.category}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </FadeIn>
-        </section>
+
 
         <section id="skills" className="py-20">
           <FadeIn>

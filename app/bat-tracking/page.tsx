@@ -15,27 +15,16 @@ export default function BatTrackingPage() {
       </div>
 
       <FadeIn>
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <div>
-            <SectionHeader
-              title="Bat Tracking"
-              subtitle="Master project using all YOLO versions"
-              description="Applied vision research with a focus on multi-object tracking in low-light environments."
-            />
-            <div className="mt-6 flex flex-wrap gap-3 text-sm text-muted">
-              <span className="chip">Computer Vision</span>
-              <span className="chip">YOLO Benchmarks</span>
-              <span className="chip">Research</span>
-            </div>
-          </div>
-          <div className="panel-strong card-hover p-6">
-            <div className="image-frame">
-              <img
-                src="/dummy-project-2.svg"
-                alt="Bat tracking project preview"
-                className="h-[360px] w-full object-cover"
-              />
-            </div>
+        <div className="mx-auto max-w-3xl">
+          <SectionHeader
+            title="Bat Tracking"
+            subtitle="Master project using all YOLO versions"
+            description="Applied vision research with a focus on multi-object tracking in low-light environments."
+          />
+          <div className="mt-6 flex flex-wrap gap-3 text-sm text-muted">
+            <span className="chip">Computer Vision</span>
+            <span className="chip">YOLO Benchmarks</span>
+            <span className="chip">Research</span>
           </div>
         </div>
       </FadeIn>

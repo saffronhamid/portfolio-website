@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #050505;
-  --fg: #e6e6e6;
-  --muted: #a1a1aa;
-  --muted-2: #71717a;
+  --bg: #000000;
+  --fg: #ffffff;
+  --muted: #a3a3a3;
+  --muted-2: #737373;
   --accent: #ffffff;
   --border: rgba(255, 255, 255, 0.1);
-  --panel: #0f0f0f;
-  --panel-2: #0a0a0a;
-  --panel-3: #141414;
+  --panel: #0a0a0a;
+  --panel-2: #111111;
+  --panel-3: #000000;
 }
 
 @theme inline {
@@ -117,6 +117,49 @@ textarea:focus-visible {
   }
 }
 
+@keyframes blink-caret {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes rainbow-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.rainbow-text {
+  background: linear-gradient(270deg,
+      #ff6b6b,
+      #ffa06b,
+      #ffd96b,
+      #6bffa0,
+      #6bd4ff,
+      #a06bff,
+      #ff6bdb,
+      #ff6b6b);
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow-shift 12s linear infinite;
+}
+
 @keyframes soft-float {
 
   0%,
@@ -176,27 +219,27 @@ textarea:focus-visible {
     border: 1px solid var(--border);
     background: var(--panel);
     border-radius: 1.25rem;
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
   }
 
   .panel-strong {
     border: 1px solid rgba(255, 255, 255, 0.12);
     background: var(--panel-2);
     border-radius: 1.5rem;
-    box-shadow: 0 40px 90px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 40px 90px rgba(0, 0, 0, 0.7);
   }
 
   .panel-soft {
     border: 1px solid rgba(255, 255, 255, 0.08);
     background: var(--panel-3);
     border-radius: 1.5rem;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
   }
 
   .btn-primary {
     border-radius: 999px;
-    background: #e6e6e6;
-    color: #050505;
+    background: #ffffff;
+    color: #000000;
     font-weight: 600;
     display: inline-flex;
     align-items: center;
@@ -208,7 +251,7 @@ textarea:focus-visible {
   .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
-    background: #ffffff;
+    background: #e5e5e5;
   }
 
   .btn-ghost {
@@ -252,14 +295,14 @@ textarea:focus-visible {
   .focus-card {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(140deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.02));
+    background: linear-gradient(140deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
   }
 
   .focus-card::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 18% 18%, rgba(0, 0, 0, 0.08), transparent 55%);
+    background: radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.05), transparent 55%);
     pointer-events: none;
   }
 
@@ -317,6 +360,6 @@ textarea:focus-visible {
     border-radius: 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
     overflow: hidden;
-    background: #1a1a1a;
+    background: #111;
   }
 }

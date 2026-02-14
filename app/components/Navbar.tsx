@@ -16,11 +16,11 @@ export default function Navbar({
 }) {
   const renderedItems = useMemo(() => items, [items]);
   return (
-    <header className="sticky top-0 z-50 border-b border-black/10 bg-[#f6f6f2]/90 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#000000]/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl flex-col items-start gap-4 px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:px-6">
         <a
           href="#home"
-          className="text-sm font-semibold uppercase tracking-[0.38em] text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
+          className="text-sm font-semibold uppercase tracking-[0.38em] text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
         >
           Faizan Hamid
         </a>
@@ -34,7 +34,7 @@ export default function Navbar({
                 key={item.id}
                 href={`#${item.id}`}
                 aria-current={activeId === item.id ? "page" : undefined}
-                className="nav-link text-xs uppercase tracking-[0.22em] text-muted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
+                className="nav-link text-xs uppercase tracking-[0.22em] text-muted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 {item.label}
               </a>
@@ -44,7 +44,7 @@ export default function Navbar({
         <div className="flex w-full items-center justify-between gap-4 text-sm text-muted sm:w-auto sm:justify-end">
           <a
             href="#contact"
-            className="btn-ghost inline-flex px-4 py-2 text-xs uppercase tracking-[0.24em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
+            className="btn-ghost inline-flex px-4 py-2 text-xs uppercase tracking-[0.24em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
           >
             Contact
           </a>

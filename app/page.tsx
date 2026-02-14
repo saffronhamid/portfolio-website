@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FiMail, FiMapPin, FiPhone } from "react-icons/fi";
@@ -12,6 +12,38 @@ import ProjectCard from "./components/ProjectCard";
 import SectionHeader from "./components/SectionHeader";
 import SkillGroup from "./components/SkillGroup";
 import SmokyCursor from "./components/SmokyCursor";
+
+function TypewriterHero() {
+  const text = "Hi, I am Faizan and I am an AI-focused Data Science student specializing in GenAI, Agentic RAG, and production-ready ML systems.";
+  const [displayedCount, setDisplayedCount] = useState(0);
+  const [showCursor, setShowCursor] = useState(true);
+
+  useEffect(() => {
+    if (displayedCount < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedCount((prev) => prev + 1);
+      }, 35);
+      return () => clearTimeout(timeout);
+    }
+  }, [displayedCount, text.length]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowCursor((prev) => !prev);
+    }, 530);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[0.9] rainbow-text">
+      {text.slice(0, displayedCount)}
+      <span
+        className="inline-block w-[3px] h-[1em] bg-white ml-1 align-middle"
+        style={{ opacity: showCursor ? 1 : 0, WebkitTextFillColor: "white" }}
+      />
+    </h1>
+  );
+}
 
 export default function Home() {
   const sections = useMemo(
@@ -238,259 +270,259 @@ export default function Home() {
       <Navbar items={navItems} activeId={activeId} />
 
       <main className="mx-auto max-w-7xl px-4 pb-24 pt-12 sm:px-6">
-        <section id="home" className="py-24">
-          <FadeIn>
-            <div className="panel-strong relative overflow-hidden px-6 py-10 sm:px-10">
-              <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-                <div className="space-y-6">
-                  <p className="text-xs uppercase tracking-[0.24em] text-muted">
-                    My name is {profile.name} and I am a
-                  </p>
-                  <div className="space-y-2">
-                    <h1 className="hero-title font-semibold text-ink">
-                      Machine Learning Engineer
-                    </h1>
-                    <h2 className="hero-title hero-outline font-semibold">
-                      &amp; Researcher
-                    </h2>
-                  </div>
-                  <p className="hero-subtitle text-muted">
-                    based in {profile.location}.
-                  </p>
-                  <p className="max-w-xl text-sm text-muted">
-                    {aboutSummary}
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    <a href="#projects" className="btn-primary px-5 py-3 text-xs uppercase tracking-[0.24em]">
-                      Discover my work
-                    </a>
-                    <a href="#contact" className="btn-ghost px-5 py-3 text-xs uppercase tracking-[0.24em]">
-                      Contact me
-                    </a>
-                  </div>
-                  <div className="flex flex-wrap gap-4 text-xs text-muted">
-                    <span className="inline-flex items-center gap-2">
-                      <FiMapPin /> {profile.location}
-                    </span>
-                    <a
-                      href={`mailto:${profile.email}`}
-                      className="inline-flex cursor-pointer items-center gap-2 hover:text-ink hover:underline hover:underline-offset-4"
-                      aria-label={`Email ${profile.email}`}
-                    >
-                      <FiMail /> {profile.email}
-                    </a>
-                    <span className="inline-flex items-center gap-2">
-                      <FiPhone /> {profile.phone}
-                    </span>
-                  </div>
-                  <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted">
-                    {profile.links.map((link) => {
-                      const Icon = link.icon;
-                      return (
-                        <a
-                          key={link.label}
-                          href={link.url}
-                          className="btn-ghost inline-flex items-center gap-2 px-4 py-2 uppercase tracking-[0.2em]"
-                        >
-                          <Icon /> {link.label}
-                        </a>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <div className="relative hidden lg:block h-[600px] w-full">
-                  <div className="absolute inset-0 z-0 bg-gradient-to-tr from-[var(--bg)] via-transparent to-transparent opacity-40"></div>
-                  <img
-                    src="/portrait.png"
-                    alt="Faizan Hamid"
-                    className="h-full w-full object-contain object-bottom"
-                    style={{
-                      maskImage: "radial-gradient(circle at center, black 40%, transparent 95%)",
-                      WebkitMaskImage: "radial-gradient(circle at center, black 40%, transparent 95%)"
-                    }}
-                  />
-                </div>
+        <section id="home" className="min-h-[85vh] flex items-center pt-20 pb-0 overflow-hidden relative">
+          <div className="mx-auto w-full max-w-7xl px-6 grid lg:grid-cols-2 gap-12 items-center h-full">
+            <div className="space-y-8 z-10 w-full">
+              <div className="min-h-[160px] sm:min-h-[200px] lg:min-h-[280px] flex flex-col justify-center">
+                <TypewriterHero />
+              </div>
+              <div className="flex gap-6 text-sm font-medium text-muted uppercase tracking-widest">
+                <a href="#projects" className="hover:text-white transition-colors">Projects</a>
+                <a href="https://www.linkedin.com/in/faizan-hamid-50b113215/" target="_blank" className="hover:text-white transition-colors">LinkedIn</a>
+                <a href="https://github.com/saffronhamid" target="_blank" className="hover:text-white transition-colors">GitHub</a>
               </div>
             </div>
-          </FadeIn>
+
+            <div className="relative h-[60vh] lg:h-[85vh] w-full flex items-end justify-center lg:justify-end">
+              {/* Gradient overlays for extra blending safety */}
+              <div className="absolute inset-y-0 left-0 z-10 bg-gradient-to-r from-black via-transparent to-transparent w-32 pointer-events-none"></div>
+              <div className="absolute inset-y-0 right-0 z-10 bg-gradient-to-l from-black via-transparent to-transparent w-32 pointer-events-none"></div>
+              <div className="absolute inset-x-0 bottom-0 z-10 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none"></div>
+
+              <img
+                src="/portrait.png"
+                alt="Faizan Hamid"
+                className="h-full w-full object-contain object-right"
+                style={{
+                  maskImage: "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
+                  WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)"
+                }}
+              />
+            </div>
+          </div>
         </section>
 
-        <section id="about" className="py-20">
+        {/* Divider */}
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-4" />
+
+        <section id="about" className="py-24">
           <FadeIn>
             <SectionHeader
               title="About"
               subtitle="Building reliable ML systems"
               description="Focused on production ML workflows, MLOps reliability, and scalable AI delivery."
             />
-            <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-              <div className="panel card-hover p-6 text-muted">
-                <p className="text-base text-muted">{aboutSummary}</p>
-                <ul className="mt-6 space-y-3 text-sm text-subtle">
-                  {aboutHighlights.map((item) => (
-                    <li key={item}>• {item}</li>
+          </FadeIn>
+          <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] items-start">
+            <FadeIn delay={0.2}>
+              <div>
+                <p className="text-lg text-muted leading-relaxed">{aboutSummary}</p>
+                <ul className="mt-8 space-y-4">
+                  {aboutHighlights.map((item, idx) => (
+                    <li key={item} className="flex gap-3 text-sm text-muted">
+                      <span className="text-[#a78bfa] mt-0.5 text-xs">▸</span>
+                      <span className="hover:text-white transition-colors duration-300">{item}</span>
+                    </li>
                   ))}
                 </ul>
               </div>
-              <div className="panel card-hover p-6">
-                <p className="text-kicker">Languages</p>
-                <div className="mt-4 space-y-2 text-sm text-muted">
-                  <p>English</p>
-                  <p>German (A2)</p>
+            </FadeIn>
+            <FadeIn delay={0.4}>
+              <div className="border-l border-white/[0.08] pl-8">
+                <p className="text-xs uppercase tracking-[0.3em] text-[#a78bfa] font-semibold mb-4">Languages</p>
+                <div className="space-y-3 text-sm text-muted">
+                  <p className="hover:text-white transition-colors">English</p>
+                  <p className="hover:text-white transition-colors">German (A2)</p>
                 </div>
               </div>
-            </div>
-          </FadeIn>
+            </FadeIn>
+          </div>
         </section>
 
-        <section id="focus" className="py-20">
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+        <section id="focus" className="py-24">
           <FadeIn>
             <SectionHeader
               title="Focus Areas"
               subtitle="What I am working on now"
               description="Two current tracks that blend applied research with practical delivery."
             />
-            <div className="grid gap-6 lg:grid-cols-2">
+          </FadeIn>
+          <div className="grid gap-8 lg:grid-cols-2">
+            <FadeIn delay={0.15}>
               <Link
                 href="/low-code"
-                className="panel focus-card card-hover p-6 animate-float"
+                className="group block relative py-8 px-6 -mx-6 rounded-2xl border border-transparent hover:border-white/[0.08] hover:bg-white/[0.02] transition-all duration-500"
                 aria-label="Low-code seminar details"
               >
-                <p className="text-kicker">Low-Code Seminar</p>
-                <h3 className="focus-card-title mt-4 text-xl font-semibold text-ink">
+                <div className="absolute left-0 top-8 w-1 h-0 bg-[#22d3ee] rounded-full group-hover:h-16 transition-all duration-500" />
+                <p className="text-xs uppercase tracking-[0.3em] text-[#22d3ee] font-semibold mb-3">Low-Code Seminar</p>
+                <h3 className="text-2xl font-semibold text-white group-hover:translate-x-2 transition-transform duration-300">
                   Web-App for Managing Student Projects
                 </h3>
+                <p className="mt-3 text-sm text-muted">Explore →</p>
               </Link>
+            </FadeIn>
+            <FadeIn delay={0.3}>
               <Link
                 href="/bat-tracking"
-                className="panel focus-card card-hover p-6 animate-float"
+                className="group block relative py-8 px-6 -mx-6 rounded-2xl border border-transparent hover:border-white/[0.08] hover:bg-white/[0.02] transition-all duration-500"
                 aria-label="Bat tracking project details"
               >
-                <p className="text-kicker">Bat Tracking</p>
-                <h3 className="focus-card-title mt-4 text-xl font-semibold text-ink">
+                <div className="absolute left-0 top-8 w-1 h-0 bg-[#34d399] rounded-full group-hover:h-16 transition-all duration-500" />
+                <p className="text-xs uppercase tracking-[0.3em] text-[#34d399] font-semibold mb-3">Bat Tracking</p>
+                <h3 className="text-2xl font-semibold text-white group-hover:translate-x-2 transition-transform duration-300">
                   Master project using all YOLO versions
                 </h3>
+                <p className="mt-3 text-sm text-muted">Explore →</p>
               </Link>
-            </div>
-          </FadeIn>
+            </FadeIn>
+          </div>
         </section>
 
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-
-        <section id="skills" className="py-20">
+        <section id="skills" className="py-24">
           <FadeIn>
             <SectionHeader
               title="Skills"
               subtitle="Technical toolkit"
               description="Core stack across ML, backend, frontend, and MLOps tooling."
             />
-            <div className="grid gap-4 md:grid-cols-2">
-              {skills.map((group) => (
-                <SkillGroup
-                  key={group.title}
-                  title={group.title}
-                  skills={group.items}
-                />
-              ))}
-            </div>
           </FadeIn>
+          <div className="grid gap-0 md:grid-cols-2 md:gap-x-12">
+            {skills.map((group) => (
+              <SkillGroup
+                key={group.title}
+                title={group.title}
+                skills={group.items}
+              />
+            ))}
+          </div>
         </section>
 
-        <section id="projects" className="py-20">
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+        <section id="projects" className="py-24">
           <FadeIn>
             <SectionHeader
               title="Projects"
               subtitle="Selected work"
               description="A mix of production ML pipelines, RAG systems, and applied research."
             />
-            <div className="grid gap-6 md:grid-cols-2">
-              {projects.map((project) => (
-                <ProjectCard key={project.title} project={project} />
-              ))}
-            </div>
           </FadeIn>
+          <div className="space-y-0">
+            {projects.map((project, idx) => (
+              <ProjectCard key={project.title} project={project} index={idx} />
+            ))}
+          </div>
         </section>
 
-        <section id="experience" className="py-20">
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+        <section id="experience" className="py-24">
           <FadeIn>
             <SectionHeader
               title="Experience"
               subtitle="Industry and research"
               description="Hands-on ML engineering, MLOps, and applied research roles."
             />
-            <div className="grid gap-4">
-              {experiences.map((experience) => (
-                <ExperienceCard key={experience.role} experience={experience} />
-              ))}
-            </div>
           </FadeIn>
+          <div className="space-y-0">
+            {experiences.map((experience, idx) => (
+              <ExperienceCard key={experience.role} experience={experience} index={idx} />
+            ))}
+          </div>
         </section>
 
-        <section id="education" className="py-20">
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+        <section id="education" className="py-24">
           <FadeIn>
             <SectionHeader
               title="Education"
               subtitle="Academic background"
               description="Formal training in data science and computer engineering."
             />
-            <div className="grid gap-4 md:grid-cols-2">
-              {education.map((item) => (
-                <div key={item.school} className="panel card-hover p-6">
-                  <h3 className="text-lg font-semibold text-ink">
+          </FadeIn>
+          <div className="grid gap-12 md:grid-cols-2">
+            {education.map((item, idx) => (
+              <FadeIn key={item.school} delay={idx * 0.15}>
+                <div className="group relative pl-8 py-6">
+                  {/* Timeline dot */}
+                  <div className="absolute left-0 top-8 w-3 h-3 rounded-full border-2 border-[#fbbf24] bg-black group-hover:bg-[#fbbf24] transition-colors duration-300" />
+                  <h3 className="text-xl font-semibold text-white group-hover:text-[#fbbf24] transition-colors duration-300">
                     {item.school}
                   </h3>
-                  <p className="mt-1 text-sm text-muted">{item.degree}</p>
-                  <p className="mt-1 text-sm text-subtle">{item.location}</p>
-                  <p className="mt-2 text-sm text-subtle">{item.date}</p>
+                  <p className="mt-2 text-sm text-muted">{item.degree}</p>
+                  <p className="mt-1 text-xs text-white/30">{item.location}</p>
+                  <p className="mt-2 text-sm text-muted">{item.date}</p>
                   {item.details.length > 0 && (
-                    <ul className="mt-3 space-y-1 text-sm text-muted">
+                    <ul className="mt-4 space-y-2 text-sm text-muted">
                       {item.details.map((detail) => (
-                        <li key={detail}>• {detail}</li>
+                        <li key={detail} className="flex gap-2">
+                          <span className="text-[#fbbf24] mt-1 text-xs">▸</span>
+                          <span>{detail}</span>
+                        </li>
                       ))}
                     </ul>
                   )}
                 </div>
-              ))}
-            </div>
-          </FadeIn>
+              </FadeIn>
+            ))}
+          </div>
         </section>
 
-        <section id="contact" className="py-20">
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+        <section id="contact" className="py-24">
           <FadeIn>
             <SectionHeader
               title="Contact"
               subtitle="Start a conversation"
               description="Open to ML engineering, RAG pipeline, and MLOps roles."
             />
-            <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
-              <div className="panel card-hover p-6 text-muted">
-                <p className="text-base">
+          </FadeIn>
+          <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] items-start">
+            <FadeIn delay={0.15}>
+              <div className="space-y-8">
+                <p className="text-lg text-muted leading-relaxed">
                   Want to collaborate or discuss ML/MLOps work? Send a message
                   and I will get back to you.
                 </p>
-                <div className="mt-6 space-y-3 text-sm">
+                <div className="space-y-4 text-sm">
                   <a
                     href={`mailto:${profile.email}`}
-                    className="inline-flex cursor-pointer items-center gap-2 hover:text-ink hover:underline hover:underline-offset-4"
+                    className="group flex items-center gap-3 text-muted hover:text-white transition-colors duration-300"
                     aria-label={`Email ${profile.email}`}
                   >
-                    <FiMail /> {profile.email}
+                    <span className="w-10 h-10 rounded-full border border-white/[0.1] flex items-center justify-center group-hover:border-[#a78bfa] group-hover:bg-[#a78bfa]/10 transition-all duration-300">
+                      <FiMail className="text-sm" />
+                    </span>
+                    {profile.email}
                   </a>
-                  <p className="inline-flex items-center gap-2">
-                    <FiPhone /> {profile.phone}
-                  </p>
-                  <p className="inline-flex items-center gap-2">
-                    <FiMapPin /> {profile.location}
-                  </p>
+                  <div className="group flex items-center gap-3 text-muted">
+                    <span className="w-10 h-10 rounded-full border border-white/[0.1] flex items-center justify-center">
+                      <FiPhone className="text-sm" />
+                    </span>
+                    {profile.phone}
+                  </div>
+                  <div className="group flex items-center gap-3 text-muted">
+                    <span className="w-10 h-10 rounded-full border border-white/[0.1] flex items-center justify-center">
+                      <FiMapPin className="text-sm" />
+                    </span>
+                    {profile.location}
+                  </div>
                 </div>
               </div>
-              <ContactForm />
-            </div>
-          </FadeIn>
+            </FadeIn>
+            <ContactForm />
+          </div>
         </section>
       </main>
 
-      <footer className="border-t border-black/10 py-10">
+      <footer className="border-t border-white/10 py-10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 text-sm text-subtle sm:flex-row sm:px-6">
           <p>© {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
           <div className="flex items-center gap-4">

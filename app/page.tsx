@@ -241,7 +241,7 @@ export default function Home() {
         <section id="home" className="py-24">
           <FadeIn>
             <div className="panel-strong relative overflow-hidden px-6 py-10 sm:px-10">
-              <div className="max-w-3xl">
+              <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
                 <div className="space-y-6">
                   <p className="text-xs uppercase tracking-[0.24em] text-muted">
                     My name is {profile.name} and I am a
@@ -297,6 +297,19 @@ export default function Home() {
                       );
                     })}
                   </div>
+                </div>
+
+                <div className="relative hidden lg:block">
+                  <div className="absolute inset-0 bg-gradient-to-r from-[var(--panel-strong)] to-transparent z-10 w-24" />
+                  <img
+                    src="/portrait.png"
+                    alt="Faizan Hamid"
+                    className="h-[500px] w-full object-cover object-top grayscale-[20%] sepia-[10%] mask-image-gradient"
+                    style={{
+                      maskImage: "linear-gradient(to bottom, black 50%, transparent 100%)",
+                      WebkitMaskImage: "linear-gradient(to bottom, black 50%, transparent 100%)"
+                    }}
+                  />
                 </div>
               </div>
             </div>

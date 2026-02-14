@@ -14,7 +14,7 @@ import SkillGroup from "./components/SkillGroup";
 import SmokyCursor from "./components/SmokyCursor";
 
 function TypewriterHero() {
-  const text = "Hi, I am Faizan and I am an AI-focused Data Science student specializing in GenAI, Agentic RAG, and production-ready ML systems.";
+  const text = "AI Engineer in training — building scalable GenAI, RAG, and ML systems for real-world applications.";
   const [displayedCount, setDisplayedCount] = useState(0);
   const [showCursor, setShowCursor] = useState(true);
 
@@ -275,6 +275,9 @@ export default function Home() {
             <div className="space-y-8 z-10 w-full">
               <div className="min-h-[160px] sm:min-h-[200px] lg:min-h-[280px] flex flex-col justify-center">
                 <TypewriterHero />
+                <p className="mt-6 text-sm sm:text-base text-muted/80 tracking-wide font-medium">
+                  Master’s in Data Science | Germany | Open to Werkstudent & AI/ML Roles
+                </p>
               </div>
               <div className="flex gap-6 text-sm font-medium text-muted uppercase tracking-widest">
                 <a href="#projects" className="hover:text-white transition-colors">Projects</a>

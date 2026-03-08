@@ -15,6 +15,10 @@
 @theme inline {
   --color-background: var(--bg);
   --color-foreground: var(--fg);
+  --color-border: var(--border);
+  --color-card: var(--panel);
+  --color-muted: var(--panel-2);
+  --color-muted-foreground: var(--muted);
   --font-sans: var(--font-body);
   --font-mono: var(--font-mono);
 }

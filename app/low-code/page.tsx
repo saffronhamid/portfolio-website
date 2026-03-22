@@ -1,15 +1,99 @@
 import Link from "next/link";
+
 import FadeIn from "../components/FadeIn";
 import SectionHeader from "../components/SectionHeader";
 
 export default function LowCodePage() {
+  const modules = [
+    {
+      title: "User Management",
+      summary:
+        "CRUD-based user management with an invitation flow. SMTP setup was problematic, so invitations were implemented via Mailtrap for development/testing.",
+      rows: [
+        { id: "5.1.1", useCase: "Log in to the server", status: "Fully Implemented" },
+        { id: "5.1.2", useCase: "Invite user", status: "Partially Implemented" },
+        { id: "5.1.3", useCase: "Accept invitation", status: "Fully Implemented" },
+        { id: "5.1.4", useCase: "Display all user accounts", status: "Fully Implemented" },
+        { id: "5.1.5", useCase: "Filter displayed user accounts", status: "Fully Implemented" },
+        { id: "5.1.6", useCase: "Display details of a user account", status: "Fully Implemented" },
+        { id: "5.1.7", useCase: "Change your own user account", status: "Fully Implemented" },
+        { id: "5.1.8", useCase: "Change another user’s account", status: "Fully Implemented" },
+        { id: "5.1.9", useCase: "Delete a user account", status: "Fully Implemented" },
+        { id: "5.1.10", useCase: "Anonymize a user account", status: "Fully Implemented" },
+      ],
+    },
+    {
+      title: "Project Management",
+      summary:
+        "Standard CRUD project management. Clear requirements and a simple data model made this module well-suited for AI-assisted development.",
+      rows: [
+        { id: "5.2.1", useCase: "Create project", status: "Fully Implemented" },
+        { id: "5.2.2", useCase: "Show all projects", status: "Fully Implemented" },
+        { id: "5.2.3", useCase: "Display own projects", status: "Fully Implemented" },
+        { id: "5.2.4", useCase: "Filter displayed projects", status: "Fully Implemented" },
+        { id: "5.2.5", useCase: "Display project details", status: "Fully Implemented" },
+        { id: "5.2.6", useCase: "Change project data", status: "Fully Implemented" },
+        { id: "5.2.7", useCase: "Delete project", status: "Fully Implemented" },
+      ],
+    },
+    {
+      title: "Appointment Management",
+      summary:
+        "Appointments follow CRUD patterns. Calendar integration was implemented via iCalendar (.ics) export instead of direct provider integration.",
+      rows: [
+        { id: "5.3.1", useCase: "Create appointment", status: "Fully Implemented" },
+        {
+          id: "5.3.2",
+          useCase: "Display all appointments for a project",
+          status: "Fully Implemented",
+        },
+        { id: "5.3.3", useCase: "Add appointment to calendar", status: "Partially Implemented" },
+        { id: "5.3.4", useCase: "Change appointment data", status: "Fully Implemented" },
+        { id: "5.3.5", useCase: "Delete appointment", status: "Fully Implemented" },
+      ],
+    },
+    {
+      title: "Commenting",
+      summary:
+        "Public/private comments with filtering and lifecycle actions. Comment analysis is technically implemented but requires a paid API key; otherwise it shows mock results.",
+      rows: [
+        { id: "5.4.1", useCase: "Write public comment", status: "Fully Implemented" },
+        { id: "5.4.2", useCase: "Write private comment", status: "Fully Implemented" },
+        { id: "5.4.3", useCase: "Display all comments of a project", status: "Fully Implemented" },
+        { id: "5.4.4", useCase: "Display public comments of a project", status: "Fully Implemented" },
+        { id: "5.4.5", useCase: "Filter displayed comments", status: "Fully Implemented" },
+        { id: "5.4.6", useCase: "Change own comment", status: "Fully Implemented" },
+        { id: "5.4.7", useCase: "Delete comment", status: "Fully Implemented" },
+        { id: "5.4.8", useCase: "Analyze the comments of a project", status: "Partially Implemented" },
+      ],
+    },
+    {
+      title: "Settings",
+      summary: "A small settings module focused on connection interruption detection intervals.",
+      rows: [
+        {
+          id: "5.5.1",
+          useCase: "Change the period for detecting connection interrupts",
+          status: "Fully Implemented",
+        },
+      ],
+    },
+    {
+      title: "Non-functional Requirements",
+      summary:
+        "Reliability, user feedback, and UI requirements were addressed with reconnection/error handling and consistent loading/notification patterns.",
+      rows: [
+        { id: "6.1", useCase: "Reliability of communication connection", status: "Fully Implemented" },
+        { id: "6.2", useCase: "Feedback to the user", status: "Fully Implemented" },
+        { id: "6.3", useCase: "User interface", status: "Fully Implemented" },
+      ],
+    },
+  ] as const;
+
   return (
     <main className="mx-auto max-w-7xl px-4 pb-24 pt-14 sm:px-6">
       <div className="mb-10">
-        <Link
-          href="/#focus"
-          className="btn-ghost inline-flex px-4 py-2 text-sm"
-        >
+        <Link href="/#focus" className="btn-ghost inline-flex px-4 py-2 text-sm">
           Back to focus
         </Link>
       </div>
@@ -17,288 +101,62 @@ export default function LowCodePage() {
       <FadeIn>
         <div className="mx-auto max-w-3xl">
           <SectionHeader
-            title="Low-Code Seminar"
-            subtitle="Web-App for Managing Student Projects"
-            description="Requirements specification and scope definition."
+            title="Low-code platforms for business applications"
+            subtitle="IntelliJ IDEA with GitHub Copilot and Claude"
+            description="A final report including the student project management web app and a module-by-module implementation status."
           />
-          <div className="mt-6 flex flex-wrap gap-3 text-sm text-muted">
-            <span className="chip">Product Design</span>
-            <span className="chip">University Scope</span>
-            <span className="chip">2025</span>
+          <div className="mt-6 flex flex-wrap gap-3 text-sm text-muted-foreground">
+            <span className="chip">Low-code</span>
+            <span className="chip">AI-assisted</span>
+            <span className="chip">Evaluation</span>
           </div>
         </div>
       </FadeIn>
 
-      <div className="grid gap-6">
-        <div className="grid gap-6 lg:grid-cols-[1.4fr_0.6fr]">
-          <section className="panel card-hover p-6">
-            <h2 className="text-lg font-semibold text-ink">Overview</h2>
-            <p className="mt-2 text-sm text-muted">
-              This document defines the requirements and scope for a low-code
-              platform that manages student projects, roles, and project
-              lifecycle coordination.
+      <div className="mt-12 grid gap-6">
+        {modules.map((module) => (
+          <section key={module.title} className="panel card-hover p-6">
+            <h2 className="text-lg font-semibold text-foreground">{module.title}</h2>
+            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+              {module.summary}
             </p>
-            <ul className="mt-4 space-y-2 text-sm text-muted">
-              <li>• Role-based access and secure account lifecycle.</li>
-              <li>• Structured project data with lifecycle states.</li>
-              <li>• Scheduling, comments, and reliability requirements.</li>
-            </ul>
-          </section>
-          <section className="panel card-hover p-6">
-            <p className="text-kicker">Document</p>
-            <h3 className="mt-3 text-base font-semibold text-ink">
-              Requirements specification
-            </h3>
-            <div className="mt-4 space-y-2 text-sm text-muted">
-              <p>Date: October 17, 2025</p>
-              <p>Scope: University project management</p>
-              <p>Audience: Lecturers and students</p>
+
+            <div className="mt-5 overflow-x-auto">
+              <table className="w-full border-separate border-spacing-0 text-left text-sm">
+                <thead>
+                  <tr className="text-muted-foreground">
+                    <th className="border-b border-white/[0.08] py-2 pr-4 font-semibold">
+                      ID
+                    </th>
+                    <th className="border-b border-white/[0.08] py-2 pr-4 font-semibold">
+                      Use case
+                    </th>
+                    <th className="border-b border-white/[0.08] py-2 font-semibold">
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {module.rows.map((row) => (
+                    <tr key={row.id} className="text-muted-foreground">
+                      <td className="border-b border-white/[0.06] py-2 pr-4 whitespace-nowrap">
+                        {row.id}
+                      </td>
+                      <td className="border-b border-white/[0.06] py-2 pr-4 min-w-[22rem]">
+                        <span className="text-foreground/90">{row.useCase}</span>
+                      </td>
+                      <td className="border-b border-white/[0.06] py-2 whitespace-nowrap">
+                        {row.status}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </section>
-        </div>
-
-        <section className="panel card-hover p-6">
-          <h3 className="text-base font-semibold text-ink">1. Objective</h3>
-          <p className="mt-2 text-sm text-muted">
-            Develop a web application that enables users to manage student
-            projects.
-          </p>
-        </section>
-
-        <section className="panel card-hover p-6">
-          <h3 className="text-base font-semibold text-ink">
-            2. General description
-          </h3>
-          <p className="mt-2 text-sm text-muted">
-            The app supports user and rights management, creation and
-            management of projects and project data, comments, and appointment
-            management.
-          </p>
-        </section>
-
-        <section className="panel card-hover p-6">
-          <h3 className="text-base font-semibold text-ink">
-            3. Definitions and abbreviations
-          </h3>
-          <ul className="mt-3 space-y-2 text-sm text-muted">
-            <li>Server: backend with REST API and data persistence.</li>
-            <li>
-              User account: user name, email, password, role, first and last
-              name, student ID, course of study, exam regulations.
-            </li>
-            <li>Role: administrator or end user with role-based rights.</li>
-            <li>Logging in as: user logs in with a role-specific account.</li>
-            <li>
-              Project type: bachelor&apos;s thesis, master&apos;s thesis,
-              advanced internship, project work, seminar paper, independent
-              scientific work.
-            </li>
-            <li>
-              Project status: proposed, registered, evaluated, completed.
-            </li>
-            <li>Project roles: manager and developer.</li>
-            <li>
-              Appointment types: deadline, meeting, group meeting, template.
-            </li>
-          </ul>
-        </section>
-
-        <section className="panel card-hover p-6">
-          <h3 className="text-base font-semibold text-ink">
-            4. Product environment
-          </h3>
-          <p className="mt-2 text-sm text-muted">
-            Web app for lecturers and students, compatible with Chrome,
-            Firefox, Safari, and Edge.
-          </p>
-        </section>
-
-        <section className="panel card-hover p-6">
-          <h3 className="text-base font-semibold text-ink">
-            5. Functional requirements
-          </h3>
-          <p className="mt-2 text-sm text-muted">
-            All requirements assume a logged-in user, except 5.1.1 and 5.1.3.
-          </p>
-        </section>
-
-        <section className="panel card-hover p-6">
-          <h3 className="text-base font-semibold text-ink">
-            5.1 User management
-          </h3>
-          <ul className="mt-3 space-y-2 text-sm text-muted">
-            <li>
-              5.1.1 Log in to the server: enter username or email and password;
-              server validates or rejects.
-            </li>
-            <li>
-              5.1.2 Invite user: admin sends invitation email with role and
-              optional project assignment.
-            </li>
-            <li>
-              5.1.3 Accept invitation: provide invitation key, name, username,
-              password, and optional student details.
-            </li>
-            <li>
-              5.1.4 Display all user accounts: admin overview with usernames
-              and emails and filtering.
-            </li>
-            <li>
-              5.1.5 Filter displayed user accounts: text filter updates the
-              overview on change.
-            </li>
-            <li>
-              5.1.6 Display details of a user account: show all data except
-              password for authorized users.
-            </li>
-            <li>
-              5.1.7 Change your own user account: edit all fields except role;
-              change password with current and new password.
-            </li>
-            <li>
-              5.1.8 Change another user&apos;s account: admin edits data and
-              sets new password with admin confirmation.
-            </li>
-            <li>
-              5.1.9 Delete a user account: admin confirms deletion; user and
-              comments removed.
-            </li>
-            <li>
-              5.1.10 Anonymize a user account: authorized user removes personal
-              data; login no longer possible.
-            </li>
-          </ul>
-        </section>
-
-        <section className="panel card-hover p-6">
-          <h3 className="text-base font-semibold text-ink">
-            5.2 Project management
-          </h3>
-          <ul className="mt-3 space-y-2 text-sm text-muted">
-            <li>
-              5.2.1 Create project: admin sets name, type, status; optional
-              description and team members; no dual role.
-            </li>
-            <li>
-              5.2.2 Show all projects: admin overview with name, type, status,
-              and team emails; filtering supported.
-            </li>
-            <li>
-              5.2.3 Display own projects: user sees projects where they are
-              manager or developer; filtering supported.
-            </li>
-            <li>
-              5.2.4 Filter displayed projects: text filter by name, type, and
-              team member emails.
-            </li>
-            <li>
-              5.2.5 Display project details: show name, description, type,
-              status, managers and developers; URLs are interactive.
-            </li>
-            <li>
-              5.2.6 Change project data: managers can edit all project fields.
-            </li>
-            <li>5.2.7 Delete project: admin confirms and deletes.</li>
-          </ul>
-        </section>
-
-        <section className="panel card-hover p-6">
-          <h3 className="text-base font-semibold text-ink">
-            5.3 Appointment management
-          </h3>
-          <ul className="mt-3 space-y-2 text-sm text-muted">
-            <li>
-              5.3.1 Create appointment: managers and developers set name, type,
-              start/end, and optional description.
-            </li>
-            <li>
-              5.3.2 Display all appointments: list for project, sorted by start
-              time.
-            </li>
-            <li>
-              5.3.3 Add appointment to calendar: confirm transfer and store
-              local calendar flag.
-            </li>
-            <li>
-              5.3.4 Change appointment data: managers and developers edit
-              appointments.
-            </li>
-            <li>5.3.5 Delete appointment: confirm and delete.</li>
-          </ul>
-        </section>
-
-        <section className="panel card-hover p-6">
-          <h3 className="text-base font-semibold text-ink">5.4 Commenting</h3>
-          <ul className="mt-3 space-y-2 text-sm text-muted">
-            <li>
-              5.4.1 Write public comment: managers and developers add public
-              comments.
-            </li>
-            <li>
-              5.4.2 Write private comment: managers and developers add private
-              comments.
-            </li>
-            <li>
-              5.4.3 Display all comments of a project: admin and managers see
-              chronological comments with filters.
-            </li>
-            <li>
-              5.4.4 Display public comments: show public comments in
-              chronological order.
-            </li>
-            <li>
-              5.4.5 Filter displayed comments: show all, public only, or private
-              only.
-            </li>
-            <li>
-              5.4.6 Change own comment: author edits text and visibility.
-            </li>
-            <li>5.4.7 Delete comment: author confirms deletion.</li>
-            <li>
-              5.4.8 Analyze comments: managers request AI analysis (summary,
-              issue prediction, deadline risk).
-            </li>
-          </ul>
-        </section>
-
-        <section className="panel card-hover p-6">
-          <h3 className="text-base font-semibold text-ink">5.5 Settings</h3>
-          <ul className="mt-3 space-y-2 text-sm text-muted">
-            <li>
-              5.5.1 Change connection interrupt period: view and update interval
-              in seconds.
-            </li>
-          </ul>
-        </section>
-
-        <section className="panel card-hover p-6">
-          <h3 className="text-base font-semibold text-ink">
-            6. Non-functional requirements
-          </h3>
-          <ul className="mt-3 space-y-2 text-sm text-muted">
-            <li>
-              6.1 Reliability: detect connection interruptions at configurable
-              intervals and prevent data loss.
-            </li>
-            <li>
-              6.2 Feedback: clear status and actionable error messages.
-            </li>
-            <li>
-              6.3 UI: intuitive interface based on established patterns.
-            </li>
-          </ul>
-        </section>
-
-        <section className="panel p-6">
-          <h3 className="text-base font-semibold text-ink">7. Glossary</h3>
-          <p className="mt-2 text-sm text-muted">None</p>
-        </section>
-
-        <section className="panel p-6">
-          <h3 className="text-base font-semibold text-ink">8. References</h3>
-          <p className="mt-2 text-sm text-muted">None</p>
-        </section>
+        ))}
       </div>
     </main>
   );
 }
+

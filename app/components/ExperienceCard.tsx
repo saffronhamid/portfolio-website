@@ -31,12 +31,12 @@ export default function ExperienceCard({
           <h3 className="text-xl font-semibold text-white group-hover:text-[#a78bfa] transition-colors duration-300">
             {experience.role}
           </h3>
-          <p className="text-sm text-muted mt-1">{experience.company}</p>
+          <p className="text-sm text-muted-foreground mt-1">{experience.company}</p>
           <p className="text-xs text-white/30 mt-1">{experience.location}</p>
         </div>
-        <p className="text-sm text-muted shrink-0">{experience.date}</p>
+        <p className="text-sm text-muted-foreground shrink-0">{experience.date}</p>
       </div>
-      <ul className="mt-4 space-y-2 text-sm text-muted leading-relaxed">
+      <ul className="mt-4 space-y-2 text-sm text-muted-foreground leading-relaxed">
         {experience.bullets.map((line, idx) => (
           <li key={idx} className="flex gap-2">
             <span className="text-[#a78bfa] mt-1 text-xs">▸</span>

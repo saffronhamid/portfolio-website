@@ -26,7 +26,7 @@ export default function ProjectCard({ project, index = 0 }: { project: Project; 
           <h3 className="text-2xl font-semibold text-white group-hover:text-[#a78bfa] transition-colors duration-300">
             {project.title}
           </h3>
-          <ul className="mt-4 space-y-2 text-sm text-muted leading-relaxed">
+          <ul className="mt-4 space-y-2 text-sm text-muted-foreground leading-relaxed">
             {project.description.map((line, idx) => (
               <li key={idx} className="flex gap-2">
                 <span className="text-[#a78bfa] mt-1 text-xs">▸</span>
@@ -38,7 +38,7 @@ export default function ProjectCard({ project, index = 0 }: { project: Project; 
             {project.tech.map((item) => (
               <span
                 key={item}
-                className="px-3 py-1 text-xs text-muted bg-white/[0.04] border border-white/[0.08] rounded-full"
+                className="px-3 py-1 text-xs text-muted-foreground bg-white/[0.04] border border-white/[0.08] rounded-full"
               >
                 {item}
               </span>

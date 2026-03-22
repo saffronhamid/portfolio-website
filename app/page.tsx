@@ -265,42 +265,25 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen text-ink">
+    <div className="min-h-screen text-foreground">
       <SmokyCursor enabled={smokeEnabled} />
       <Navbar items={navItems} activeId={activeId} />
 
       <main className="mx-auto max-w-7xl px-4 pb-24 pt-12 sm:px-6">
         <section id="home" className="min-h-[85vh] flex items-center pt-20 pb-0 overflow-hidden relative">
-          <div className="mx-auto w-full max-w-7xl px-6 grid lg:grid-cols-2 gap-12 items-center h-full">
+          <div className="mx-auto w-full max-w-7xl px-6 grid grid-cols-1 gap-12 items-center h-full">
             <div className="space-y-8 z-10 w-full">
               <div className="min-h-[160px] sm:min-h-[200px] lg:min-h-[280px] flex flex-col justify-center">
                 <TypewriterHero />
-                <p className="mt-6 text-sm sm:text-base text-muted/80 tracking-wide font-medium">
+                <p className="mt-6 text-sm sm:text-base text-muted-foreground/80 tracking-wide font-medium">
                   Master’s in Data Science | Germany | Open to Werkstudent & AI/ML Roles
                 </p>
               </div>
-              <div className="flex gap-6 text-sm font-medium text-muted uppercase tracking-widest">
-                <a href="#projects" className="hover:text-white transition-colors">Projects</a>
-                <a href="https://www.linkedin.com/in/faizan-hamid-50b113215/" target="_blank" className="hover:text-white transition-colors">LinkedIn</a>
-                <a href="https://github.com/saffronhamid" target="_blank" className="hover:text-white transition-colors">GitHub</a>
+              <div className="flex gap-6 text-sm font-medium text-muted-foreground uppercase tracking-widest">
+                <a href="#projects" className="hover:text-foreground transition-colors">Projects</a>
+                <a href="https://www.linkedin.com/in/faizan-hamid-50b113215/" target="_blank" className="hover:text-foreground transition-colors">LinkedIn</a>
+                <a href="https://github.com/saffronhamid" target="_blank" className="hover:text-foreground transition-colors">GitHub</a>
               </div>
-            </div>
-
-            <div className="relative h-[60vh] lg:h-[85vh] w-full flex items-end justify-center lg:justify-end">
-              {/* Gradient overlays for extra blending safety */}
-              <div className="absolute inset-y-0 left-0 z-10 bg-gradient-to-r from-black via-transparent to-transparent w-32 pointer-events-none"></div>
-              <div className="absolute inset-y-0 right-0 z-10 bg-gradient-to-l from-black via-transparent to-transparent w-32 pointer-events-none"></div>
-              <div className="absolute inset-x-0 bottom-0 z-10 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none"></div>
-
-              <img
-                src="/portrait.png"
-                alt="Faizan Hamid"
-                className="h-full w-full object-contain object-right"
-                style={{
-                  maskImage: "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
-                  WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)"
-                }}
-              />
             </div>
           </div>
         </section>
@@ -319,25 +302,25 @@ export default function Home() {
           <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] items-start">
             <FadeIn delay={0.2}>
               <div>
-                <p className="text-lg text-muted leading-relaxed">{aboutSummary}</p>
+                <p className="text-lg text-muted-foreground leading-relaxed">{aboutSummary}</p>
                 <ul className="mt-8 space-y-4">
                   {aboutHighlights.map((item, idx) => (
-                    <li key={item} className="flex gap-3 text-sm text-muted">
+                    <li key={item} className="flex gap-3 text-sm text-muted-foreground">
                       <span className="text-[#a78bfa] mt-0.5 text-xs">▸</span>
-                      <span className="hover:text-white transition-colors duration-300">{item}</span>
+                      <span className="hover:text-foreground transition-colors duration-300">{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             </FadeIn>
             <FadeIn delay={0.4}>
-              <div className="border-l border-white/[0.08] pl-8">
-                <p className="text-xs uppercase tracking-[0.3em] text-[#a78bfa] font-semibold mb-4">Languages</p>
-                <div className="space-y-3 text-sm text-muted">
-                  <p className="hover:text-white transition-colors">English</p>
-                  <p className="hover:text-white transition-colors">German (A2)</p>
+                <div className="border-l border-white/[0.08] pl-8">
+                  <p className="text-xs uppercase tracking-[0.3em] text-[#a78bfa] font-semibold mb-4">Languages</p>
+                  <div className="space-y-3 text-sm text-muted-foreground">
+                    <p className="hover:text-foreground transition-colors">English</p>
+                    <p className="hover:text-foreground transition-colors">German (A2)</p>
+                  </div>
                 </div>
-              </div>
             </FadeIn>
           </div>
         </section>
@@ -364,7 +347,7 @@ export default function Home() {
                 <h3 className="text-2xl font-semibold text-white group-hover:translate-x-2 transition-transform duration-300">
                   Web-App for Managing Student Projects
                 </h3>
-                <p className="mt-3 text-sm text-muted">Explore →</p>
+                <p className="mt-3 text-sm text-muted-foreground">Explore →</p>
               </Link>
             </FadeIn>
             <FadeIn delay={0.3}>
@@ -378,7 +361,7 @@ export default function Home() {
                 <h3 className="text-2xl font-semibold text-white group-hover:translate-x-2 transition-transform duration-300">
                   Master project using all YOLO versions
                 </h3>
-                <p className="mt-3 text-sm text-muted">Explore →</p>
+                <p className="mt-3 text-sm text-muted-foreground">Explore →</p>
               </Link>
             </FadeIn>
           </div>
@@ -458,11 +441,11 @@ export default function Home() {
                   <h3 className="text-xl font-semibold text-white group-hover:text-[#fbbf24] transition-colors duration-300">
                     {item.school}
                   </h3>
-                  <p className="mt-2 text-sm text-muted">{item.degree}</p>
+                  <p className="mt-2 text-sm text-muted-foreground">{item.degree}</p>
                   <p className="mt-1 text-xs text-white/30">{item.location}</p>
-                  <p className="mt-2 text-sm text-muted">{item.date}</p>
+                  <p className="mt-2 text-sm text-muted-foreground">{item.date}</p>
                   {item.details.length > 0 && (
-                    <ul className="mt-4 space-y-2 text-sm text-muted">
+                    <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
                       {item.details.map((detail) => (
                         <li key={detail} className="flex gap-2">
                           <span className="text-[#fbbf24] mt-1 text-xs">▸</span>
@@ -490,14 +473,14 @@ export default function Home() {
           <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] items-start">
             <FadeIn delay={0.15}>
               <div className="space-y-8">
-                <p className="text-lg text-muted leading-relaxed">
+                <p className="text-lg text-muted-foreground leading-relaxed">
                   Want to collaborate or discuss ML/MLOps work? Send a message
                   and I will get back to you.
                 </p>
                 <div className="space-y-4 text-sm">
                   <a
                     href={`mailto:${profile.email}`}
-                    className="group flex items-center gap-3 text-muted hover:text-white transition-colors duration-300"
+                    className="group flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors duration-300"
                     aria-label={`Email ${profile.email}`}
                   >
                     <span className="w-10 h-10 rounded-full border border-white/[0.1] flex items-center justify-center group-hover:border-[#a78bfa] group-hover:bg-[#a78bfa]/10 transition-all duration-300">
@@ -505,13 +488,13 @@ export default function Home() {
                     </span>
                     {profile.email}
                   </a>
-                  <div className="group flex items-center gap-3 text-muted">
+                  <div className="group flex items-center gap-3 text-muted-foreground">
                     <span className="w-10 h-10 rounded-full border border-white/[0.1] flex items-center justify-center">
                       <FiPhone className="text-sm" />
                     </span>
                     {profile.phone}
                   </div>
-                  <div className="group flex items-center gap-3 text-muted">
+                  <div className="group flex items-center gap-3 text-muted-foreground">
                     <span className="w-10 h-10 rounded-full border border-white/[0.1] flex items-center justify-center">
                       <FiMapPin className="text-sm" />
                     </span>
@@ -526,18 +509,18 @@ export default function Home() {
       </main>
 
       <footer className="border-t border-white/10 py-10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 text-sm text-subtle sm:flex-row sm:px-6">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 text-sm text-muted-foreground/70 sm:flex-row sm:px-6">
           <p>© {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <a
               href={profile.links[0].url}
-              className="text-xs text-subtle transition hover:text-ink"
+              className="text-xs text-muted-foreground/70 transition hover:text-foreground"
             >
               LinkedIn
             </a>
             <a
               href={profile.links[1].url}
-              className="text-xs text-subtle transition hover:text-ink"
+              className="text-xs text-muted-foreground/70 transition hover:text-foreground"
             >
               GitHub
             </a>
@@ -547,5 +530,3 @@ export default function Home() {
     </div>
   );
 }
-
-

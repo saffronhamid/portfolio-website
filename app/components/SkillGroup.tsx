@@ -21,7 +21,7 @@ export default function SkillGroup({
           const item = (
             <span
               key={skill}
-              className="px-4 py-2 text-sm text-muted bg-white/[0.04] border border-white/[0.08] rounded-full hover:bg-white/[0.1] hover:text-white hover:border-white/20 transition-all duration-300 cursor-default"
+              className="px-4 py-2 text-sm text-muted-foreground bg-white/[0.04] border border-white/[0.08] rounded-full hover:bg-white/[0.1] hover:text-white hover:border-white/20 transition-all duration-300 cursor-default"
             >
               {skill}
             </span>
@@ -36,7 +36,7 @@ export default function SkillGroup({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: idx * 0.05 }}
-              className="px-4 py-2 text-sm text-muted bg-white/[0.04] border border-white/[0.08] rounded-full hover:bg-white/[0.1] hover:text-white hover:border-white/20 transition-all duration-300 cursor-default"
+              className="px-4 py-2 text-sm text-muted-foreground bg-white/[0.04] border border-white/[0.08] rounded-full hover:bg-white/[0.1] hover:text-white hover:border-white/20 transition-all duration-300 cursor-default"
             >
               {skill}
             </motion.span>

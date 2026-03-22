@@ -13,7 +13,7 @@ export default function ContactForm() {
       method="POST"
     >
       <input type="hidden" name="_subject" value="New portfolio message" />
-      <label className="block space-y-2 text-sm text-muted">
+      <label className="block space-y-2 text-sm text-muted-foreground">
         <span className="text-xs uppercase tracking-widest text-white/60">Name</span>
         <input
           type="text"
@@ -24,7 +24,7 @@ export default function ContactForm() {
           required
         />
       </label>
-      <label className="block space-y-2 text-sm text-muted">
+      <label className="block space-y-2 text-sm text-muted-foreground">
         <span className="text-xs uppercase tracking-widest text-white/60">Email</span>
         <input
           type="email"
@@ -35,7 +35,7 @@ export default function ContactForm() {
           required
         />
       </label>
-      <label className="block space-y-2 text-sm text-muted">
+      <label className="block space-y-2 text-sm text-muted-foreground">
         <span className="text-xs uppercase tracking-widest text-white/60">Message</span>
         <textarea
           rows={4}

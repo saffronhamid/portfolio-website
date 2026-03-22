@@ -31,7 +31,7 @@ export default function SectionHeader({
         <span className="text-[#a78bfa]">.</span>
       </h2>
       {description && (
-        <p className="mt-5 max-w-2xl text-base text-muted leading-relaxed">
+        <p className="mt-5 max-w-2xl text-base text-muted-foreground leading-relaxed">
           {description}
         </p>
       )}

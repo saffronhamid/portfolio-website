@@ -295,10 +295,11 @@ export function CardStack<T extends CardStackItem>({
 }
 
 function DefaultFanCard({ item }: { item: CardStackItem; active: boolean }) {
+  const hasImage = Boolean(item.imageSrc);
   return (
     <div className="relative h-full w-full">
       <div className="absolute inset-0">
-        {item.imageSrc ? (
+        {hasImage ? (
           <Image
             src={item.imageSrc}
             alt={item.title}
@@ -309,18 +310,30 @@ function DefaultFanCard({ item }: { item: CardStackItem; active: boolean }) {
             priority
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-secondary text-sm text-muted-foreground">
-            No image
-          </div>
+          <div className="h-full w-full bg-gradient-to-br from-secondary via-background to-secondary" />
         )}
       </div>
 
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+      {hasImage ? (
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+      ) : null}
 
       <div className="relative z-10 flex h-full flex-col justify-end p-5">
-        <div className="truncate text-lg font-semibold text-white">{item.title}</div>
+        <div
+          className={cn(
+            "truncate text-lg font-semibold",
+            hasImage ? "text-white" : "text-foreground"
+          )}
+        >
+          {item.title}
+        </div>
         {item.description ? (
-          <div className="mt-1 line-clamp-2 text-sm text-white/80">
+          <div
+            className={cn(
+              "mt-1 line-clamp-2 text-sm",
+              hasImage ? "text-white/80" : "text-muted-foreground"
+            )}
+          >
             {item.description}
           </div>
         ) : null}

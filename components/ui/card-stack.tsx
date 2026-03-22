@@ -295,13 +295,14 @@ export function CardStack<T extends CardStackItem>({
 }
 
 function DefaultFanCard({ item }: { item: CardStackItem; active: boolean }) {
-  const hasImage = Boolean(item.imageSrc);
+  const imageSrc = item.imageSrc;
+  const hasImage = typeof imageSrc === "string" && imageSrc.length > 0;
   return (
     <div className="relative h-full w-full">
       <div className="absolute inset-0">
         {hasImage ? (
           <Image
-            src={item.imageSrc}
+            src={imageSrc}
             alt={item.title}
             fill
             sizes="(max-width: 768px) 100vw, 520px"

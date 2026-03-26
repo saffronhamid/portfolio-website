@@ -4,7 +4,6 @@ import { CardStack, type CardStackItem } from "@/components/ui/card-stack";
 
 const items: CardStackItem[] = [
 
-  
   {
     id: 1,
     title: "Luxury Performance",

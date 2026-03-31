@@ -20,7 +20,6 @@ export default function Demo() {
                 Network
               </span>
             </h1>
-
             <p className="mb-8 max-w-md text-sm leading-relaxed text-muted-foreground md:text-base">
               Deployed across 150+ points of presence worldwide. Your data
               served from the nearest node in under 50ms. Drag the globe to

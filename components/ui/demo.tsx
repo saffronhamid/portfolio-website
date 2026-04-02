@@ -25,7 +25,6 @@ export default function Demo() {
               served from the nearest node in under 50ms. Drag the globe to
               explore.
             </p>
-
             <div className="flex items-center gap-6">
               <div>
                 <p className="text-2xl font-bold text-foreground">150+</p>

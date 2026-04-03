@@ -2,7 +2,6 @@
 
 import { cn } from "@/lib/utils";
 import { useRef, useEffect, useCallback } from "react";
-
 interface GlobeProps {
   className?: string;
   size?: number;

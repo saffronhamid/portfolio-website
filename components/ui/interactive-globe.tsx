@@ -12,7 +12,6 @@ interface GlobeProps {
   connections?: { from: [number, number]; to: [number, number] }[];
   markers?: { lat: number; lng: number; label?: string }[];
 }
-
 const DEFAULT_MARKERS = [
   { lat: 37.78, lng: -122.42, label: "San Francisco" },
   { lat: 51.51, lng: -0.13, label: "London" },

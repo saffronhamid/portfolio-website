@@ -21,7 +21,7 @@ export default function SkillGroup({
           const item = (
             <span
               key={skill}
-              className="px-4 py-2 text-sm text-muted-foreground bg-white/[0.04] border border-white/[0.08] rounded-full hover:bg-white/[0.1] hover:text-white hover:border-white/20 transition-all duration-300 cursor-default"
+              className="skill-pill px-4 py-2 text-sm text-muted-foreground bg-white/[0.04] border border-white/[0.08] rounded-full hover:bg-[#a78bfa]/10 hover:text-white hover:border-[#a78bfa]/40 hover:shadow-[0_0_20px_rgba(167,139,250,0.15)] transition-all duration-300 cursor-default"
             >
               {skill}
             </span>
@@ -32,11 +32,12 @@ export default function SkillGroup({
           return (
             <motion.span
               key={skill}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 14, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: idx * 0.05 }}
-              className="px-4 py-2 text-sm text-muted-foreground bg-white/[0.04] border border-white/[0.08] rounded-full hover:bg-white/[0.1] hover:text-white hover:border-white/20 transition-all duration-300 cursor-default"
+              transition={{ duration: 0.4, delay: idx * 0.06, type: "spring", stiffness: 200 }}
+              whileHover={{ scale: 1.08, y: -2 }}
+              className="skill-pill px-4 py-2 text-sm text-muted-foreground bg-white/[0.04] border border-white/[0.08] rounded-full hover:bg-[#a78bfa]/10 hover:text-white hover:border-[#a78bfa]/40 hover:shadow-[0_0_20px_rgba(167,139,250,0.15)] transition-colors duration-300 cursor-default"
             >
               {skill}
             </motion.span>

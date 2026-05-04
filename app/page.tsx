@@ -1,9 +1,11 @@
-﻿"use client";
+"use client";
 
-import { useEffect, useMemo, useState, useCallback, useRef } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FiMail, FiMapPin, FiPhone } from "react-icons/fi";
+import AnimatedBackground from "./components/AnimatedBackground";
 import ContactForm from "./components/ContactForm";
 import ExperienceCard from "./components/ExperienceCard";
 import FadeIn from "./components/FadeIn";
@@ -12,6 +14,7 @@ import ProjectCard from "./components/ProjectCard";
 import SectionHeader from "./components/SectionHeader";
 import SkillGroup from "./components/SkillGroup";
 import SmokyCursor from "./components/SmokyCursor";
+import TiltCard from "./components/TiltCard";
 
 function TypewriterHero() {
   const text = "AI Engineer in training — building scalable GenAI, RAG, and ML systems for real-world applications.";
@@ -45,6 +48,15 @@ function TypewriterHero() {
   );
 }
 
+const heroLinkVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: 1.5 + i * 0.15, duration: 0.5, ease: "easeOut" },
+  }),
+};
+
 export default function Home() {
   const sections = useMemo(
     () => [
@@ -66,39 +78,20 @@ export default function Home() {
 
   const [activeId, setActiveId] = useState("home");
   const [smokeEnabled, setSmokeEnabled] = useState(false);
-  const [headlineIndex, setHeadlineIndex] = useState(0);
+  const prefersReduced = useReducedMotion();
 
   useEffect(() => {
-    const prefersReduced = window.matchMedia(
+    const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
     const isCoarse =
       window.matchMedia("(pointer: coarse)").matches ||
       window.matchMedia("(hover: none)").matches;
 
-    if (prefersReduced || isCoarse) {
+    if (prefersReducedMotion || isCoarse) {
       setSmokeEnabled(false);
     }
   }, []);
-
-  const rotatingHeadlines = [
-    "Machine Learning Engineer (MLOps) | RAG | AI Pipelines",
-    "Low-Code Seminar Builder | Product Strategy",
-    "Computer Vision | YOLO Tracking | Applied Research",
-  ];
-
-  useEffect(() => {
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) return;
-
-    const interval = setInterval(() => {
-      setHeadlineIndex((prev) => (prev + 1) % rotatingHeadlines.length);
-    }, 2800);
-
-    return () => clearInterval(interval);
-  }, [rotatingHeadlines.length]);
 
   useEffect(() => {
     const targets = sections
@@ -211,8 +204,6 @@ export default function Home() {
     },
   ];
 
-
-
   const experiences = [
     {
       role: "Machine Learning Engineer (MLOps)",
@@ -264,25 +255,56 @@ export default function Home() {
     },
   ];
 
+  const heroLinks = [
+    { label: "Projects", href: "#projects" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/faizan-hamid-50b113215/", external: true },
+    { label: "GitHub", href: "https://github.com/saffronhamid", external: true },
+  ];
+
   return (
     <div className="min-h-screen text-foreground">
+      <AnimatedBackground />
       <SmokyCursor enabled={smokeEnabled} />
       <Navbar items={navItems} activeId={activeId} />
 
       <main className="mx-auto max-w-7xl px-4 pb-24 pt-12 sm:px-6">
+        {/* ─── Hero ─── */}
         <section id="home" className="min-h-[85vh] flex items-center pt-20 pb-0 overflow-hidden relative">
           <div className="mx-auto w-full max-w-7xl px-6 grid grid-cols-1 gap-12 items-center h-full">
             <div className="space-y-8 z-10 w-full">
-              <div className="min-h-[160px] sm:min-h-[200px] lg:min-h-[280px] flex flex-col justify-center">
+              <motion.div
+                className="min-h-[160px] sm:min-h-[200px] lg:min-h-[280px] flex flex-col justify-center"
+                initial={prefersReduced ? undefined : { opacity: 0 }}
+                animate={prefersReduced ? undefined : { opacity: 1 }}
+                transition={{ duration: 0.8 }}
+              >
                 <TypewriterHero />
-                <p className="mt-6 text-sm sm:text-base text-muted-foreground/80 tracking-wide font-medium">
-                  Master’s in Data Science | Germany | Open to Werkstudent & AI/ML Roles
-                </p>
-              </div>
+                <motion.p
+                  className="mt-6 text-sm sm:text-base text-muted-foreground/80 tracking-wide font-medium"
+                  initial={prefersReduced ? undefined : { opacity: 0, y: 10 }}
+                  animate={prefersReduced ? undefined : { opacity: 1, y: 0 }}
+                  transition={{ delay: 1.2, duration: 0.6 }}
+                >
+                  Master&apos;s in Data Science | Germany | Open to Werkstudent & AI/ML Roles
+                </motion.p>
+              </motion.div>
               <div className="flex gap-6 text-sm font-medium text-muted-foreground uppercase tracking-widest">
-                <a href="#projects" className="hover:text-foreground transition-colors">Projects</a>
-                <a href="https://www.linkedin.com/in/faizan-hamid-50b113215/" target="_blank" className="hover:text-foreground transition-colors">LinkedIn</a>
-                <a href="https://github.com/saffronhamid" target="_blank" className="hover:text-foreground transition-colors">GitHub</a>
+                {heroLinks.map((link, i) => (
+                  <motion.a
+                    key={link.label}
+                    href={link.href}
+                    target={link.external ? "_blank" : undefined}
+                    className="relative hover:text-foreground transition-colors group"
+                    custom={i}
+                    variants={heroLinkVariants}
+                    initial="hidden"
+                    animate="visible"
+                    whileHover={{ y: -2 }}
+                  >
+                    {link.label}
+                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#a78bfa] group-hover:w-full transition-all duration-300" />
+                  </motion.a>
+                ))}
               </div>
             </div>
           </div>
@@ -291,6 +313,7 @@ export default function Home() {
         {/* Divider */}
         <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-4" />
 
+        {/* ─── About ─── */}
         <section id="about" className="py-24">
           <FadeIn>
             <SectionHeader
@@ -305,10 +328,17 @@ export default function Home() {
                 <p className="text-lg text-muted-foreground leading-relaxed">{aboutSummary}</p>
                 <ul className="mt-8 space-y-4">
                   {aboutHighlights.map((item, idx) => (
-                    <li key={item} className="flex gap-3 text-sm text-muted-foreground">
+                    <motion.li
+                      key={item}
+                      className="flex gap-3 text-sm text-muted-foreground"
+                      initial={prefersReduced ? undefined : { opacity: 0, x: -20 }}
+                      whileInView={prefersReduced ? undefined : { opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 + idx * 0.1, duration: 0.5 }}
+                    >
                       <span className="text-[#a78bfa] mt-0.5 text-xs">▸</span>
                       <span className="hover:text-foreground transition-colors duration-300">{item}</span>
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
               </div>
@@ -327,6 +357,7 @@ export default function Home() {
 
         <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
+        {/* ─── Focus ─── */}
         <section id="focus" className="py-24">
           <FadeIn>
             <SectionHeader
@@ -337,38 +368,43 @@ export default function Home() {
           </FadeIn>
           <div className="grid gap-8 lg:grid-cols-2">
             <FadeIn delay={0.15}>
-              <Link
-                href="/low-code"
-                className="group block relative py-8 px-6 -mx-6 rounded-2xl border border-transparent hover:border-white/[0.08] hover:bg-white/[0.02] transition-all duration-500"
-                aria-label="Low-code seminar details"
-              >
-                <div className="absolute left-0 top-8 w-1 h-0 bg-[#22d3ee] rounded-full group-hover:h-16 transition-all duration-500" />
-                <p className="text-xs uppercase tracking-[0.3em] text-[#22d3ee] font-semibold mb-3">Low-Code Seminar</p>
-                <h3 className="text-2xl font-semibold text-white group-hover:translate-x-2 transition-transform duration-300">
-                  Web-App for Managing Student Projects
-                </h3>
-                <p className="mt-3 text-sm text-muted-foreground">Explore →</p>
-              </Link>
+              <TiltCard className="relative">
+                <Link
+                  href="/low-code"
+                  className="group block relative py-8 px-6 rounded-2xl border border-transparent hover:border-white/[0.08] hover:bg-white/[0.02] transition-all duration-500"
+                  aria-label="Low-code seminar details"
+                >
+                  <div className="absolute left-0 top-8 w-1 h-0 bg-[#22d3ee] rounded-full group-hover:h-16 transition-all duration-500 shadow-[0_0_12px_rgba(34,211,238,0.5)]" />
+                  <p className="text-xs uppercase tracking-[0.3em] text-[#22d3ee] font-semibold mb-3">Low-Code Seminar</p>
+                  <h3 className="text-2xl font-semibold text-white group-hover:translate-x-2 transition-transform duration-300">
+                    Web-App for Managing Student Projects
+                  </h3>
+                  <p className="mt-3 text-sm text-muted-foreground group-hover:text-[#22d3ee] transition-colors duration-300">Explore →</p>
+                </Link>
+              </TiltCard>
             </FadeIn>
             <FadeIn delay={0.3}>
-              <Link
-                href="/bat-tracking"
-                className="group block relative py-8 px-6 -mx-6 rounded-2xl border border-transparent hover:border-white/[0.08] hover:bg-white/[0.02] transition-all duration-500"
-                aria-label="Bat tracking project details"
-              >
-                <div className="absolute left-0 top-8 w-1 h-0 bg-[#34d399] rounded-full group-hover:h-16 transition-all duration-500" />
-                <p className="text-xs uppercase tracking-[0.3em] text-[#34d399] font-semibold mb-3">Bat Tracking</p>
-                <h3 className="text-2xl font-semibold text-white group-hover:translate-x-2 transition-transform duration-300">
-                  Master project using all YOLO versions
-                </h3>
-                <p className="mt-3 text-sm text-muted-foreground">Explore →</p>
-              </Link>
+              <TiltCard className="relative">
+                <Link
+                  href="/bat-tracking"
+                  className="group block relative py-8 px-6 rounded-2xl border border-transparent hover:border-white/[0.08] hover:bg-white/[0.02] transition-all duration-500"
+                  aria-label="Bat tracking project details"
+                >
+                  <div className="absolute left-0 top-8 w-1 h-0 bg-[#34d399] rounded-full group-hover:h-16 transition-all duration-500 shadow-[0_0_12px_rgba(52,211,153,0.5)]" />
+                  <p className="text-xs uppercase tracking-[0.3em] text-[#34d399] font-semibold mb-3">Bat Tracking</p>
+                  <h3 className="text-2xl font-semibold text-white group-hover:translate-x-2 transition-transform duration-300">
+                    Master project using all YOLO versions
+                  </h3>
+                  <p className="mt-3 text-sm text-muted-foreground group-hover:text-[#34d399] transition-colors duration-300">Explore →</p>
+                </Link>
+              </TiltCard>
             </FadeIn>
           </div>
         </section>
 
         <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
+        {/* ─── Skills ─── */}
         <section id="skills" className="py-24">
           <FadeIn>
             <SectionHeader
@@ -390,6 +426,7 @@ export default function Home() {
 
         <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
+        {/* ─── Projects ─── */}
         <section id="projects" className="py-24">
           <FadeIn>
             <SectionHeader
@@ -398,7 +435,7 @@ export default function Home() {
               description="A mix of production ML pipelines, RAG systems, and applied research."
             />
           </FadeIn>
-          <div className="space-y-0">
+          <div className="space-y-4">
             {projects.map((project, idx) => (
               <ProjectCard key={project.title} project={project} index={idx} />
             ))}
@@ -407,6 +444,7 @@ export default function Home() {
 
         <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
+        {/* ─── Experience ─── */}
         <section id="experience" className="py-24">
           <FadeIn>
             <SectionHeader
@@ -424,6 +462,7 @@ export default function Home() {
 
         <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
+        {/* ─── Education ─── */}
         <section id="education" className="py-24">
           <FadeIn>
             <SectionHeader
@@ -436,8 +475,11 @@ export default function Home() {
             {education.map((item, idx) => (
               <FadeIn key={item.school} delay={idx * 0.15}>
                 <div className="group relative pl-8 py-6">
-                  {/* Timeline dot */}
-                  <div className="absolute left-0 top-8 w-3 h-3 rounded-full border-2 border-[#fbbf24] bg-black group-hover:bg-[#fbbf24] transition-colors duration-300" />
+                  {/* Animated timeline dot */}
+                  <motion.div
+                    className="absolute left-0 top-8 w-3 h-3 rounded-full border-2 border-[#fbbf24] bg-black group-hover:bg-[#fbbf24] transition-colors duration-300"
+                    whileHover={{ scale: 1.5, boxShadow: "0 0 16px rgba(251,191,36,0.5)" }}
+                  />
                   <h3 className="text-xl font-semibold text-white group-hover:text-[#fbbf24] transition-colors duration-300">
                     {item.school}
                   </h3>
@@ -462,6 +504,7 @@ export default function Home() {
 
         <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
+        {/* ─── Contact ─── */}
         <section id="contact" className="py-24">
           <FadeIn>
             <SectionHeader
@@ -483,9 +526,12 @@ export default function Home() {
                     className="group flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors duration-300"
                     aria-label={`Email ${profile.email}`}
                   >
-                    <span className="w-10 h-10 rounded-full border border-white/[0.1] flex items-center justify-center group-hover:border-[#a78bfa] group-hover:bg-[#a78bfa]/10 transition-all duration-300">
+                    <motion.span
+                      className="w-10 h-10 rounded-full border border-white/[0.1] flex items-center justify-center group-hover:border-[#a78bfa] group-hover:bg-[#a78bfa]/10 transition-all duration-300"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                    >
                       <FiMail className="text-sm" />
-                    </span>
+                    </motion.span>
                     {profile.email}
                   </a>
                   <div className="group flex items-center gap-3 text-muted-foreground">
@@ -512,18 +558,16 @@ export default function Home() {
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 text-sm text-muted-foreground/70 sm:flex-row sm:px-6">
           <p>© {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <a
-              href={profile.links[0].url}
-              className="text-xs text-muted-foreground/70 transition hover:text-foreground"
-            >
-              LinkedIn
-            </a>
-            <a
-              href={profile.links[1].url}
-              className="text-xs text-muted-foreground/70 transition hover:text-foreground"
-            >
-              GitHub
-            </a>
+            {profile.links.map((link) => (
+              <motion.a
+                key={link.label}
+                href={link.url}
+                className="text-xs text-muted-foreground/70 transition hover:text-foreground"
+                whileHover={{ y: -2 }}
+              >
+                {link.label}
+              </motion.a>
+            ))}
           </div>
         </div>
       </footer>

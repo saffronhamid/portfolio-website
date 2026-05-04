@@ -16,7 +16,7 @@ const letterVariants = {
     transition: {
       delay: i * 0.03,
       duration: 0.4,
-      ease: [0.2, 0.65, 0.3, 0.9] as [number, number, number, number],
+      ease: "easeOut" as const,
     },
   }),
 };

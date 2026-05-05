@@ -6,6 +6,8 @@ import { motion, useReducedMotion } from "framer-motion";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FiMail, FiMapPin, FiPhone } from "react-icons/fi";
 import AnimatedBackground from "./components/AnimatedBackground";
+import BackToTop from "./components/BackToTop";
+import CommandPalette from "./components/CommandPalette";
 import ContactForm from "./components/ContactForm";
 import ExperienceCard from "./components/ExperienceCard";
 import FadeIn from "./components/FadeIn";
@@ -14,6 +16,7 @@ import ProjectCard from "./components/ProjectCard";
 import SectionHeader from "./components/SectionHeader";
 import SkillGroup from "./components/SkillGroup";
 import SmokyCursor from "./components/SmokyCursor";
+import Stats from "./components/Stats";
 import TiltCard from "./components/TiltCard";
 
 function TypewriterHero() {
@@ -62,6 +65,7 @@ export default function Home() {
     () => [
       { id: "home", label: "Home" },
       { id: "about", label: "About" },
+      { id: "stats", label: "Stats" },
       { id: "focus", label: "Focus" },
       { id: "skills", label: "Skills" },
       { id: "projects", label: "Projects" },
@@ -266,6 +270,8 @@ export default function Home() {
       <AnimatedBackground />
       <SmokyCursor enabled={smokeEnabled} />
       <Navbar items={navItems} activeId={activeId} />
+      <CommandPalette />
+      <BackToTop />
 
       <main className="mx-auto max-w-7xl px-4 pb-24 pt-12 sm:px-6">
         {/* ─── Hero ─── */}
@@ -353,6 +359,22 @@ export default function Home() {
                 </div>
             </FadeIn>
           </div>
+        </section>
+
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+        {/* ─── Stats ─── */}
+        <section id="stats" className="py-24">
+          <FadeIn>
+            <SectionHeader
+              title="By the numbers"
+              subtitle="A snapshot"
+              description="Practice translated into shipped systems and measurable outcomes."
+            />
+          </FadeIn>
+          <FadeIn delay={0.15}>
+            <Stats />
+          </FadeIn>
         </section>
 
         <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />

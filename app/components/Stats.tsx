@@ -20,27 +20,24 @@ const stats: Stat[] = [
 function CountUp({ to, duration = 1.6 }: { to: number; duration?: number }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-15% 0px" });
-  const [value, setValue] = useState(0);
+  const [animated, setAnimated] = useState(0);
   const prefersReduced = useReducedMotion();
 
   useEffect(() => {
-    if (!inView) return;
-    if (prefersReduced) {
-      setValue(to);
-      return;
-    }
+    if (!inView || prefersReduced) return;
     const start = performance.now();
     let frame = 0;
     const tick = (now: number) => {
       const t = Math.min(1, (now - start) / (duration * 1000));
       const eased = 1 - Math.pow(1 - t, 3);
-      setValue(Math.round(eased * to));
+      setAnimated(Math.round(eased * to));
       if (t < 1) frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
   }, [inView, to, duration, prefersReduced]);
 
+  const value = prefersReduced ? to : animated;
   return <span ref={ref}>{value}</span>;
 }
 

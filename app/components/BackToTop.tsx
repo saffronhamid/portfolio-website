@@ -16,9 +16,12 @@ export default function BackToTop() {
       setVisible(y > 600);
       setProgress(total > 0 ? Math.min(1, y / total) : 0);
     };
-    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const id = requestAnimationFrame(onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(id);
+    };
   }, []);
 
   const handleClick = () => {

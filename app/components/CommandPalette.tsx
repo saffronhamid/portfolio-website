@@ -1,8 +1,21 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import { FiArrowRight, FiCommand, FiSearch } from "react-icons/fi";
+
+const noopSubscribe = () => () => {};
+const getIsMacSnapshot = () =>
+  typeof navigator !== "undefined" &&
+  /Mac|iPod|iPhone|iPad/.test(navigator.platform);
+const getIsMacServer = () => false;
 
 type CommandItem = {
   id: string;
@@ -49,13 +62,14 @@ export default function CommandPalette() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [activeIdx, setActiveIdx] = useState(0);
-  const [isMac, setIsMac] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const prefersReduced = useReducedMotion();
 
-  useEffect(() => {
-    setIsMac(/Mac|iPod|iPhone|iPad/.test(navigator.platform));
-  }, []);
+  const isMac = useSyncExternalStore(
+    noopSubscribe,
+    getIsMacSnapshot,
+    getIsMacServer
+  );
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -66,9 +80,12 @@ export default function CommandPalette() {
     );
   }, [query]);
 
-  useEffect(() => {
+  const resetKey = `${query}|${open}`;
+  const [prevResetKey, setPrevResetKey] = useState(resetKey);
+  if (prevResetKey !== resetKey) {
+    setPrevResetKey(resetKey);
     setActiveIdx(0);
-  }, [query, open]);
+  }
 
   useEffect(() => {
     if (open && inputRef.current) {

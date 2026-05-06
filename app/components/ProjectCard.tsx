@@ -1,11 +1,11 @@
 "use client";
 
-import { useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { FiExternalLink, FiGithub } from "react-icons/fi";
+import { FiArrowUpRight, FiGithub } from "react-icons/fi";
 
 type Project = {
   title: string;
+  year?: string;
   description: string[];
   tech: string[];
   links: {
@@ -14,101 +14,65 @@ type Project = {
   };
 };
 
-export default function ProjectCard({ project, index = 0 }: { project: Project; index?: number }) {
+export default function ProjectCard({
+  project,
+  index = 0,
+}: {
+  project: Project;
+  index?: number;
+}) {
   const prefersReduced = useReducedMotion();
-  const ref = useRef<HTMLDivElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current || prefersReduced) return;
-    const rect = ref.current.getBoundingClientRect();
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
-
-  const card = (
-    <div
-      ref={ref}
-      className="group relative py-8 px-6 -mx-2 rounded-2xl border border-white/[0.06] hover:border-white/[0.12] transition-colors duration-500 overflow-hidden"
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Mouse-following spotlight */}
-      {!prefersReduced && (
-        <div
-          className="absolute pointer-events-none transition-opacity duration-300"
-          style={{
-            left: mousePos.x - 150,
-            top: mousePos.y - 150,
-            width: 300,
-            height: 300,
-            background: "radial-gradient(circle, rgba(167,139,250,0.08) 0%, transparent 70%)",
-            opacity: isHovered ? 1 : 0,
-          }}
-        />
-      )}
-
-      {/* Glow accent on hover */}
-      <div className="absolute -left-1 top-8 w-1 h-0 bg-[#a78bfa] rounded-full group-hover:h-12 transition-all duration-500 shadow-[0_0_12px_rgba(167,139,250,0.6)]" />
-
-      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 relative z-10">
-        <div className="flex-1">
-          <h3 className="text-2xl font-semibold text-white group-hover:text-[#a78bfa] transition-colors duration-300">
-            {project.title}
-          </h3>
-          <ul className="mt-4 space-y-2 text-sm text-muted-foreground leading-relaxed">
-            {project.description.map((line, idx) => (
-              <li key={idx} className="flex gap-2">
-                <span className="text-[#a78bfa] mt-1 text-xs">▸</span>
-                <span>{line}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-5 flex flex-wrap gap-2">
-            {project.tech.map((item) => (
-              <span
-                key={item}
-                className="px-3 py-1 text-xs text-muted-foreground bg-white/[0.04] border border-white/[0.08] rounded-full hover:bg-[#a78bfa]/10 hover:border-[#a78bfa]/30 hover:text-[#a78bfa] transition-all duration-300"
-              >
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
-        <div className="flex gap-4 text-sm text-white/60 lg:pt-2 shrink-0">
-          <a
-            className="inline-flex items-center gap-2 hover:text-[#a78bfa] transition-colors duration-200"
-            href={project.links.live}
-            aria-label={`Open live project for ${project.title}`}
-          >
-            <FiExternalLink /> Live
-          </a>
-          <a
-            className="inline-flex items-center gap-2 hover:text-[#a78bfa] transition-colors duration-200"
-            href={project.links.repo}
-            aria-label={`Open repository for ${project.title}`}
-          >
-            <FiGithub /> GitHub
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-
-  if (prefersReduced) return card;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.2 }}
+    <motion.article
+      className="group relative grid gap-6 border-t border-white/[0.06] py-10 md:grid-cols-[120px_1fr_auto] md:gap-12 md:py-14"
+      initial={prefersReduced ? undefined : { opacity: 0, y: 24 }}
+      whileInView={prefersReduced ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-5% 0px" }}
+      transition={{ duration: 0.6, delay: index * 0.08, ease: "easeOut" }}
     >
-      {card}
-    </motion.div>
+      <span className="text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground/70">
+        {project.year ?? "—"} / {String(index + 1).padStart(2, "0")}
+      </span>
+
+      <div className="flex flex-col gap-5">
+        <h3 className="text-display text-2xl font-medium text-foreground transition-colors duration-300 sm:text-3xl md:text-4xl">
+          <span className="link-underline">{project.title}</span>
+        </h3>
+        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+          {project.description.join(" ")}
+        </p>
+        <ul className="flex flex-wrap gap-2 pt-1">
+          {project.tech.map((item) => (
+            <li key={item} className="chip">
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="flex items-start gap-5 text-[11px] uppercase tracking-[0.22em] text-muted-foreground md:flex-col md:items-end md:gap-3">
+        {project.links.live && project.links.live !== "#" && (
+          <a
+            href={project.links.live}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-underline inline-flex items-center gap-1.5 text-foreground/80 hover:text-foreground"
+            aria-label={`Visit ${project.title} live site`}
+          >
+            Live <FiArrowUpRight className="text-sm" />
+          </a>
+        )}
+        <a
+          href={project.links.repo}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="link-underline inline-flex items-center gap-1.5 text-foreground/80 hover:text-foreground"
+          aria-label={`View ${project.title} repository`}
+        >
+          Code <FiGithub className="text-sm" />
+        </a>
+      </div>
+    </motion.article>
   );
 }

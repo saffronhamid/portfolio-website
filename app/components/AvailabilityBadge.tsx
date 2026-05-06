@@ -8,20 +8,28 @@ export default function AvailabilityBadge() {
   return (
     <motion.a
       href="#contact"
-      className="group inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 text-xs uppercase tracking-[0.2em] text-muted-foreground hover:border-[#34d399]/40 hover:text-foreground transition-colors duration-300"
-      initial={prefersReduced ? undefined : { opacity: 0, y: -10 }}
-      animate={prefersReduced ? undefined : { opacity: 1, y: 0 }}
-      transition={{ delay: 0.3, duration: 0.6 }}
-      aria-label="Available for hire — open to opportunities"
+      className="group inline-flex items-center gap-3 rounded-full border border-white/[0.08] bg-white/[0.02] px-4 py-1.5 text-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground transition-colors duration-300 hover:border-white/30 hover:text-foreground"
+      initial={prefersReduced ? undefined : { opacity: 0 }}
+      animate={prefersReduced ? undefined : { opacity: 1 }}
+      transition={{ delay: 0.2, duration: 0.6 }}
+      aria-label="Available for hire"
     >
-      <span className="relative flex h-2 w-2">
+      <span className="relative flex h-1.5 w-1.5">
         {!prefersReduced && (
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#34d399] opacity-75" />
+          <span
+            className="absolute inline-flex h-full w-full rounded-full bg-[#34d399]"
+            style={{ animation: "pulse-soft 2.4s ease-out infinite" }}
+          />
         )}
-        <span className="relative inline-flex h-2 w-2 rounded-full bg-[#34d399] shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
+        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#34d399]" />
       </span>
-      <span className="font-medium">Available for hire</span>
-      <span className="text-[#34d399]/60 group-hover:text-[#34d399] transition-colors">→</span>
+      Open to opportunities
+      <span
+        className="text-foreground/40 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-foreground"
+        aria-hidden="true"
+      >
+        →
+      </span>
     </motion.a>
   );
 }

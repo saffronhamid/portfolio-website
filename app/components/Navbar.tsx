@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 type NavItem = {
@@ -15,68 +15,80 @@ export default function Navbar({
   items: NavItem[];
   activeId: string;
 }) {
-  const renderedItems = useMemo(() => items, [items]);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
   const prefersReduced = useReducedMotion();
 
   useEffect(() => {
     const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = totalHeight > 0 ? window.scrollY / totalHeight : 0;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = total > 0 ? window.scrollY / total : 0;
       setScrollProgress(progress);
+      setScrolled(window.scrollY > 24);
     };
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#000000]/80 backdrop-blur-xl">
-      {/* Scroll progress bar */}
+    <header
+      className={`sticky top-0 z-50 transition-colors duration-300 ${
+        scrolled
+          ? "border-b border-white/[0.06] bg-[#0a0a0a]/85 backdrop-blur-xl"
+          : "border-b border-transparent bg-transparent"
+      }`}
+    >
       {!prefersReduced && (
         <motion.div
-          className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-[#a78bfa] via-[#22d3ee] to-[#f472b6]"
-          style={{ width: `${scrollProgress * 100}%` }}
+          className="absolute bottom-0 left-0 h-px bg-white origin-left"
+          style={{ width: "100%", scaleX: scrollProgress }}
         />
       )}
-      <div className="mx-auto flex max-w-7xl flex-col items-start gap-4 px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:px-6">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-8 px-6 py-5 sm:px-10">
         <a
           href="#home"
-          className="text-sm font-semibold uppercase tracking-[0.38em] text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          className="text-mono text-[11px] uppercase tracking-[0.3em] text-foreground"
         >
-          Faizan Hamid
+          <span className="text-muted-foreground">/</span> faizan-hamid
         </a>
+
         <nav
           aria-label="Primary"
-          className="flex w-full flex-wrap items-center gap-4 text-sm text-muted-foreground sm:w-auto sm:gap-6"
+          className="hidden items-center gap-7 text-[11px] uppercase tracking-[0.22em] md:flex"
         >
-          {renderedItems.map((item) => {
-            return (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                aria-current={activeId === item.id ? "page" : undefined}
-                className="nav-link text-xs uppercase tracking-[0.22em] text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-              >
-                {item.label}
-              </a>
-            );
-          })}
+          {items.map((item, idx) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              aria-current={activeId === item.id ? "page" : undefined}
+              className={`nav-link transition-colors ${
+                activeId === item.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <span className="text-mono mr-1.5 text-[10px] text-muted-foreground/60">
+                {String(idx + 1).padStart(2, "0")}
+              </span>
+              {item.label}
+            </a>
+          ))}
         </nav>
-        <div className="flex w-full items-center justify-between gap-4 text-sm text-muted-foreground sm:w-auto sm:justify-end">
-          <a
-            href="#contact"
-            className="btn-ghost inline-flex px-4 py-2 text-xs uppercase tracking-[0.24em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-          >
-            Contact
-          </a>
-          <button
-            type="button"
-            className="btn-ghost inline-flex px-3 py-2 text-xs uppercase tracking-[0.24em]"
-            aria-label="Switch language"
-          >
-            EN
-          </button>
-        </div>
+
+        <a
+          href="#contact"
+          className="text-mono inline-flex items-center gap-2 rounded-full border border-white/[0.12] px-4 py-2 text-[10px] uppercase tracking-[0.22em] text-foreground transition-colors hover:border-white/40 hover:bg-white/[0.04]"
+        >
+          <span className="relative inline-flex h-1.5 w-1.5">
+            {!prefersReduced && (
+              <span
+                className="absolute inline-flex h-full w-full rounded-full bg-[#34d399]"
+                style={{ animation: "pulse-soft 2.4s ease-out infinite" }}
+              />
+            )}
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#34d399]" />
+          </span>
+          Available
+        </a>
       </div>
     </header>
   );

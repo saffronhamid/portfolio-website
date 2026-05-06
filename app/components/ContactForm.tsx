@@ -1,56 +1,67 @@
-﻿"use client";
+"use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { FiArrowUpRight } from "react-icons/fi";
 
 export default function ContactForm() {
   const prefersReduced = useReducedMotion();
 
+  const inputClasses =
+    "w-full bg-transparent border-0 border-b border-white/[0.1] px-0 py-3 text-foreground placeholder:text-muted-foreground/40 outline-none transition-colors focus:border-foreground";
+
   const form = (
     <form
-      className="space-y-6"
+      className="flex flex-col gap-8"
       aria-label="Contact form"
       action="https://formspree.io/f/xdaaodyn"
       method="POST"
     >
       <input type="hidden" name="_subject" value="New portfolio message" />
-      <label className="block space-y-2 text-sm text-muted-foreground">
-        <span className="text-xs uppercase tracking-widest text-white/60">Name</span>
+      <label className="flex flex-col gap-2">
+        <span className="text-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+          Name
+        </span>
         <input
           type="text"
           name="name"
-          className="w-full rounded-lg border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-white outline-none transition-all duration-300 focus:border-[#a78bfa] focus:bg-white/[0.06] placeholder:text-white/20"
+          className={inputClasses}
           placeholder="Your name"
           autoComplete="name"
           required
         />
       </label>
-      <label className="block space-y-2 text-sm text-muted-foreground">
-        <span className="text-xs uppercase tracking-widest text-white/60">Email</span>
+      <label className="flex flex-col gap-2">
+        <span className="text-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+          Email
+        </span>
         <input
           type="email"
           name="email"
-          className="w-full rounded-lg border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-white outline-none transition-all duration-300 focus:border-[#a78bfa] focus:bg-white/[0.06] placeholder:text-white/20"
+          className={inputClasses}
           placeholder="you@email.com"
           autoComplete="email"
           required
         />
       </label>
-      <label className="block space-y-2 text-sm text-muted-foreground">
-        <span className="text-xs uppercase tracking-widest text-white/60">Message</span>
+      <label className="flex flex-col gap-2">
+        <span className="text-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+          Message
+        </span>
         <textarea
           rows={4}
           name="message"
-          className="w-full rounded-lg border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-white outline-none transition-all duration-300 focus:border-[#a78bfa] focus:bg-white/[0.06] placeholder:text-white/20 resize-none"
-          placeholder="Tell me about your project..."
+          className={`${inputClasses} resize-none`}
+          placeholder="Tell me about the role or project."
           required
         />
       </label>
       <button
         type="submit"
-        className="w-full sm:w-auto rounded-lg bg-[#a78bfa] px-8 py-3 text-sm font-semibold text-black uppercase tracking-widest transition-all duration-300 hover:bg-[#c4b5fd] hover:shadow-[0_0_30px_rgba(167,139,250,0.3)]"
+        className="btn-primary self-start mt-2"
         aria-label="Send message"
       >
-        Send Message
+        Send message
+        <FiArrowUpRight className="text-base" />
       </button>
     </form>
   );
@@ -59,10 +70,10 @@ export default function ContactForm() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: 0.2 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
     >
       {form}
     </motion.div>

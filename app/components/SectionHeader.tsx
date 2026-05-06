@@ -3,108 +3,55 @@
 import { motion, useReducedMotion } from "framer-motion";
 
 type SectionHeaderProps = {
+  number: string;
   title: string;
-  subtitle?: string;
   description?: string;
 };
 
-const letterVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: i * 0.03,
-      duration: 0.4,
-      ease: "easeOut" as const,
-    },
-  }),
-};
-
 export default function SectionHeader({
+  number,
   title,
-  subtitle,
   description,
 }: SectionHeaderProps) {
   const prefersReduced = useReducedMotion();
-  const letters = title.split("");
-
-  const content = (
-    <div className="mb-16 relative">
-      {/* Large background decorative text */}
-      <div className="absolute -left-4 -top-8 text-[8rem] font-bold text-white/[0.03] leading-none pointer-events-none select-none hidden lg:block">
-        {title}
-      </div>
-      {subtitle && (
-        <p className="text-xs uppercase tracking-[0.3em] text-[#a78bfa] font-semibold mb-4">
-          ◆ {subtitle}
-        </p>
-      )}
-      <h2 className="text-5xl sm:text-6xl font-bold text-white tracking-tight">
-        {prefersReduced ? (
-          <>
-            {title}
-            <span className="text-[#a78bfa]">.</span>
-          </>
-        ) : (
-          <>
-            {letters.map((letter, i) => (
-              <motion.span
-                key={i}
-                custom={i}
-                variants={letterVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-10% 0px" }}
-                className="inline-block"
-                style={{ whiteSpace: letter === " " ? "pre" : undefined }}
-              >
-                {letter}
-              </motion.span>
-            ))}
-            <motion.span
-              className="text-[#a78bfa] inline-block"
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-10% 0px" }}
-              transition={{ delay: letters.length * 0.03 + 0.1, duration: 0.4, type: "spring" }}
-            >
-              .
-            </motion.span>
-          </>
-        )}
-      </h2>
-      {description && (
-        <p className="mt-5 max-w-2xl text-base text-muted-foreground leading-relaxed">
-          {description}
-        </p>
-      )}
-      {!prefersReduced ? (
-        <motion.div
-          className="mt-6 h-[2px] bg-gradient-to-r from-[#a78bfa] to-transparent rounded-full"
-          initial={{ width: 0 }}
-          whileInView={{ width: 64 }}
-          viewport={{ once: true, margin: "-10% 0px" }}
-          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-        />
-      ) : (
-        <div className="mt-6 h-[2px] w-16 bg-gradient-to-r from-[#a78bfa] to-transparent rounded-full" />
-      )}
-    </div>
-  );
-
-  if (prefersReduced) {
-    return content;
-  }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -30 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-10% 0px" }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
-      {content}
-    </motion.div>
+    <div className="mb-16 grid gap-6 md:mb-24 md:grid-cols-[auto_1fr] md:items-end md:gap-12">
+      <motion.div
+        className="flex items-baseline gap-3"
+        initial={prefersReduced ? undefined : { opacity: 0, y: 12 }}
+        whileInView={prefersReduced ? undefined : { opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-10% 0px" }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
+        <span className="text-mono text-xs tracking-[0.18em] text-muted-foreground">
+          {number}
+        </span>
+        <span className="hairline w-12 origin-left" />
+      </motion.div>
+
+      <div className="flex flex-col gap-4">
+        <motion.h2
+          className="display-lg text-foreground"
+          initial={prefersReduced ? undefined : { opacity: 0, y: 16 }}
+          whileInView={prefersReduced ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10% 0px" }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.05 }}
+        >
+          {title}
+        </motion.h2>
+        {description && (
+          <motion.p
+            className="max-w-xl text-base leading-relaxed text-muted-foreground"
+            initial={prefersReduced ? undefined : { opacity: 0, y: 12 }}
+            whileInView={prefersReduced ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10% 0px" }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
+          >
+            {description}
+          </motion.p>
+        )}
+      </div>
+    </div>
   );
 }

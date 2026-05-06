@@ -6,7 +6,9 @@ import { motion, useReducedMotion } from "framer-motion";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FiMail, FiMapPin, FiPhone } from "react-icons/fi";
 import AnimatedBackground from "./components/AnimatedBackground";
+import AvailabilityBadge from "./components/AvailabilityBadge";
 import BackToTop from "./components/BackToTop";
+import Certifications from "./components/Certifications";
 import CommandPalette from "./components/CommandPalette";
 import ContactForm from "./components/ContactForm";
 import ExperienceCard from "./components/ExperienceCard";
@@ -17,6 +19,8 @@ import SectionHeader from "./components/SectionHeader";
 import SkillGroup from "./components/SkillGroup";
 import SmokyCursor from "./components/SmokyCursor";
 import Stats from "./components/Stats";
+import TechMarquee from "./components/TechMarquee";
+import Testimonials from "./components/Testimonials";
 import TiltCard from "./components/TiltCard";
 
 function TypewriterHero() {
@@ -71,6 +75,8 @@ export default function Home() {
       { id: "projects", label: "Projects" },
       { id: "experience", label: "Experience" },
       { id: "education", label: "Education" },
+      { id: "certifications", label: "Certifications" },
+      { id: "testimonials", label: "Testimonials" },
       { id: "contact", label: "Contact" },
     ],
     []
@@ -284,6 +290,9 @@ export default function Home() {
                 animate={prefersReduced ? undefined : { opacity: 1 }}
                 transition={{ duration: 0.8 }}
               >
+                <div className="mb-6">
+                  <AvailabilityBadge />
+                </div>
                 <TypewriterHero />
                 <motion.p
                   className="mt-6 text-sm sm:text-base text-muted-foreground/80 tracking-wide font-medium"
@@ -444,6 +453,11 @@ export default function Home() {
               />
             ))}
           </div>
+          <FadeIn delay={0.2}>
+            <div className="mt-16 -mx-4 sm:-mx-6">
+              <TechMarquee />
+            </div>
+          </FadeIn>
         </section>
 
         <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -522,6 +536,38 @@ export default function Home() {
               </FadeIn>
             ))}
           </div>
+        </section>
+
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+        {/* ─── Certifications ─── */}
+        <section id="certifications" className="py-24">
+          <FadeIn>
+            <SectionHeader
+              title="Certifications"
+              subtitle="Credentials and recognition"
+              description="Formal training and milestones across ML, cloud, and engineering."
+            />
+          </FadeIn>
+          <FadeIn delay={0.15}>
+            <Certifications />
+          </FadeIn>
+        </section>
+
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+        {/* ─── Testimonials ─── */}
+        <section id="testimonials" className="py-24">
+          <FadeIn>
+            <SectionHeader
+              title="Testimonials"
+              subtitle="What collaborators say"
+              description="Feedback from mentors, leads, and teammates I have worked with."
+            />
+          </FadeIn>
+          <FadeIn delay={0.15}>
+            <Testimonials />
+          </FadeIn>
         </section>
 
         <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />

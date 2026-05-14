@@ -108,6 +108,7 @@ export function Component({
   }>({ active: false, startX: 0, startY: 0, startRotY: 0, startRotX: 0 });
   const animRef = useRef<number>(0);
   const timeRef = useRef(0);
+  const velocityRef = useRef({ vy: 0, vx: 0 });
 
   const dotsRef = useRef<[number, number, number][]>([]);
   const starsRef = useRef<{ x: number; y: number; r: number; tw: number }[]>(
@@ -159,7 +160,15 @@ export function Component({
     const fov = 600;
 
     if (!dragRef.current.active) {
-      rotYRef.current += autoRotateSpeed;
+      rotYRef.current += velocityRef.current.vy + autoRotateSpeed;
+      rotXRef.current = Math.max(
+        -1,
+        Math.min(1, rotXRef.current + velocityRef.current.vx)
+      );
+      velocityRef.current.vy *= 0.94;
+      velocityRef.current.vx *= 0.94;
+      if (Math.abs(velocityRef.current.vy) < 0.0001) velocityRef.current.vy = 0;
+      if (Math.abs(velocityRef.current.vx) < 0.0001) velocityRef.current.vx = 0;
     }
 
     timeRef.current += 0.015;
@@ -361,6 +370,7 @@ export function Component({
   }, [draw]);
 
   const onPointerDown = useCallback((e: React.PointerEvent) => {
+    velocityRef.current = { vy: 0, vx: 0 };
     dragRef.current = {
       active: true,
       startX: e.clientX,
@@ -375,11 +385,17 @@ export function Component({
     if (!dragRef.current.active) return;
     const dx = e.clientX - dragRef.current.startX;
     const dy = e.clientY - dragRef.current.startY;
-    rotYRef.current = dragRef.current.startRotY + dx * 0.005;
-    rotXRef.current = Math.max(
+    const newRotY = dragRef.current.startRotY + dx * 0.005;
+    const newRotX = Math.max(
       -1,
       Math.min(1, dragRef.current.startRotX + dy * 0.005)
     );
+    const dvy = newRotY - rotYRef.current;
+    const dvx = newRotX - rotXRef.current;
+    velocityRef.current.vy = velocityRef.current.vy * 0.7 + dvy * 0.3;
+    velocityRef.current.vx = velocityRef.current.vx * 0.7 + dvx * 0.3;
+    rotYRef.current = newRotY;
+    rotXRef.current = newRotX;
   }, []);
 
   const onPointerUp = useCallback(() => {

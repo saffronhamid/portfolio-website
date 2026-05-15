@@ -27,7 +27,13 @@ export default function SectionHeader({
         <span className="text-mono text-xs tracking-[0.18em] text-muted-foreground">
           {number}
         </span>
-        <span className="hairline w-12 origin-left" />
+        <motion.span
+          className="hairline w-12 origin-left"
+          initial={prefersReduced ? undefined : { scaleX: 0 }}
+          whileInView={prefersReduced ? undefined : { scaleX: 1 }}
+          viewport={{ once: true, margin: "-10% 0px" }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+        />
       </motion.div>
 
       <div className="flex flex-col gap-4">

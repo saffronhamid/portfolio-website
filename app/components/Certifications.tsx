@@ -9,6 +9,7 @@ type Certification = {
 };
 
 const certifications: Certification[] = [
+  { title: "Ultimate RAG Bootcamp — LangChain, LangGraph & LangSmith", issuer: "Udemy · Krish Naik", date: "2026" },
   { title: "MLOps Specialization", issuer: "DeepLearning.AI", date: "2024" },
   { title: "Deep Learning Specialization", issuer: "Coursera · Andrew Ng", date: "2023" },
   { title: "AWS Cloud Practitioner", issuer: "Amazon Web Services", date: "2023" },

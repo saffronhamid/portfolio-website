@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import LiveFigure from "./components/three/LiveFigure";
+import AgentConsole from "./components/AgentConsole";
 
 /* ------------------------------------------------------------------ */
 /*  Content                                                            */
@@ -213,8 +214,8 @@ export default function Home() {
       {/* ---------- Global nav ---------- */}
       <header className="gnav" data-open={menuOpen}>
         <div className="gnav-inner">
-          <a href="#top" className="gnav-mark" aria-label="Faizan Hamid — top">
-            FH
+          <a href="#top" className="gnav-mark">
+            Faizan Hamid
           </a>
           <nav className="gnav-links" aria-label="Sections">
             {nav.map((n) => (
@@ -248,7 +249,7 @@ export default function Home() {
         <Tile
           tone="light"
           className="tile-hero"
-          eyebrow="Faizan Hamid"
+          eyebrow={<span className="hero-name">Faizan Hamid</span>}
           title={<>Machine learning.<br />Engineered for production.</>}
           subtitle="RAG systems, MLOps and AI agents — from the first notebook to the service people rely on."
           ctas={
@@ -270,7 +271,9 @@ export default function Home() {
           subtitle="Intern on the BAT, Test Automation & AI team since August 2026."
           ctas={<Cta href="#experience">View experience</Cta>}
         >
-          <LiveFigure shape={1} dark className="tile-figure" label="Neural network with signals flowing between layers" />
+          <Reveal className="console-wrap">
+            <AgentConsole />
+          </Reveal>
           <Reveal className="stats">
             <div>
               <span className="stat-num">40%</span>
@@ -284,6 +287,24 @@ export default function Home() {
               <span className="stat-num stat-num-text">Gherkin → code</span>
               <span className="stat-label">an agent that turns test scenarios into automated tests</span>
             </div>
+          </Reveal>
+        </Tile>
+
+        {/* ---------- Agent pipeline ---------- */}
+        <Tile
+          tone="grey"
+          eyebrow="Automation agents"
+          title="Plan. Retrieve. Generate. Verify."
+          subtitle="Agents hand work around a loop of specialised steps, each one checking the last."
+        >
+          <LiveFigure shape={1} className="tile-figure" label="Agent pipeline: work packets flowing around a loop of six stations, with the active station highlighted" />
+          <Reveal className="loop-legend">
+            {["Scenario", "Retrieve", "Plan", "Generate", "Execute", "Report"].map((s, i) => (
+              <span key={s} style={{ ["--i" as string]: i }}>
+                <i />
+                {s}
+              </span>
+            ))}
           </Reveal>
         </Tile>
 

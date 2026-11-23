@@ -100,12 +100,6 @@ textarea:focus-visible {
   letter-spacing: -0.01em;
 }
 
-.gnav-mark {
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: -0.04em;
-}
-
 .gnav-links {
   display: none;
   gap: 36px;
@@ -872,4 +866,311 @@ a:hover .chev { transform: translateX(2px); }
 .stat-num.stat-num-text {
   font-size: clamp(26px, 3vw, 36px);
   line-height: 1.33;
+}
+
+/* ================================================================== */
+/*  Name                                                               */
+/* ================================================================== */
+
+.gnav-mark {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  white-space: nowrap;
+}
+
+.tile-eyebrow:has(.hero-name) {
+  margin-bottom: 14px;
+}
+.hero-name {
+  display: inline-block;
+  font-size: clamp(26px, 3.2vw, 34px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
+
+/* ================================================================== */
+/*  Agent console                                                      */
+/* ================================================================== */
+
+.console-wrap {
+  width: 100%;
+  max-width: 980px;
+  margin: 44px 0 56px;
+}
+
+.console {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #161617;
+  border: 1px solid #2c2c2e;
+  box-shadow: 0 30px 80px -30px rgba(41, 151, 255, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+  text-align: left;
+  color: #e5e5ea;
+}
+
+.console-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 40px;
+  padding: 0 16px;
+  border-bottom: 1px solid #2c2c2e;
+  background: #1c1c1e;
+  font-size: 12px;
+}
+.console-dots {
+  display: flex;
+  gap: 7px;
+}
+.console-dots i {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #3a3a3c;
+}
+.console-title {
+  flex: 1;
+  font-family: var(--font-mono);
+  color: var(--muted-dark);
+  text-align: center;
+}
+.console-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 128px;
+  justify-content: flex-end;
+  color: var(--muted-dark);
+}
+.console-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff9f0a;
+  animation: blink 1s steps(2, start) infinite;
+}
+.console-status.is-pass {
+  color: #30d158;
+}
+.console-status.is-pass .console-status-dot {
+  background: #30d158;
+  animation: none;
+}
+@keyframes blink {
+  to { opacity: 0.25; }
+}
+
+.console-panes {
+  display: grid;
+}
+@media (min-width: 834px) {
+  .console-panes { grid-template-columns: 1fr 1fr; }
+  .console-pane + .console-pane { border-left: 1px solid #2c2c2e; }
+}
+.console-pane {
+  min-width: 0;
+  padding: 14px 0 18px;
+}
+.console-pane + .console-pane {
+  border-top: 1px solid #2c2c2e;
+}
+@media (min-width: 834px) {
+  .console-pane + .console-pane { border-top: 0; }
+}
+.console-file {
+  margin: 0 0 10px;
+  padding: 0 18px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted-dark);
+}
+.console-code {
+  min-height: 148px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.75;
+  white-space: pre;
+  overflow-x: auto;
+  scrollbar-width: none;
+  letter-spacing: 0;
+}
+.console-line {
+  display: flex;
+  padding-right: 18px;
+}
+.console-ln {
+  flex-shrink: 0;
+  width: 38px;
+  padding-right: 14px;
+  text-align: right;
+  color: #48484a;
+  user-select: none;
+}
+.console-empty {
+  padding: 0 18px;
+  color: #48484a;
+  font-style: italic;
+}
+.console-caret {
+  display: inline-block;
+  width: 7px;
+  height: 1.1em;
+  margin-left: 1px;
+  vertical-align: -0.2em;
+  background: #2997ff;
+  animation: blink 0.9s steps(2, start) infinite;
+}
+.tok-kw { color: #ff7ab2; }
+.tok-step { color: #2997ff; }
+.tok-fn { color: #67b7ff; }
+.tok-str { color: #ff9f0a; }
+.tok-num { color: #d0bf69; }
+
+.console-steps {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid #2c2c2e;
+}
+@media (min-width: 834px) {
+  .console-steps { grid-template-columns: repeat(4, 1fr); }
+}
+.console-steps li {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  font-size: 13px;
+  line-height: 1.3;
+  color: #636366;
+  transition: color 0.4s var(--ease);
+  overflow: hidden;
+}
+.console-steps li + li {
+  border-left: 1px solid #2c2c2e;
+}
+.console-steps li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: #2997ff;
+}
+.console-steps li[data-state="running"]::after {
+  animation: progress 0.85s linear forwards;
+}
+.console-steps li[data-state="done"]::after {
+  width: 100%;
+  background: #30d158;
+  opacity: 0.5;
+}
+@keyframes progress {
+  to { width: 100%; }
+}
+.console-steps li[data-state="running"],
+.console-steps li[data-state="done"] {
+  color: #f5f5f7;
+}
+.console-step-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.console-step-text b {
+  font-weight: 600;
+}
+.console-step-text span {
+  font-size: 11.5px;
+  color: #8e8e93;
+}
+.console-step-icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
+  border-radius: 50%;
+  border: 1.5px solid #48484a;
+  color: #000;
+}
+.console-steps li[data-state="running"] .console-step-icon {
+  border-color: #2997ff;
+  border-right-color: transparent;
+  animation: spin 0.7s linear infinite;
+}
+.console-steps li[data-state="done"] .console-step-icon {
+  border-color: #30d158;
+  background: #30d158;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.console-wrap .console-note {
+  position: static;
+  margin: 0;
+  padding: 8px 16px 10px;
+  border-top: 1px solid #2c2c2e;
+  font-size: 11px;
+  color: #48484a;
+  text-align: right;
+}
+
+/* ================================================================== */
+/*  Agent loop legend                                                  */
+/* ================================================================== */
+
+.loop-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 760px;
+  padding: 4px 0 64px;
+}
+.loop-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 980px;
+  background: var(--bg);
+  font-size: 14px;
+  color: var(--muted);
+  animation: legend-step 6.6s calc(var(--i) * 1.1s) infinite;
+}
+.loop-legend i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--hairline);
+  animation: legend-dot 6.6s calc(var(--i) * 1.1s) infinite;
+}
+@keyframes legend-step {
+  0%, 16% { color: var(--fg); box-shadow: 0 0 0 1px var(--blue) inset; }
+  17%, 100% { color: var(--muted); box-shadow: none; }
+}
+@keyframes legend-dot {
+  0%, 16% { background: var(--blue); }
+  17%, 100% { background: var(--hairline); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loop-legend span,
+  .loop-legend i,
+  .console-caret,
+  .console-status-dot,
+  .console-step-icon {
+    animation: none !important;
+  }
 }

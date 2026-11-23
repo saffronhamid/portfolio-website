@@ -9,7 +9,7 @@ import * as THREE from "three";
  * and eases toward the active one at its own speed, so transitions
  * dissolve rather than snap.
  *
- * 0 loss landscape · 1 MLP forward pass · 2 embedding clusters
+ * 0 loss landscape · 1 agent pipeline · 2 embedding clusters
  * 3 tracked trajectories · 4 confusion matrix · 5 signal ribbon
  */
 
@@ -44,42 +44,50 @@ function build() {
     jitter[i * 3 + 2] = gauss() * 0.012;
   }
 
-  /* 1 — MLP: nodes + points streaming along edges */
-  const layers = [5, 9, 12, 9, 4];
-  const nodes: THREE.Vector3[][] = layers.map((count, l) =>
-    Array.from({ length: count }, (_, k) =>
-      new THREE.Vector3(
-        (l - (layers.length - 1) / 2) * 1.35,
-        (k - (count - 1) / 2) * (2.9 / Math.max(count - 1, 1)),
-        (rand() - 0.5) * 0.25
-      )
-    )
-  );
-  const netA = new Float32Array(N * 3);
-  const netB = new Float32Array(N * 3);
-  const netU = new Float32Array(N);
-  const netNode = new Uint8Array(N);
-  const netAccent = new Float32Array(N);
+  /* 1 — agent pipeline: 6 stations on a loop, packets between them, hub spokes */
+  const STATIONS = 6;
+  const stations = Array.from({ length: STATIONS }, (_, k) => {
+    const th = (k / STATIONS) * TAU - Math.PI / 2;
+    return new THREE.Vector3(Math.cos(th) * 2.5, Math.sin(k * 1.7) * 0.18, Math.sin(th) * 1.35);
+  });
+  // kind: 0 station shell, 1 station orbit, 2 loop packet, 3 hub spoke, 4 hub core
+  const agKind = new Uint8Array(N);
+  const agStation = new Uint8Array(N);
+  const agU = new Float32Array(N);
+  const agOff = new Float32Array(N * 3);
   for (let i = 0; i < N; i++) {
-    if (i % 6 === 0) {
-      const l = Math.floor(rand() * layers.length);
-      const c = nodes[l][Math.floor(rand() * nodes[l].length)];
-      const r = 0.07 * Math.cbrt(rand());
+    const r = rand();
+    const st = Math.floor(rand() * STATIONS);
+    agStation[i] = st;
+    agU[i] = rand();
+    if (r < 0.16) {
+      agKind[i] = 0;
+      const rad = 0.13 + rand() * 0.03;
       const th = rand() * TAU;
       const ph = Math.acos(2 * rand() - 1);
-      netA[i * 3] = c.x + r * Math.sin(ph) * Math.cos(th);
-      netA[i * 3 + 1] = c.y + r * Math.sin(ph) * Math.sin(th);
-      netA[i * 3 + 2] = c.z + r * Math.cos(ph);
-      netB.set(netA.subarray(i * 3, i * 3 + 3), i * 3);
-      netNode[i] = 1;
+      agOff[i * 3] = rad * Math.sin(ph) * Math.cos(th);
+      agOff[i * 3 + 1] = rad * Math.sin(ph) * Math.sin(th);
+      agOff[i * 3 + 2] = rad * Math.cos(ph);
+    } else if (r < 0.26) {
+      agKind[i] = 1;
+    } else if (r < 0.78) {
+      agKind[i] = 2;
+      agOff[i * 3] = gauss() * 0.035;
+      agOff[i * 3 + 1] = gauss() * 0.035;
+      agOff[i * 3 + 2] = gauss() * 0.035;
+    } else if (r < 0.95) {
+      agKind[i] = 3;
+      agOff[i * 3] = gauss() * 0.02;
+      agOff[i * 3 + 1] = gauss() * 0.02;
+      agOff[i * 3 + 2] = gauss() * 0.02;
     } else {
-      const l = Math.floor(rand() * (layers.length - 1));
-      const a = nodes[l][Math.floor(rand() * nodes[l].length)];
-      const b = nodes[l + 1][Math.floor(rand() * nodes[l + 1].length)];
-      a.toArray(netA, i * 3);
-      b.toArray(netB, i * 3);
-      netU[i] = rand();
-      netAccent[i] = i % 23 === 1 ? 1 : 0;
+      agKind[i] = 4;
+      const rad = 0.22 * Math.cbrt(rand());
+      const th = rand() * TAU;
+      const ph = Math.acos(2 * rand() - 1);
+      agOff[i * 3] = rad * Math.sin(ph) * Math.cos(th);
+      agOff[i * 3 + 1] = rad * Math.sin(ph) * Math.sin(th);
+      agOff[i * 3 + 2] = rad * Math.cos(ph);
     }
   }
 
@@ -167,7 +175,7 @@ function build() {
 
   return {
     speed, jitter,
-    netA, netB, netU, netNode, netAccent,
+    stations, agKind, agStation, agU, agOff,
     emb, embAccent,
     tracks, trkId, trkU, trkAccent,
     mat, matAccent,
@@ -196,11 +204,34 @@ function target(d: Data, shape: number, i: number, t: number, px: number, py: nu
       return;
     }
     case 1: {
-      const u = d.netNode[i] ? 0 : (d.netU[i] + t * 0.11) % 1;
       const j = i * 3;
-      out[0] = d.netA[j] + (d.netB[j] - d.netA[j]) * u;
-      out[1] = d.netA[j + 1] + (d.netB[j + 1] - d.netA[j + 1]) * u;
-      out[2] = d.netA[j + 2] + (d.netB[j + 2] - d.netA[j + 2]) * u;
+      const st = d.stations[d.agStation[i]];
+      const kind = d.agKind[i];
+      if (kind === 0) {
+        out[0] = st.x + d.agOff[j]; out[1] = st.y + d.agOff[j + 1]; out[2] = st.z + d.agOff[j + 2];
+      } else if (kind === 1) {
+        const th = d.agU[i] * TAU + t * (d.agStation[i] % 2 ? 1.4 : -1.4);
+        out[0] = st.x + Math.cos(th) * 0.3;
+        out[1] = st.y + Math.sin(th) * 0.3 * 0.35;
+        out[2] = st.z + Math.sin(th) * 0.3;
+      } else if (kind === 2) {
+        const nx = d.stations[(d.agStation[i] + 1) % d.stations.length];
+        const u = (d.agU[i] + t * 0.22) % 1;
+        // packets bunch into small groups: quantise u softly
+        const g = Math.floor(u * 7) / 7 + ((u * 7) % 1) * 0.045;
+        out[0] = st.x + (nx.x - st.x) * g + d.agOff[j];
+        out[1] = st.y + (nx.y - st.y) * g + Math.sin(g * Math.PI) * 0.55 + d.agOff[j + 1];
+        out[2] = st.z + (nx.z - st.z) * g + d.agOff[j + 2];
+      } else if (kind === 3) {
+        const u = (d.agU[i] + t * 0.3) % 1;
+        const w = d.agStation[i] % 2 ? u : 1 - u;
+        out[0] = st.x * w + d.agOff[j];
+        out[1] = st.y * w + Math.sin(w * Math.PI) * 0.25 + d.agOff[j + 1];
+        out[2] = st.z * w + d.agOff[j + 2];
+      } else {
+        const pulse = 1 + Math.sin(t * 2.2) * 0.08;
+        out[0] = d.agOff[j] * pulse; out[1] = d.agOff[j + 1] * pulse + 0.05; out[2] = d.agOff[j + 2] * pulse;
+      }
       return;
     }
     case 2: {
@@ -236,10 +267,16 @@ function target(d: Data, shape: number, i: number, t: number, px: number, py: nu
   }
 }
 
-function accentOf(d: Data, shape: number, i: number) {
+function accentOf(d: Data, shape: number, i: number, t = 0) {
   switch (shape) {
     case 0: return d.terAccent[i];
-    case 1: return d.netAccent[i];
+    case 1: {
+      const kind = d.agKind[i];
+      if (kind === 4) return 1;
+      const active = Math.floor(t * 0.9) % d.stations.length;
+      if (d.agStation[i] !== active) return 0;
+      return kind <= 2 ? 1 : 0;
+    }
     case 2: return d.embAccent[i];
     case 3: return d.trkAccent[i];
     case 4: return d.matAccent[i];
@@ -250,7 +287,7 @@ function accentOf(d: Data, shape: number, i: number) {
 // Per-figure group orientation (x tilt, y yaw)
 const POSE: [number, number][] = [
   [0.62, 0],
-  [0.08, -0.35],
+  [0.42, 0],
   [0.18, 0],
   [0.32, -0.4],
   [0.58, 0.62],
@@ -359,7 +396,7 @@ function Cloud({ shape, dark, active, reduced }: CloudProps) {
       p[j] += (tmp[0] + data.jitter[j] - p[j]) * k;
       p[j + 1] += (tmp[1] + data.jitter[j + 1] - p[j + 1]) * k;
       p[j + 2] += (tmp[2] + data.jitter[j + 2] - p[j + 2]) * k;
-      a[i] += ((formed ? accentOf(data, shape, i) : 0) - a[i]) * k;
+      a[i] += ((formed ? accentOf(data, shape, i, t) : 0) - a[i]) * k;
     }
     pos.needsUpdate = true;
     acc.needsUpdate = true;

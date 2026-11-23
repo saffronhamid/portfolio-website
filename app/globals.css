@@ -1174,3 +1174,81 @@ a:hover .chev { transform: translateX(2px); }
     animation: none !important;
   }
 }
+
+/* ================================================================== */
+/*  Compact layout                                                     */
+/* ================================================================== */
+
+.tile { padding-top: 44px; }
+.tile-hero { padding-top: 48px; }
+.tile-figure-hero { height: clamp(280px, 36vw, 420px); margin-top: -16px; }
+.tile-half { min-height: 0; padding-top: 40px; }
+.tile-figure-half { height: clamp(220px, 24vw, 300px); }
+.console-wrap { margin: 32px 0 36px; }
+.stats { padding-bottom: 48px; }
+.shelf { padding: 64px 0 72px; }
+.carousel { margin-top: 28px; }
+.carousel-track { padding-bottom: 28px; }
+.card { min-height: 420px; }
+.tile-contact { padding-bottom: 56px; }
+.form-wrap { margin-top: 32px; }
+.form textarea { min-height: 96px; }
+
+/* Credentials */
+.creds {
+  display: grid;
+  gap: 40px 32px;
+  max-width: 1024px;
+  margin: 40px auto 0;
+  padding: 0 22px;
+}
+@media (min-width: 834px) {
+  .creds { grid-template-columns: 1.3fr 1fr 1.2fr; }
+}
+.creds-col h3 {
+  padding-bottom: 12px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 17px;
+}
+.creds-stack {
+  margin: 0;
+}
+.creds-stack div,
+.creds-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+.creds-stack div:last-child,
+.creds-list li:last-child {
+  border-bottom: 0;
+}
+.creds-stack dt {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.creds-stack dd {
+  margin: 2px 0 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+.creds-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.creds-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.creds-list b {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.creds-list span {
+  font-size: 13px;
+  color: var(--muted);
+}

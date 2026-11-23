@@ -18,12 +18,10 @@ const profile = {
 };
 
 const nav = [
-  { id: "about", label: "About" },
   { id: "deutsche-boerse", label: "Deutsche Börse" },
   { id: "work", label: "Work" },
   { id: "experience", label: "Experience" },
-  { id: "stack", label: "Stack" },
-  { id: "education", label: "Education" },
+  { id: "credentials", label: "Credentials" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -250,8 +248,8 @@ export default function Home() {
           tone="light"
           className="tile-hero"
           eyebrow={<span className="hero-name">Faizan Hamid</span>}
-          title={<>Machine learning.<br />Engineered for production.</>}
-          subtitle="RAG systems, MLOps and AI agents — from the first notebook to the service people rely on."
+          title={<>AI Engineer.<br />Built for production.</>}
+          subtitle="AI agents, RAG systems and MLOps — from the first notebook to the service people rely on."
           ctas={
             <>
               <Cta href="#work">See the work</Cta>
@@ -259,7 +257,7 @@ export default function Home() {
             </>
           }
         >
-          <LiveFigure shape={0} className="tile-figure tile-figure-hero" label="Animated loss landscape made of points that ripple under the cursor" />
+          <LiveFigure shape={1} className="tile-figure tile-figure-hero" label="Agent pipeline: work packets flowing around a loop of six stations, with the active station highlighted" />
         </Tile>
 
         {/* ---------- Deutsche Börse ---------- */}
@@ -290,70 +288,18 @@ export default function Home() {
           </Reveal>
         </Tile>
 
-        {/* ---------- Agent pipeline ---------- */}
-        <Tile
-          tone="grey"
-          eyebrow="Automation agents"
-          title="Plan. Retrieve. Generate. Verify."
-          subtitle="Agents hand work around a loop of specialised steps, each one checking the last."
-        >
-          <LiveFigure shape={1} className="tile-figure" label="Agent pipeline: work packets flowing around a loop of six stations, with the active station highlighted" />
-          <Reveal className="loop-legend">
-            {["Scenario", "Retrieve", "Plan", "Generate", "Execute", "Report"].map((s, i) => (
-              <span key={s} style={{ ["--i" as string]: i }}>
-                <i />
-                {s}
-              </span>
-            ))}
-          </Reveal>
-        </Tile>
-
-        {/* ---------- About ---------- */}
-        <section id="about" className="about">
-          <Reveal>
-            <h2 className="headline">
-              About. <span>Between the notebook and the user.</span>
-            </h2>
-          </Reveal>
-          <Reveal className="about-body">
-            <p>
-              I&apos;m finishing an M.Sc. in Data Science at Philipps-Universität Marburg and work on the
-              test-automation team at Deutsche Börse in Frankfurt. I build ML systems that keep working
-              after the demo — services that monitor themselves, recover gracefully and stay accurate under drift.
-            </p>
-          </Reveal>
-          <div className="features">
-            {[
-              ["Production pipelines", "MLflow, Docker and FastAPI — tracked, versioned and deployable."],
-              ["Retrieval & agents", "RAG and agent systems built with LangChain, LangGraph and FAISS."],
-              ["Drift-aware", "Monitoring and continuous-learning workflows that keep models honest."],
-              ["Full stack", "Comfortable across data, backend APIs and the frontend that ships it."],
-            ].map(([t, d], i) => (
-              <Reveal key={t} delay={i * 0.06} className="feature">
-                <h3>{t}</h3>
-                <p>{d}</p>
-              </Reveal>
-            ))}
-          </div>
-        </section>
-
         {/* ---------- Work ---------- */}
-        <div id="work" className="work-anchor" />
-        <Tile
-          tone="grey"
-          eyebrow="Featured project"
-          title="Modular RAG Pipeline."
-          subtitle="Retrieval-augmented generation across PDFs, text and the web — orchestrated as LangGraph nodes over FAISS."
-          ctas={
-            <>
-              <Cta href="https://github.com/saffronhamid/code.git">View source</Cta>
-            </>
-          }
-        >
-          <LiveFigure shape={2} className="tile-figure" label="Rotating embedding space with seven clusters" />
-        </Tile>
-
-        <div className="grid">
+        <div id="work" className="grid">
+          <Tile
+            tone="grey"
+            className="tile-half"
+            eyebrow="Retrieval"
+            title="Modular RAG Pipeline."
+            subtitle="PDFs, text and the web — orchestrated as LangGraph nodes over FAISS."
+            ctas={<Cta href="https://github.com/saffronhamid/code.git">View source</Cta>}
+          >
+            <LiveFigure shape={2} className="tile-figure tile-figure-half" label="Rotating embedding space with seven clusters" />
+          </Tile>
           <Tile
             tone="dark"
             className="tile-half"
@@ -365,31 +311,25 @@ export default function Home() {
             <LiveFigure shape={3} dark className="tile-figure tile-figure-half" label="Flight trajectories streaming through space" />
           </Tile>
           <Tile
-            tone="light"
+            tone="dark"
             className="tile-half"
             eyebrow="MLOps"
             title="Phishing URL Detection."
             subtitle="ETL to inference: MLflow, DagsHub and a Dockerised FastAPI service on AWS."
             ctas={<Cta href="https://github.com/saffronhamid/networksecurity.git">View source</Cta>}
           >
-            <LiveFigure shape={4} className="tile-figure tile-figure-half" label="Three-dimensional confusion matrix" />
+            <LiveFigure shape={4} dark className="tile-figure tile-figure-half" label="Three-dimensional confusion matrix" />
           </Tile>
           <Tile
-            tone="light"
-            className="tile-half tile-compact"
+            tone="grey"
+            className="tile-half"
             eyebrow="Low-code seminar"
             title="Student Project Manager."
-            subtitle="Auth, dashboards and reporting for coordinating student research — shipped end-to-end."
+            subtitle="Auth, dashboards and reporting for coordinating student research."
             ctas={<Cta href="/low-code">Read case study</Cta>}
-          />
-          <Tile
-            tone="grey"
-            className="tile-half tile-compact"
-            eyebrow="Open source"
-            title="More on GitHub."
-            subtitle="Experiments, notebooks and the source for this site."
-            ctas={<Cta href={profile.github}>Visit GitHub</Cta>}
-          />
+          >
+            <LiveFigure shape={0} className="tile-figure tile-figure-half" label="Animated landscape of points" />
+          </Tile>
         </div>
 
         {/* ---------- Experience ---------- */}
@@ -419,65 +359,59 @@ export default function Home() {
           </Carousel>
         </section>
 
-        {/* ---------- Stack ---------- */}
-        <section id="stack" className="shelf shelf-white">
+        {/* ---------- Credentials ---------- */}
+        <section id="credentials" className="shelf shelf-white">
           <Reveal>
             <h2 className="headline">
-              Stack. <span>The tools of the trade.</span>
+              Credentials. <span>Stack, education and certificates.</span>
             </h2>
           </Reveal>
-          <div className="stack">
-            {skills.map((g, i) => (
-              <Reveal key={g.title} delay={i * 0.05} className="stack-col">
-                <h3>{g.title}</h3>
-                <ul>
-                  {g.items.map((s) => (
-                    <li key={s}>{s}</li>
-                  ))}
-                </ul>
-              </Reveal>
-            ))}
-          </div>
-        </section>
-
-        {/* ---------- Education & certificates ---------- */}
-        <section id="education" className="shelf">
-          <Reveal>
-            <h2 className="headline">
-              Education. <span>And a few certificates.</span>
-            </h2>
-          </Reveal>
-          <div className="edu">
-            {education.map((e, i) => (
-              <Reveal key={e.school} delay={i * 0.06} className="edu-card">
-                <p className="card-eyebrow">{e.date}</p>
-                <h3>{e.degree}</h3>
-                <p>{e.school}</p>
-                <p className="card-foot">{e.location}</p>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal className="certs">
-            <ul>
-              {certifications.map((c) => (
-                <li key={c.title}>
-                  <div>
-                    <span className="cert-title">{c.title}</span>
-                    <span className="cert-issuer">{c.issuer}</span>
+          <div className="creds">
+            <Reveal className="creds-col">
+              <h3>Stack</h3>
+              <dl className="creds-stack">
+                {skills.map((g) => (
+                  <div key={g.title}>
+                    <dt>{g.title}</dt>
+                    <dd>{g.items.join(", ")}</dd>
                   </div>
-                  <span className="cert-side">
-                    {c.href ? (
-                      <a href={c.href} target="_blank" rel="noopener noreferrer" className="link">
-                        View <Chevron />
-                      </a>
-                    ) : (
-                      c.date
-                    )}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
+                ))}
+              </dl>
+            </Reveal>
+            <Reveal delay={0.06} className="creds-col">
+              <h3>Education</h3>
+              <ul className="creds-list">
+                {education.map((e) => (
+                  <li key={e.school}>
+                    <b>{e.degree}</b>
+                    <span>{e.school}</span>
+                    <span>{e.date}</span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+            <Reveal delay={0.12} className="creds-col">
+              <h3>Certificates</h3>
+              <ul className="creds-list">
+                {certifications.map((c) => (
+                  <li key={c.title}>
+                    <b>
+                      {c.href ? (
+                        <a href={c.href} target="_blank" rel="noopener noreferrer" className="link">
+                          {c.title} <Chevron />
+                        </a>
+                      ) : (
+                        c.title
+                      )}
+                    </b>
+                    <span>
+                      {c.issuer} · {c.date}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          </div>
         </section>
 
         {/* ---------- Contact ---------- */}
@@ -486,7 +420,7 @@ export default function Home() {
           tone="dark"
           className="tile-contact"
           title="Let's talk."
-          subtitle="Open to ML engineering, RAG and MLOps roles in Germany and beyond."
+          subtitle="Open to AI engineering, RAG and MLOps roles in Germany and beyond."
           ctas={
             <>
               <Cta href={`mailto:${profile.email}`}>Email me</Cta>
@@ -494,7 +428,6 @@ export default function Home() {
             </>
           }
         >
-          <LiveFigure shape={5} dark className="tile-figure tile-figure-short" label="A twisting signal ribbon" />
           <Reveal className="form-wrap">
             <form className="form" action="https://formspree.io/f/xdaaodyn" method="POST" aria-label="Contact form">
               <input type="hidden" name="_subject" value="New portfolio message" />
@@ -522,7 +455,7 @@ export default function Home() {
       <footer className="footer">
         <div className="footer-inner">
           <p className="footer-note">
-            The figures on this page are rendered live in Three.js from 8,192 points each, and only animate while on screen.
+            Figures on this page are rendered live in Three.js and only animate while on screen.
           </p>
           <div className="footer-cols">
             <div>

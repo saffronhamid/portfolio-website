@@ -14,10 +14,10 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Faizan Hamid — ML Engineer",
+  title: "Faizan Hamid — AI Engineer",
   description:
-    "Faizan Hamid is a machine-learning engineer in Frankfurt working on retrieval systems, MLOps and test-automation agents.",
-  keywords: ["Faizan Hamid", "Machine Learning Engineer", "MLOps", "RAG", "Data Science", "Frankfurt"],
+    "Faizan Hamid is an AI engineer in Frankfurt building AI agents, retrieval systems and MLOps pipelines.",
+  keywords: ["Faizan Hamid", "AI Engineer", "Machine Learning Engineer", "MLOps", "RAG", "Data Science", "Frankfurt"],
 };
 
 export default function RootLayout({

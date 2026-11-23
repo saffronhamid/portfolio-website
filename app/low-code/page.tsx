@@ -38,7 +38,7 @@ export default function LowCodePage() {
         </div>
       </FadeIn>
 
-      <section className="border-t border-white/[0.06] pt-6">
+      <section className="border-t border-black/[0.06] pt-6">
         <iframe
           title="Full paper (PDF)"
           src={reportPath}

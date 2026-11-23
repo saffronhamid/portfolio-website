@@ -28,7 +28,7 @@ export default function BatTrackingPage() {
       </FadeIn>
 
       <div className="grid gap-12 md:grid-cols-[1.4fr_0.6fr]">
-        <section className="flex flex-col gap-4 border-t border-white/[0.06] py-8">
+        <section className="flex flex-col gap-4 border-t border-black/[0.06] py-8">
           <h2 className="text-display text-xl font-medium text-foreground">Overview</h2>
           <p className="text-sm leading-relaxed text-muted-foreground">
             Applied computer vision project focused on multi-object tracking in
@@ -50,7 +50,7 @@ export default function BatTrackingPage() {
             </li>
           </ul>
         </section>
-        <aside className="flex flex-col gap-5 border-t border-white/[0.06] py-8">
+        <aside className="flex flex-col gap-5 border-t border-black/[0.06] py-8">
           <span className="text-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
             Project facts
           </span>
@@ -77,8 +77,8 @@ export default function BatTrackingPage() {
         </aside>
       </div>
 
-      <div className="mt-12 grid gap-px bg-white/[0.06]">
-        <section className="flex flex-col gap-3 bg-[#0a0a0a] p-8">
+      <div className="mt-12 grid gap-px bg-black/[0.06]">
+        <section className="flex flex-col gap-3 bg-[#f5f5f7] p-8">
           <span className="text-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/70">
             01 — Research goals
           </span>
@@ -88,7 +88,7 @@ export default function BatTrackingPage() {
           </p>
         </section>
 
-        <section className="flex flex-col gap-3 bg-[#0a0a0a] p-8">
+        <section className="flex flex-col gap-3 bg-[#f5f5f7] p-8">
           <span className="text-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/70">
             02 — Data strategy
           </span>
@@ -98,7 +98,7 @@ export default function BatTrackingPage() {
           </p>
         </section>
 
-        <section className="flex flex-col gap-3 bg-[#0a0a0a] p-8">
+        <section className="flex flex-col gap-3 bg-[#f5f5f7] p-8">
           <span className="text-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/70">
             03 — Evaluation
           </span>

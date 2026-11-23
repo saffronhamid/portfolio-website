@@ -17,6 +17,7 @@ import SideRail from "./components/SideRail";
 import SkillGroup from "./components/SkillGroup";
 import Stats from "./components/Stats";
 import Testimonials from "./components/Testimonials";
+import SceneBackground from "./components/three/SceneBackground";
 
 export default function Home() {
   const sections = useMemo(
@@ -150,6 +151,17 @@ export default function Home() {
 
   const experiences = [
     {
+      role: "Intern — BAT, Test Automation & AI",
+      company: "Deutsche Börse",
+      date: "Aug 2026 — Present",
+      location: "Frankfurt, Germany",
+      bullets: [
+        "Built a data converter for OKF supporting both structured and unstructured data formats.",
+        "Led an AI agent project using hybrid retrieval, improving correctness by 40% while cutting token usage by 60%.",
+        "Built an agent that transforms Gherkin test scenarios into automated test code, streamlining BAT workflows.",
+      ],
+    },
+    {
       role: "Machine Learning Engineer",
       company: "Solid Works",
       date: "Sep 2023 — Mar 2024",
@@ -199,6 +211,7 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen text-foreground">
+      <SceneBackground />
       <Navbar items={navItems} activeId={activeId} />
       <SideRail sections={sections} activeId={activeId} />
       <CommandPalette />
@@ -257,7 +270,7 @@ export default function Home() {
                     Currently
                   </span>
                   <span className="text-foreground/85">
-                    M.Sc. Data Science · open to Werkstudent / full-time AI roles
+                    Intern at Deutsche Börse · M.Sc. Data Science, Marburg
                   </span>
                 </div>
               </aside>
@@ -298,7 +311,7 @@ export default function Home() {
           />
           <div className="flex flex-col">
             {experiences.map((experience, idx) => (
-              <ExperienceCard key={experience.role} experience={experience} index={idx} />
+              <ExperienceCard key={`${experience.company}-${experience.role}`} experience={experience} index={idx} />
             ))}
           </div>
         </section>

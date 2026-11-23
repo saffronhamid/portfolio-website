@@ -79,8 +79,9 @@ export default function Hero() {
             <span className="text-foreground">RAG systems</span>,{" "}
             <span className="text-foreground">MLOps</span>, and{" "}
             <span className="text-foreground">scalable AI pipelines</span>.
-            Currently pursuing M.Sc. Data Science in Germany — open to
-            Werkstudent and full-time roles.
+            Currently building AI agents for test automation at{" "}
+            <span className="text-foreground">Deutsche Börse</span> while
+            completing an M.Sc. in Data Science.
           </p>
         </motion.div>
 
